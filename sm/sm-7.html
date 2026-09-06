@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁上辈为人测算，根据出生年月日计算你上辈子的身份来历，趣味前世测试。">
+<meta name="keywords" content="上辈为人,上辈子,前世测试,测前世">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-7.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="上辈为人_测测你上辈子是什么人 - 缘中阁">
+<meta property="og:description" content="缘中阁上辈为人测算，根据出生年月日计算你上辈子的身份来历，趣味前世测试。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-7.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上辈为人_测测你上辈子是什么人 - 缘中阁">
+<meta name="twitter:description" content="缘中阁上辈为人测算，根据出生年月日计算你上辈子的身份来历，趣味前世测试。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>上辈为人_测测你上辈子是什么人 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "上辈为人_测测你上辈子是什么人",
+  "description": "缘中阁上辈为人测算，根据出生年月日计算你上辈子的身份来历，趣味前世测试。",
+  "url": "https://www.yuanzhongge.com/sm/sm-7.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>上辈为人</h1><div class="desc">测测你上辈子是什么人。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('上辈为人');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+
+  var name=qs('n'), y=qs('y'), m=qs('m'), d=qs('d');
+  function buildForm(){
+    var now=new Date();
+    var ys='<select id="f_year">';for(var yr=1940;yr<=now.getFullYear();yr++){ys+='<option value="'+yr+'">'+yr+'</option>';}ys+='</select>';
+    var ms='<select id="f_month">';for(var mo=1;mo<=12;mo++){ms+='<option value="'+mo+'">'+mo+'</option>';}ms+='</select>';
+    var ds='<select id="f_day">';for(var dd=1;dd<=31;dd++){ds+='<option value="'+dd+'">'+dd+'</option>';}ds+='</select>';
+    var f='<div class="panel"><h2>上辈为人测试</h2>'+
+      '<p class="desc" style="margin-bottom:12px">本测算来源于民间！输入出生年月日即可测试。</p>'+
+      '<form id="sbForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label>公历生日</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">'+ys+'<span>年</span>'+ms+'<span>月</span>'+ds+'<span>日</span></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始测试</button></div></div></form></div>';
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('上辈为人')+f;
+    if(y) document.getElementById('f_year').value=y;
+    if(m) document.getElementById('f_month').value=m;
+    if(d) document.getElementById('f_day').value=d;
+    if(name) document.getElementById('f_name').value=name;
+    document.getElementById('goBtn').onclick=calc;
+  }
+
+  function digitSum(n){
+    var s=String(n), sum=0;
+    for(var i=0;i<s.length;i++) sum+=parseInt(s.charAt(i));
+    return sum;
+  }
+
+  function calc(){
+    var nm=document.getElementById('f_name').value.trim();
+    var yr=parseInt(document.getElementById('f_year').value);
+    var mo=parseInt(document.getElementById('f_month').value);
+    var dd=parseInt(document.getElementById('f_day').value);
+    if(!nm){alert('请输入姓名');return;}
+    if(!yr||!mo||!dd){alert('请填写出生日期');return;}
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('上辈为人')+'<div class="loading">正在计算...</div>';
+
+    SHL.data.load('senlon_sbwr').then(function(d){
+      var rows=d.rows;
+      // 算法: 年月日拼接, 逐位求和, 再求和, 再求和, 得1-9
+      var csrq=''+yr+mo+dd;
+      var sbnum=digitSum(csrq);
+      var sbnum2=digitSum(sbnum);
+      var sbnum3=digitSum(sbnum2);
+      if(sbnum3>9) sbnum3=digitSum(sbnum3);
+
+      var intro='';
+      for(var i=0;i<rows.length;i++){
+        if(parseInt(rows[i].num)===sbnum3){ intro=rows[i].intro; break; }
+      }
+
+      var age=new Date().getFullYear()-yr;
+      var html='<div class="panel"><h2>上辈为人结果</h2><div class="result-box">';
+      html+='<p>亲爱的<span class="red">'+esc(nm)+'</span>：</p>';
+      html+='<p>您出生于'+yr+'年'+mo+'月'+dd+'日，今年'+age+'岁（以下资料仅供参考）：</p>';
+      html+='<p>测测你上辈子是什么人：根据您的公元出生年月日，经过电脑计算，结果为<b class="red">'+sbnum3+'</b>，表示你上辈子是 <span class="red" style="font-size:16px">'+esc(intro)+'</span></p>';
+      html+='</div>';
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="sm-7.html">重新测试</a>　<a class="btn" href="index.html">返回算命首页</a></p>';
+      html+='</div>';
+      el.innerHTML=navButtons('上辈为人')+html;
+    }).catch(function(e){
+      el.innerHTML=navButtons('上辈为人')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  buildForm();
+})();
+</script>
+</body></html>

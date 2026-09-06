@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁八字测算，分析四柱十神、日主旺衰、用神喜忌，免费八字命盘测算。">
+<meta name="keywords" content="八字测算,十神,日主旺衰,用神喜忌,八字命盘">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-2.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="八字测算_四柱十神日主旺衰分析 - 缘中阁">
+<meta property="og:description" content="缘中阁八字测算，分析四柱十神、日主旺衰、用神喜忌，免费八字命盘测算。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-2.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="八字测算_四柱十神日主旺衰分析 - 缘中阁">
+<meta name="twitter:description" content="缘中阁八字测算，分析四柱十神、日主旺衰、用神喜忌，免费八字命盘测算。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>八字测算_四柱十神日主旺衰分析 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "八字测算_四柱十神日主旺衰分析",
+  "description": "缘中阁八字测算，分析四柱十神、日主旺衰、用神喜忌，免费八字命盘测算。",
+  "url": "https://www.yuanzhongge.com/sm/sm-2.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>八字测算</h1><div class="desc">四柱八字十神与日主旺衰分析。</div></div>
+  <div id="formBox"></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('八字测算');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function constellation(month,day){
+    var d=[[1,20,'摩羯','水瓶'],[2,19,'水瓶','双鱼'],[3,21,'双鱼','白羊'],[4,21,'白羊','金牛'],
+      [5,21,'金牛','双子'],[6,22,'双子','巨蟹'],[7,23,'巨蟹','狮子'],[8,23,'狮子','处女'],
+      [9,23,'处女','天秤'],[10,23,'天秤','天蝎'],[11,22,'天蝎','射手'],[12,22,'射手','摩羯']];
+    for(var i=0;i<12;i++){ if(month===d[i][0]) return day<d[i][1]?d[i][2]:d[i][3]; }
+    return '摩羯';
+  }
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+  function buildForm(){
+    var now=new Date();
+    var ys='<select id="f_year">';for(var y=1940;y<=now.getFullYear();y++){ys+='<option value="'+y+'">'+y+'</option>';}ys+='</select>';
+    var ms='<select id="f_month">';for(var m=1;m<=12;m++){ms+='<option value="'+m+'">'+m+'</option>';}ms+='</select>';
+    var ds='<select id="f_day">';for(var d=1;d<=31;d++){ds+='<option value="'+d+'">'+d+'</option>';}ds+='</select>';
+    var hs='<select id="f_hour">';for(var h=0;h<=23;h++){hs+='<option value="'+h+'">'+C.dizhiHour(h)+' '+h+'时</option>';}hs+='</select>';
+    var f='<div class="panel"><h2>输入资料</h2><form id="bzForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label>性别</label><div class="ctrl"><select id="f_sex"><option value="男">男</option><option value="女">女</option></select></div></div>'+
+      '<div class="form-row"><label>出生时间</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">'+ys+'<span>年</span>'+ms+'<span>月</span>'+ds+'<span>日</span>'+hs+'<span>时</span></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始测算</button></div></div></form></div>';
+    document.getElementById('formBox').innerHTML=f;
+    document.getElementById('f_year').value=1990;document.getElementById('f_month').value=now.getMonth()+1;
+    document.getElementById('f_day').value=now.getDate();document.getElementById('f_hour').value=12;
+    document.getElementById('goBtn').onclick=function(){
+      var name=document.getElementById('f_name').value.trim();
+      if(!name){alert('请输入姓名');return;}
+      var p='?y='+document.getElementById('f_year').value+'&m='+document.getElementById('f_month').value+'&d='+document.getElementById('f_day').value;
+      p+='&h='+document.getElementById('f_hour').value+'&mi=0&n='+encodeURIComponent(name)+'&s='+encodeURIComponent(document.getElementById('f_sex').value);
+      location.href='sm-2.html'+p;
+    };
+  }
+
+  var y=parseInt(qs('y')),m=parseInt(qs('m')),d=parseInt(qs('d')),h=parseInt(qs('h')),mi=parseInt(qs('mi'))||0;
+  var name=qs('n'),sex=qs('s');
+  if(!y||!m||!d||isNaN(h)||!name){ buildForm(); return; }
+
+  var r=document.getElementById('result');
+  r.innerHTML='<div class="loading">正在测算...</div>'+navButtons('八字测算');
+
+  Promise.all([
+    SHL.data.load('calendar_jq'), SHL.data.load('calendar_stime'),
+    SHL.data.load('senlon_wh'), SHL.data.load('senlon_sjrs')
+  ]).then(function(arr){
+    var jq=arr[0].terms, st=arr[1].items;
+    var whData=arr[2].rows, sjrsData=arr[3].rows;
+    var b=SHL.bazi.calc({year:y,month:m,day:d,hour:h,minute:mi,longitude:120}, jq, st);
+    var dg1=b.dgz.charAt(0), dWh=SHL.common.ganWh(dg1);
+    var season=SHL.common.siji(m);
+    var xingzuo=constellation(m,d);
+
+    // 五行个数 (含藏干)
+    var allGz=b.ygz+b.mgz+b.dgz+b.tgz;
+    var wn={金:0,木:0,水:0,火:0,土:0};
+    for(var i=0;i<allGz.length;i++){
+      var w=SHL.common.tgdzwh(allGz[i]);
+      if(wn[w]!==undefined) wn[w]++;
+    }
+    // 藏干五行
+    var cangGz='';
+    [b.ygz.charAt(1),b.mgz.charAt(1),b.dgz.charAt(1),b.tgz.charAt(1)].forEach(function(z){
+      cangGz+=SHL.bazi.canggan(z);
+    });
+    for(var i=0;i<cangGz.length;i++){ var w=SHL.common.ganWh(cangGz[i]); if(wn[w]!==undefined) wn[w]++; }
+
+    // 十神统计
+    var ssNames=['比肩','劫财','食神','伤官','偏财','正财','七杀','正官','偏印','正印'];
+    var ssCount={};
+    var allGans=b.ygz.charAt(0)+b.mgz.charAt(0)+b.tgz.charAt(0)+cangGz;
+    for(var i=0;i<allGans.length;i++){
+      if(allGans[i]===dg1) continue;
+      var ss=SHL.bazi.shishen(dg1,allGans[i]);
+      ssCount[ss]=(ssCount[ss]||0)+1;
+    }
+
+    // 日主旺衰判断 (简化: 同类=比劫+印绶, 异类=财+官杀+食伤)
+    var same=wn[dWh]||0; // 日主本气
+    var shengMe=''; for(var k in C.sheng){ if(C.sheng[k]===dWh) shengMe=k; } // 印 (生我)
+    var tongLei=(ssCount['比肩']||0)+(ssCount['劫财']||0)+(ssCount['偏印']||0)+(ssCount['正印']||0);
+    var yiLei=(ssCount['食神']||0)+(ssCount['伤官']||0)+(ssCount['偏财']||0)+(ssCount['正财']||0)+(ssCount['七杀']||0)+(ssCount['正官']||0);
+    var strength = tongLei>=yiLei ? '偏旺' : '偏弱';
+
+    var whRow=null; for(var i=0;i<whData.length;i++){ if(whData[i].wh===dWh){whRow=whData[i];break;} }
+    var sjrsRow=null; for(var i=0;i<sjrsData.length;i++){ if(sjrsData[i].wh===dWh && sjrsData[i].sj===season){sjrsRow=sjrsData[i];break;} }
+
+    var html='<div class="panel"><h2>八字测算结果</h2><div class="result-box">';
+    html+='<p><b>姓名：</b><span class="red">'+esc(name)+'</span>　<b>性别：</b>'+esc(sex)+'</p>';
+    html+='<p><b>出生：</b><span class="gold">'+y+'年'+m+'月'+d+'日 '+pad(h)+'时</span>　<b>生肖：</b>'+b.shengxiao+'　<b>星座：</b>'+xingzuo+'</p>';
+    html+='</div>';
+
+    // 四柱简表
+    html+='<table class="bazi-table">';
+    html+='<tr><th>四柱</th><th>年柱</th><th>月柱</th><th>日柱</th><th>时柱</th></tr>';
+    html+='<tr><td>十神</td><td>'+esc(SHL.bazi.shishen(dg1,b.ygz.charAt(0)))+'</td><td>'+esc(SHL.bazi.shishen(dg1,b.mgz.charAt(0)))+'</td><td>日元</td><td>'+esc(SHL.bazi.shishen(dg1,b.tgz.charAt(0)))+'</td></tr>';
+    html+='<tr><td>干支</td><td class="gz">'+b.ygz+'</td><td class="gz">'+b.mgz+'</td><td class="gz red">'+b.dgz+'</td><td class="gz">'+b.tgz+'</td></tr>';
+    html+='<tr><td>纳音</td><td>'+b.yNayin+'</td><td>'+b.mNayin+'</td><td>'+b.dNayin+'</td><td>'+b.tNayin+'</td></tr>';
+    html+='<tr><td>五行</td><td>'+b.ygzWh+'</td><td>'+b.mgzWh+'</td><td>'+b.dgzWh+'</td><td>'+b.tgzWh+'</td></tr>';
+    html+='</table>';
+
+    html+='<div class="result-box">';
+    html+='<p><b>日主：</b>'+dg1+'（'+dWh+'）　<b>生于：</b>'+season+'季　<b>日主强弱：</b><span class="red">'+strength+'</span></p>';
+    html+='<p><b>五行个数(含藏干)：</b>金'+wn.金+' 木'+wn.木+' 水'+wn.水+' 火'+wn.火+' 土'+wn.土+'</p>';
+    html+='<p><b>同类(比劫印)：</b>'+tongLei+'　<b>异类(食伤财官)：</b>'+yiLei+'</p>';
+    html+='</div>';
+
+    // 十神分布
+    html+='<div class="result-box"><p><b>十神分布：</b></p><p>';
+    for(var i=0;i<ssNames.length;i++){
+      if(ssCount[ssNames[i]]) html+='<span style="margin-right:14px">'+ssNames[i]+'×'+ssCount[ssNames[i]]+'</span>';
+    }
+    html+='</p></div>';
+
+    if(sjrsRow){
+      html+='<div class="result-box"><p><b>用神参考：</b>日主'+dWh+'生于'+season+'季，'+sjrsRow.sjrs+'</p></div>';
+    }
+    if(whRow){
+      html+='<div class="result-box">';
+      if(whRow.skzhyj) html+='<p><b>五行生克制化宜忌：</b>'+whRow.skzhyj+'</p>';
+      if(whRow.hyhw) html+='<p><b>宜从事行业与方位：</b>'+whRow.hyhw+'</p>';
+      html+='</div>';
+    }
+
+    html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p>';
+    html+='</div>';
+    r.innerHTML=navButtons('八字测算')+html;
+  }).catch(function(e){
+    r.innerHTML=navButtons('八字测算')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+  });
+})();
+</script>
+</body></html>

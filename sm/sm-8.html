@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁姓氏起源查询，收录百家姓各姓氏的来源、历史迁徙与名人，了解你的姓氏文化。">
+<meta name="keywords" content="姓氏起源,百家姓,姓氏来源,姓氏查询,姓氏文化">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-8.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="姓氏起源_百家姓姓氏来源查询 - 缘中阁">
+<meta property="og:description" content="缘中阁姓氏起源查询，收录百家姓各姓氏的来源、历史迁徙与名人，了解你的姓氏文化。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-8.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="姓氏起源_百家姓姓氏来源查询 - 缘中阁">
+<meta name="twitter:description" content="缘中阁姓氏起源查询，收录百家姓各姓氏的来源、历史迁徙与名人，了解你的姓氏文化。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>姓氏起源_百家姓姓氏来源查询 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "姓氏起源_百家姓姓氏来源查询",
+  "description": "缘中阁姓氏起源查询，收录百家姓各姓氏的来源、历史迁徙与名人，了解你的姓氏文化。",
+  "url": "https://www.yuanzhongge.com/sm/sm-8.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>姓氏起源</h1><div class="desc">输入姓氏查询起源与详细介绍。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('姓氏起源');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+
+  var name=qs('n');
+  var defaultXing=name?name.charAt(0):'';
+
+  function buildForm(surname){
+    var f='<div class="panel"><h2>姓氏起源查询</h2>'+
+      '<form id="xForm" onsubmit="return false">'+
+      '<div class="form-row"><label>请输入姓氏</label><div class="ctrl"><input type="text" id="f_xing" maxlength="2" style="max-width:120px" value="'+esc(surname||'')+'"> <button class="btn btn-gold" id="goBtn">开始搜索</button></div></div>'+
+      '</form></div>';
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓氏起源')+f;
+    document.getElementById('goBtn').onclick=calc;
+    document.getElementById('f_xing').focus();
+  }
+
+  function calc(){
+    var xing=document.getElementById('f_xing').value.trim();
+    if(!xing){alert('请输入姓氏');return;}
+    if(xing.length<1||xing.length>10){alert('姓氏应在1-10个字之间');return;}
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓氏起源')+'<div class="loading">正在查询...</div>';
+
+    SHL.data.load('senlon_xing').then(function(d){
+      var rows=d.rows;
+      var row=null;
+      for(var i=0;i<rows.length;i++){
+        if(rows[i].xing===xing || rows[i].xing.trim()===xing){ row=rows[i]; break; }
+      }
+      var html='<div class="panel"><h2>姓氏起源结果</h2><div class="result-box">';
+      html+='<p><b>姓氏：</b><span class="red">'+esc(xing)+'</span></p>';
+      html+='</div>';
+      if(row && row.intro){
+        html+='<div class="result-box">'+row.intro+'</div>';
+      } else {
+        html+='<div class="result-box"><p>系统没有找到此姓的资料！</p></div>';
+      }
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="sm-8.html">重新查询</a>　<a class="btn" href="index.html">返回算命首页</a></p>';
+      html+='</div>';
+      el.innerHTML=navButtons('姓氏起源')+html;
+    }).catch(function(e){
+      el.innerHTML=navButtons('姓氏起源')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  buildForm(defaultXing);
+  // 如有默认姓氏则自动查询
+  if(defaultXing) setTimeout(calc, 100);
+})();
+</script>
+</body></html>

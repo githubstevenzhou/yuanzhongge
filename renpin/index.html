@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁人品计算器，输入姓名趣味推算人品值（0-100分）与人品评语，搞笑人品测试。">
+<meta name="keywords" content="人品计算器,人品测试,人品分数,姓名人品,趣味测试">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/renpin/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="人品计算器_在线人品测试 - 缘中阁">
+<meta property="og:description" content="缘中阁人品计算器，输入姓名趣味推算人品值（0-100分）与人品评语，搞笑人品测试。">
+<meta property="og:url" content="https://www.yuanzhongge.com/renpin/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人品计算器_在线人品测试 - 缘中阁">
+<meta name="twitter:description" content="缘中阁人品计算器，输入姓名趣味推算人品值（0-100分）与人品评语，搞笑人品测试。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>人品计算器_在线人品测试 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "人品计算器_在线人品测试",
+  "description": "缘中阁人品计算器，输入姓名趣味推算人品值（0-100分）与人品评语，搞笑人品测试。",
+  "url": "https://www.yuanzhongge.com/renpin/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>人品计算器</h1><div class="desc">输入姓名，趣味推算人品值（0-100）及评语。</div></div>
+
+  <div class="panel">
+    <h2>人品计算器简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>原版为 Flash 小游戏，本页以纯 JS 改写。输入你的姓名，对姓名中每个字符的 Unicode 编码累加，再对 100 取模，即得人品值（0-100）。再根据人品值给出对应评语。</p>
+      <p style="color:#8a6a48">注：人品值仅依据姓名字符运算得出，纯属趣味测试，请勿当真。</p></div></div>
+
+  <div class="panel">
+    <h2>开始测算</h2>
+    <form id="rpForm" onsubmit="return false">
+      <div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="rpName" maxlength="20" placeholder="请输入姓名（中文/英文均可）" autocomplete="off" style="max-width:240px"></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="rpBtn" type="button">开始测算</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('人品计算器');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+
+  var inp=document.getElementById('rpName');
+  inp.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); calc(); } };
+
+  var data=null;
+  function ensureData(){
+    if(data) return Promise.resolve(data);
+    return SHL.data.rows('renpin_data').then(function(rows){ data=rows; return rows; });
+  }
+
+  // 人品值 = 姓名各字符 Unicode 累加 mod 100
+  function calcScore(name){
+    var sum=0;
+    for(var i=0;i<name.length;i++){ sum += name.charCodeAt(i); }
+    return sum % 100;
+  }
+
+  function findSeg(score){
+    if(!data) return null;
+    for(var i=0;i<data.length;i++){
+      var r=data[i];
+      var mn=parseInt(r.min,10), mx=parseInt(r.max,10);
+      if(score>=mn && score<=mx) return r;
+    }
+    return null;
+  }
+
+  function calc(){
+    var name=inp.value.trim();
+    if(!name){ alert('请输入姓名！'); inp.focus(); return; }
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var score=calcScore(name);
+      var seg=findSeg(score);
+      var html='<div class="result-box">';
+      html+='<p>姓名：<b style="color:#0066cc">'+esc(name)+'</b></p>';
+      html+='<p style="font-size:16px;margin-top:8px">人品值：<b style="font-size:28px;color:#d4450f">'+score+'</b> <span style="color:#8a6a48">/ 100</span></p>';
+      if(seg){
+        var lvCls = seg.min>=80?'tag-green':(seg.min>=60?'':(seg.min>=40?'tag-red':'tag-red'));
+        html+='<p>评级：<span class="tag '+lvCls+'">'+esc(seg.level||'')+'</span></p>';
+        html+='<div style="line-height:2;text-indent:2em;margin-top:8px">'+esc(seg.content||'')+'</div>';
+      } else {
+        html+='<div class="error">未找到对应评语。</div>';
+      }
+      html+='';
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('rpBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

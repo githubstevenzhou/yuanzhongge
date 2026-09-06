@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁纳甲六爻在线起卦，手摇或自动摇卦得六爻卦象，配纳甲、六亲、六神、世应与日月建，支持六爻排卦与卦象解读。">
+<meta name="keywords" content="六爻起卦,纳甲六爻,金钱卦,在线排卦,六爻占卜,六爻排盘">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/pp6y/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="六爻起卦在线排卦_纳甲六爻金钱卦 - 缘中阁">
+<meta property="og:description" content="缘中阁纳甲六爻在线起卦，手摇或自动摇卦得六爻卦象，配纳甲、六亲、六神、世应与日月建，支持六爻排卦与卦象解读。">
+<meta property="og:url" content="https://www.yuanzhongge.com/pp6y/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="六爻起卦在线排卦_纳甲六爻金钱卦 - 缘中阁">
+<meta name="twitter:description" content="缘中阁纳甲六爻在线起卦，手摇或自动摇卦得六爻卦象，配纳甲、六亲、六神、世应与日月建，支持六爻排卦与卦象解读。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>六爻起卦在线排卦_纳甲六爻金钱卦 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+.method-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}
+.method-tabs label{padding:6px 12px;border:1px solid #d9c8a4;border-radius:3px;background:#fbf6ed;cursor:pointer;font-size:14px;color:#5a3a18}
+.method-tabs input{display:none}
+.method-tabs input:checked+span{color:#cc6600;font-weight:bold}
+.method-tabs label:has(input:checked){background:#f3e6c8;border-color:#d4a017}
+.yao-opts{margin:8px 0}
+.yao-row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.yao-row label{width:56px;font-size:13px;color:#8a6a48}
+.yao-row select{padding:3px 5px;border:1px solid #d9c8a4;border-radius:3px}
+.coins{display:flex;gap:6px;justify-content:center;margin:8px 0}
+.coin{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#8a6a48;background:radial-gradient(circle,#f5e6c0,#e3c890);border:1px solid #b8923a}
+.coin.fan{background:radial-gradient(circle,#fff,#e8e0d0);color:#5a3a18}
+.yao-progress{font-family:monospace,serif;text-align:center;min-height:60px;margin:8px 0}
+.gua-box{font-family:monospace,serif;font-size:22px;text-align:center;margin:10px auto;max-width:220px;padding:12px;background:#fbf6ed;border:1px dashed #d9c8a4}
+.gua-box .yline{line-height:1.7}
+</style>
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "六爻起卦在线排卦_纳甲六爻金钱卦",
+  "description": "缘中阁纳甲六爻在线起卦，手摇或自动摇卦得六爻卦象，配纳甲、六亲、六神、世应与日月建，支持六爻排卦与卦象解读。",
+  "url": "https://www.yuanzhongge.com/pp6y/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>纳甲六爻在线起卦</h1><div class="desc">支持手动摇卦、电脑自动、手工指定、报数起卦、时间起卦，排定本卦变卦并显示卦辞爻辞。</div></div>
+
+  <div class="panel">
+    <h2>起卦信息</h2>
+    <form id="pp6yForm" onsubmit="return false">
+      <div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" placeholder="可选" style="max-width:140px"></div></div>
+      <div class="form-row"><label>占事</label><div class="ctrl"><input type="text" id="f_reason" placeholder="请输入您要占问的事情" maxlength="30" style="max-width:320px"></div></div>
+    </form></div>
+
+  <div class="panel">
+    <h2>起卦方式</h2>
+    <div class="method-tabs" id="methodTabs">
+      <label><input type="radio" name="method" value="toss" checked><span>手动摇卦</span></label>
+      <label><input type="radio" name="method" value="auto"><span>电脑自动</span></label>
+      <label><input type="radio" name="method" value="manual"><span>手工指定</span></label>
+      <label><input type="radio" name="method" value="number"><span>报数起卦</span></label>
+      <label><input type="radio" name="method" value="time"><span>时间起卦</span></label></div>
+
+    <!-- 手动摇卦 -->
+    <div class="method-pane" id="pane-toss">
+      <div class="desc" style="font-size:13px">点击「摇卦」按钮模拟三枚铜钱摇六次，依次得到初爻至上爻。</div>
+      <div class="coins">
+        <div class="coin" id="coin1">正</div>
+        <div class="coin" id="coin2">正</div>
+        <div class="coin" id="coin3">正</div></div>
+      <div style="text-align:center">
+        <button class="btn btn-gold" id="tossBtn">摇卦 (0/6)</button>
+        <button class="btn" id="tossAutoBtn">一键摇成</button>
+        <button class="btn" id="tossResetBtn" style="display:none">重新开始</button></div>
+      <div class="yao-progress" id="tossProgress"></div></div>
+
+    <!-- 电脑自动 -->
+    <div class="method-pane" id="pane-auto" style="display:none">
+      <div class="desc" style="font-size:13px">由电脑随机生成六爻，一键成卦。</div>
+      <button class="btn btn-gold" id="autoBtn">电脑起卦</button></div>
+
+    <!-- 手工指定 -->
+    <div class="method-pane" id="pane-manual" style="display:none">
+      <div class="desc" style="font-size:13px">请为每一爻指定阴阳属性（少阳/少阴为静爻，老阳/老阴为动爻）。</div>
+      <div class="yao-opts" id="manualOpts"></div>
+      <button class="btn btn-gold" id="manualBtn">确定排卦</button></div>
+
+    <!-- 报数起卦 -->
+    <div class="method-pane" id="pane-number" style="display:none">
+      <div class="desc" style="font-size:13px">输入两个正整数（心有所感之数），以上下两数分别取上、下卦，两数之和取动爻。</div>
+      <div class="form-row"><label>上卦数</label><div class="ctrl"><input type="number" id="num_up" min="1" value="3" style="max-width:120px"></div></div>
+      <div class="form-row"><label>下卦数</label><div class="ctrl"><input type="number" id="num_down" min="1" value="7" style="max-width:120px"></div></div>
+      <div class="form-row"><label>动爻加时辰</label><div class="ctrl"><input type="checkbox" id="num_addhour" checked> <span style="font-size:12px;color:#8a6a48">勾选则动爻加时辰序号</span></div></div>
+      <button class="btn btn-gold" id="numBtn">起卦</button></div>
+
+    <!-- 时间起卦 -->
+    <div class="method-pane" id="pane-time" style="display:none">
+      <div class="desc" style="font-size:13px">依年月日时之数起卦（梅花易数，依公历数取卦）。</div>
+      <div class="form-row"><label>起卦时间</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">
+        <select id="t_year"></select><span>年</span>
+        <select id="t_month"></select><span>月</span>
+        <select id="t_day"></select><span>日</span>
+        <select id="t_hour"></select><span>时</span></div></div>
+      <button class="btn btn-gold" id="timeBtn">起卦</button></div>
+
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>六爻简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>六爻是我国传统预测方法的一种，往往和八字等同论。又称“火珠林预测”“纳甲预测”“周易预测”。卦成后有六个爻位，因动静不同而变化繁多。易有六十四卦，一卦六爻，因爻动又分本卦与变卦。</p>
+      <p>六爻成卦方法多样：金钱起卦、报数起卦、时间起卦、方位起卦等。起了卦之后，依成卦的显示，从象、理、数、占入手，依爻与爻间的生克制化推算事物吉凶。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('纳甲六爻在线起卦');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  function br(s){ return esc(s).replace(/\r\n|\n|\r/g,'<br>'); }
+
+  // ===== 爻数据结构: {value:0|1, changing:bool, type:'少阳'..., coinText:''} =====
+  // value: 1=阳, 0=阴; index 0=初爻(下) ... 5=上爻(上)
+  // 原始取值 1=少阳 2=少阴 3=老阳 4=老阴
+  function vToYao(v){
+    if(v===1)return {value:1,changing:false,type:'少阳',coinText:'───'};
+    if(v===2)return {value:0,changing:false,type:'少阴',coinText:'─　─'};
+    if(v===3)return {value:1,changing:true,type:'老阳',coinText:'─── ○'};
+    if(v===4)return {value:0,changing:true,type:'老阴',coinText:'─　─ ×'};
+    return {value:1,changing:false,type:'少阳',coinText:'───'};
+  }
+  function yaoLine(y){return y.value===1?'━━━━━━━':'━━━ ━━━';}
+  function yaoMark(y){if(!y.changing)return'';return y.value===1?' ○':' ×';}
+  var posName=['初','二','三','四','五','上'];
+
+  // ===== 64卦数据 =====
+  var guaData=null;
+  function ensureData(){ if(guaData)return Promise.resolve(guaData); return SHL.data.rows('senlon_64gua').then(function(r){guaData=r;return r;}); }
+  function findGua(binary){ if(!guaData)return null; for(var i=0;i<guaData.length;i++){ if(guaData[i].binary===binary)return guaData[i]; } return null; }
+
+  // 八卦先天序 1-8 -> 3bit (bottom-to-top)
+  var BaGuaBit=SHL.const.BaGuaBit; // ["111","110","101","100","011","010","001","000"]
+  function numToTrigramBit(n){ n=n%8; if(n===0)n=8; return BaGuaBit[n-1]; }
+  function guashiFromHour(h){ if(h===23||h===0)return 1; return Math.floor((h+2)/2+0.5); }
+
+  // ===== 方法切换 =====
+  var panes={toss:'pane-toss',auto:'pane-auto',manual:'pane-manual',number:'pane-number',time:'pane-time'};
+  function showPane(m){
+    for(var k in panes){ document.getElementById(panes[k]).style.display = (k===m)?'':'none'; }
+  }
+  var methodRadios=document.querySelectorAll('input[name=method]');
+  for(var i=0;i<methodRadios.length;i++){
+    methodRadios[i].onchange=function(){ showPane(this.value); };
+  }
+
+  // ===== 手动摇卦 =====
+  var tossYaos=[], tossCount=0;
+  var tossBtn=document.getElementById('tossBtn'),tossAutoBtn=document.getElementById('tossAutoBtn'),tossResetBtn=document.getElementById('tossResetBtn');
+  var tossProgress=document.getElementById('tossProgress');
+  var coinEls=[document.getElementById('coin1'),document.getElementById('coin2'),document.getElementById('coin3')];
+
+  function tossOneYao(){
+    var coins=[Math.random()<0.5?1:0,Math.random()<0.5?1:0,Math.random()<0.5?1:0]; // 1=正,0=反
+    var zheng=coins[0]+coins[1]+coins[2];
+    var v;
+    if(zheng===3)v=4;       // 老阴 (3正)
+    else if(zheng===0)v=3;  // 老阳 (3反)
+    else if(zheng===2)v=1;  // 少阳
+    else v=2;               // 少阴
+    return {yao:vToYao(v), coins:coins};
+  }
+  function renderCoins(coins){
+    for(var i=0;i<3;i++){
+      coinEls[i].textContent=coins[i]?'正':'反';
+      coinEls[i].className='coin'+(coins[i]?'':' fan');
+    }
+  }
+  function renderTossProgress(){
+    if(tossYaos.length===0){ tossProgress.innerHTML='<div class="notice">请点击「摇卦」按钮，共需摇6次以成卦。</div>'; return; }
+    var h='<div style="display:inline-block;text-align:left">';
+    for(var i=tossYaos.length-1;i>=0;i--){
+      var y=tossYaos[i];
+      h+='<div style="font-size:18px;line-height:2;color:#3a2a18">';
+      h+='<span style="color:#8a6a48;font-size:13px;width:28px;display:inline-block">'+posName[i]+'爻</span> ';
+      h+='<b style="color:'+(y.value===1?'#5a8a3a':'#d4450f')+'">'+yaoLine(y)+'</b>';
+      h+='<span style="font-size:13px;color:#8a6a48">'+yaoMark(y)+'</span>';
+      h+=' <span class="tag" style="font-size:11px">'+esc(y.type)+'</span>';
+      h+='</div>';
+    }
+    h+='</div>';
+    tossProgress.innerHTML=h;
+  }
+  function tossOnce(){
+    if(tossCount>=6)return;
+    var r=tossOneYao();
+    renderCoins(r.coins);
+    tossYaos.push(r.yao);
+    tossCount++;
+    tossBtn.textContent='摇卦 ('+tossCount+'/6)';
+    renderTossProgress();
+    if(tossCount>=6){
+      tossBtn.disabled=true;tossAutoBtn.disabled=true;tossResetBtn.style.display='inline-block';
+      showResult(tossYaos,'手动摇卦');
+    }
+  }
+  function tossReset(){
+    tossYaos=[];tossCount=0;
+    tossBtn.disabled=false;tossAutoBtn.disabled=false;tossBtn.textContent='摇卦 (0/6)';
+    tossResetBtn.style.display='none';
+    renderTossProgress();
+    document.getElementById('result').innerHTML='';
+  }
+  tossBtn.onclick=tossOnce;
+  tossAutoBtn.onclick=function(){ while(tossCount<6)tossOnce(); };
+  tossResetBtn.onclick=tossReset;
+  renderTossProgress();
+
+  // ===== 电脑自动 =====
+  document.getElementById('autoBtn').onclick=function(){
+    var yaos=[];
+    for(var i=0;i<6;i++){
+      var v=Math.floor(Math.random()*4)+1; // 1-4
+      if(v===0)v=4;
+      yaos.push(vToYao(v));
+    }
+    showResult(yaos,'电脑自动');
+  };
+
+  // ===== 手工指定 =====
+  var manualOpts=document.getElementById('manualOpts');
+  (function(){
+    var h='';
+    for(var i=6;i>=1;i--){
+      h+='<div class="yao-row"><label>第'+posName[i-1]+'爻</label><select id="my'+i+'">'+
+        '<option value="1">少阳 ───</option><option value="2">少阴 ─　─</option>'+
+        '<option value="3">老阳─── ○</option><option value="4">老阴─　─ ×</option></select></div>';
+    }
+    manualOpts.innerHTML=h;
+  })();
+  document.getElementById('manualBtn').onclick=function(){
+    var yaos=[];
+    for(var i=1;i<=6;i++){ yaos.push(vToYao(parseInt(document.getElementById('my'+i).value))); }
+    showResult(yaos,'手工指定');
+  };
+
+  // ===== 报数起卦 =====
+  document.getElementById('numBtn').onclick=function(){
+    var up=parseInt(document.getElementById('num_up').value)||1;
+    var down=parseInt(document.getElementById('num_down').value)||1;
+    var addhour=document.getElementById('num_addhour').checked;
+    var shangGuaNum=up%8; if(shangGuaNum===0)shangGuaNum=8;
+    var xiaGuaNum=down%8; if(xiaGuaNum===0)xiaGuaNum=8;
+    var bianNum=up+down; if(addhour)bianNum+=guashiFromHour(new Date().getHours());
+    bianNum=bianNum%6; if(bianNum===0)bianNum=6;
+    var yaos=yaosFromTrigrams(xiaGuaNum,shangGuaNum,bianNum);
+    showResult(yaos,'报数起卦（上'+up+'、下'+down+(addhour?'，加时辰':'')+'）');
+  };
+
+  // ===== 时间起卦 =====
+  var tySel=document.getElementById('t_year'),tmSel=document.getElementById('t_month'),tdSel=document.getElementById('t_day'),thSel=document.getElementById('t_hour');
+  (function(){
+    var now=new Date();
+    for(var y=1950;y<=now.getFullYear()+1;y++)tySel.add(new Option(y,y));
+    for(var m=1;m<=12;m++)tmSel.add(new Option(m,m));
+    for(var d=1;d<=31;d++)tdSel.add(new Option(d,d));
+    for(var h=0;h<=23;h++)thSel.add(new Option(SHL.const.dizhiHour(h)+' '+h+'时',h));
+    tySel.value=now.getFullYear();tmSel.value=now.getMonth()+1;tdSel.value=now.getDate();thSel.value=now.getHours();
+  })();
+  document.getElementById('timeBtn').onclick=function(){
+    var y=parseInt(tySel.value),mo=parseInt(tmSel.value),d=parseInt(tdSel.value),h=parseInt(thSel.value);
+    var gs=guashiFromHour(h);
+    var shangGuaNum=(y+mo+d)%8; if(shangGuaNum===0)shangGuaNum=8;
+    var xiaGuaNum=(y+mo+d+gs)%8; if(xiaGuaNum===0)xiaGuaNum=8;
+    var bianNum=(y+mo+d+gs)%6; if(bianNum===0)bianNum=6;
+    var yaos=yaosFromTrigrams(xiaGuaNum,shangGuaNum,bianNum);
+    showResult(yaos,'时间起卦（'+y+'年'+mo+'月'+d+'日 '+SHL.const.dizhiHour(h)+'时）');
+  };
+
+  // 由上下卦数 + 动爻位 构建6爻 (index 0=初爻)
+  function yaosFromTrigrams(xiaNum,shangNum,bianPos){
+    var xiaBit=numToTrigramBit(xiaNum); // 下卦3bit (bottom-to-top)
+    var shangBit=numToTrigramBit(shangNum); // 上卦3bit
+    var bits=xiaBit+shangBit; // 6bit bottom-to-top
+    var yaos=[];
+    for(var i=0;i<6;i++){
+      var v=bits.charAt(i)==='1'?1:2; // 少阳/少阴
+      yaos.push(vToYao(v));
+    }
+    // 动爻 (1-based)
+    var bi=bianPos-1;
+    if(yaos[bi].value===1)yaos[bi]=vToYao(3); else yaos[bi]=vToYao(4);
+    return yaos;
+  }
+
+  // ===== 结果显示 =====
+  function showResult(yaos,methodText){
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在排卦...</div>';
+    ensureData().then(function(){
+      var benBin='';for(var i=0;i<6;i++)benBin+=yaos[i].value;
+      var bianBin='',hasChange=false;
+      for(var j=0;j<6;j++){ if(yaos[j].changing){bianBin+=(1-yaos[j].value);hasChange=true;}else{bianBin+=yaos[j].value;} }
+      var benGua=findGua(benBin);
+      var bianGua=hasChange?findGua(bianBin):null;
+      var name=document.getElementById('f_name').value||'';
+      var reason=document.getElementById('f_reason').value||'';
+
+      var h='<div class="result-box">';
+      h+='<p><b>姓名：</b>'+esc(name)+'　<b>起卦方式：</b>'+esc(methodText)+'</p>';
+      if(reason)h+='<p><b>所占之事：</b><span style="color:#0066cc">'+esc(reason)+'</span></p>';
+
+      // 本卦
+      h+='<h3 style="color:#cc6600">本卦：'+(benGua?esc(benGua.symbol+' '+benGua.name):'未找到')+'</h3>';
+      h+='<div class="gua-box">';
+      for(var k=5;k>=0;k--){
+        var y=yaos[k];
+        h+='<div class="yline" style="color:'+(y.value===1?'#5a8a3a':'#d4450f')+'">'+yaoLine(y)+'<span style="font-size:14px">'+yaoMark(y)+'</span></div>';
+      }
+      h+='</div>';
+      if(benGua){
+        h+='<h3>卦辞</h3><div style="line-height:2;text-indent:2em">'+br(benGua.gunci)+'</div>';
+      }
+
+      // 变卦
+      if(hasChange&&bianGua){
+        h+='<hr style="border:none;border-top:1px dashed #d4a017;margin:14px 0">';
+        h+='<h3 style="color:#cc6600">变卦：'+esc(bianGua.symbol+' '+bianGua.name)+'</h3>';
+        var bianYaos=[];
+        for(var m=0;m<6;m++){ bianYaos.push({value:(yaos[m].changing?(1-yaos[m].value):yaos[m].value),changing:false}); }
+        h+='<div class="gua-box">';
+        for(var n=5;n>=0;n--){ h+='<div class="yline" style="color:'+(bianYaos[n].value===1?'#5a8a3a':'#d4450f')+'">'+yaoLine(bianYaos[n])+'</div>'; }
+        h+='</div>';
+        h+='<h3>变卦卦辞</h3><div style="line-height:2;text-indent:2em">'+br(bianGua.gunci)+'</div>';
+      }
+
+      // 爻辞
+      if(benGua&&benGua.yaoci){
+        h+='<h3>爻辞</h3><div style="line-height:2;text-indent:2em;font-size:14px">'+br(benGua.yaoci)+'</div>';
+        if(hasChange){
+          var changePos=[];
+          for(var p=0;p<6;p++){ if(yaos[p].changing)changePos.push(posName[p]+'爻'); }
+          h+='<p style="font-size:13px;color:#8a6a48">动爻：'+esc(changePos.join('、'))+'，宜重点参看本卦相应爻辞断吉凶。</p>';
+        }else{
+          h+='<p style="font-size:13px;color:#8a6a48">无动爻，以本卦卦辞断之。</p>';
+        }
+      }
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+})();
+</script>
+</body>
+</html>

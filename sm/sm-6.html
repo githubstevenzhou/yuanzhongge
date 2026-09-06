@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁姓名配对测试，根据双方姓名五格数理计算配对指数与缘分解析。">
+<meta name="keywords" content="姓名配对,姓名配对测试,五格配对,缘分指数">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-6.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="姓名配对测试_双方姓名五格缘分 - 缘中阁">
+<meta property="og:description" content="缘中阁姓名配对测试，根据双方姓名五格数理计算配对指数与缘分解析。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-6.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="姓名配对测试_双方姓名五格缘分 - 缘中阁">
+<meta name="twitter:description" content="缘中阁姓名配对测试，根据双方姓名五格数理计算配对指数与缘分解析。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>姓名配对测试_双方姓名五格缘分 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "姓名配对测试_双方姓名五格缘分",
+  "description": "缘中阁姓名配对测试，根据双方姓名五格数理计算配对指数与缘分解析。",
+  "url": "https://www.yuanzhongge.com/sm/sm-6.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>姓名配对</h1><div class="desc">根据双方姓名五格数理计算配对指数。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('姓名配对');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+  function getBihua(ch, bihuaData){
+    for(var i=0;i<bihuaData.length;i++){
+      var chars=(bihuaData[i].hanzi||'').replace(/\r/g,'');
+      if(chars.indexOf(ch)>=0) return parseInt(bihuaData[i].num);
+    }
+    return 0;
+  }
+  function splitName(full){
+    if(full.length<=1) return {xing:full,ming:''};
+    return {xing:full.charAt(0),ming:full.substring(1)};
+  }
+
+  var name=qs('n');
+  function buildForm(){
+    var f='<div class="panel"><h2>姓名配对</h2>'+
+      '<p class="desc" style="margin-bottom:12px">输入双方中文姓名，计算配对指数。</p>'+
+      '<form id="pdForm" onsubmit="return false">'+
+      '<div class="form-row"><label>您的姓名</label><div class="ctrl"><input type="text" id="f_name1" maxlength="4" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label>对方姓名</label><div class="ctrl"><input type="text" id="f_name2" maxlength="4" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始配对</button></div></div></form></div>';
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓名配对')+f;
+    if(name) document.getElementById('f_name1').value=name;
+    document.getElementById('goBtn').onclick=calc;
+  }
+
+  function calc(){
+    var n1=document.getElementById('f_name1').value.trim();
+    var n2=document.getElementById('f_name2').value.trim();
+    if(!n1||!n2){alert('请输入双方姓名');return;}
+    if(/[^\u4e00-\u9fa5]/.test(n1+n2)){alert('请输入中文汉字');return;}
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓名配对')+'<div class="loading">正在配对...</div>';
+
+    SHL.data.load('senlon_bihua').then(function(d){
+      var bihua=d.rows;
+      function analyze(full){
+        var sp=splitName(full);
+        var xB=sp.xing.split('').map(function(c){return getBihua(c,bihua);});
+        var mB=sp.ming.split('').map(function(c){return getBihua(c,bihua);});
+        if(!xB.length) xB=[0];
+        if(!mB.length) mB=[0];
+        var w=SHL.common.wuge(xB,mB);
+        return {name:full,wuge:w,sc:SHL.common.getsancai(w.ren)};
+      }
+      var a1=analyze(n1), a2=analyze(n2);
+
+      // 配对指数: 基于人格五行相生相克
+      var sc1=a1.sc, sc2=a2.sc;
+      var score=50;
+      if(sc1===sc2) score+=25; // 同类
+      else if(C.sheng[sc1]===sc2) score+=20; // 相生
+      else if(C.sheng[sc2]===sc1) score+=15;
+      else if(C.ke[sc1]===sc2) score-=15; // 相克
+      else if(C.ke[sc2]===sc1) score-=10;
+      // 总格互补
+      var z1=a1.wuge.zong%10, z2=a2.wuge.zong%10;
+      if(z1===z2) score+=10;
+      score=Math.max(10,Math.min(99,score));
+
+      var comment='';
+      if(score>=80) comment='天作之合，缘分深厚';
+      else if(score>=65) comment='般配度较高，相处融洽';
+      else if(score>=50) comment='缘分一般，需多沟通';
+      else if(score>=35) comment='差异较大，需互相包容';
+      else comment='缘分较浅，顺其自然';
+
+      var html='<div class="panel"><h2>姓名配对结果</h2><div class="result-box">';
+      html+='<p><b>'+esc(n1)+'</b> 与 <b>'+esc(n2)+'</b> 的配对指数：</p>';
+      html+='<p style="font-size:28px;color:#d4450f;font-weight:bold;text-align:center">'+score+' 分</p>';
+      html+='<p style="text-align:center">'+comment+'</p>';
+      html+='</div>';
+
+      html+='<div class="result-box"><p><b>'+esc(n1)+'：</b>人格'+a1.wuge.ren+'（'+a1.sc+'）　总格'+a1.wuge.zong+'</p>';
+      html+='<p><b>'+esc(n2)+'：</b>人格'+a2.wuge.ren+'（'+a2.sc+'）　总格'+a2.wuge.zong+'</p></div>';
+
+      html+='<div class="result-box"><p><b>五行关系：</b>'+sc1+'与'+sc2;
+      if(sc1===sc2) html+='属同类，性格相近。';
+      else if(C.sheng[sc1]===sc2) html+='相生，互相促进。';
+      else if(C.sheng[sc2]===sc1) html+='相生，互相扶持。';
+      else if(C.ke[sc1]===sc2) html+='相克，易生摩擦。';
+      else if(C.ke[sc2]===sc1) html+='相克，需多忍让。';
+      else html+='关系平和。';
+      html+='</p></div>';
+
+      html+='<p class="muted">说明：姓名配对仅为娱乐参考，真正的关系取决于双方的性格与经营。</p>';
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p>';
+      html+='</div>';
+      el.innerHTML=navButtons('姓名配对')+html;
+    }).catch(function(e){
+      el.innerHTML=navButtons('姓名配对')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  buildForm();
+})();
+</script>
+</body></html>

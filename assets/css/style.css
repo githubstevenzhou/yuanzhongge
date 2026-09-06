@@ -1,0 +1,173 @@
+/* style.css - 缘中阁静态站点样式 (现代化重写, 保留暖色命理主题) */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.7;color:#3a2a18;background:#FEECBA;}
+a{color:#a4672e;text-decoration:none}
+a:hover{color:#d4450f}
+img{max-width:100%;border:0}
+.container{max-width:1000px;margin:0 auto;padding:0 12px}
+.flex{display:flex}
+.between{justify-content:space-between;align-items:center;flex-wrap:wrap}
+.center{text-align:center}
+
+/* 顶栏 */
+.topbar{background:#683400;border-bottom:3px solid #d4a017}
+.topbar .logo{display:flex;align-items:center;gap:8px;color:#fff;font-size:22px;font-weight:bold;padding:10px 0}
+.logo-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background:#d4a017;color:#3a1f0a;border-radius:50%;font-size:22px;font-weight:bold}
+.top-slogan{color:#f0d9a8;font-size:13px}
+
+/* 主导航 */
+.mainnav{background:#7a3d0e;box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative;z-index:100}
+.nav-list{list-style:none;display:flex;flex-wrap:wrap}
+.nav-item{position:relative}
+.nav-item>a{display:block;color:#fff;padding:0 16px;height:46px;line-height:46px;font-weight:bold;font-size:15px}
+.nav-item>a:hover,.nav-item:hover>a{background:#8c4a14;color:#ffe082}
+.has-sub > a:after{content:"▾";font-size:10px;margin-left:4px;opacity:.7}
+.submenu{display:none;position:absolute;left:0;top:46px;min-width:150px;background:#fff;border:1px solid #d4a017;border-top:none;box-shadow:0 4px 10px rgba(0,0,0,.15);padding:6px 0;z-index:200}
+.nav-item:hover .submenu,.nav-item:focus-within .submenu{display:block}
+.submenu a{display:block;padding:8px 16px;color:#5a3a18;font-size:14px;white-space:nowrap}
+.submenu a:hover{background:#FEECBA;color:#a4672e}
+
+/* 主内容 */
+main{padding:16px 0 30px}
+.page-head{background:#fff;border:1px solid #e0c898;border-left:5px solid #a4672e;padding:12px 16px;margin-bottom:14px;border-radius:3px}
+.page-head h1{font-size:20px;color:#7a3d0e}
+.page-head .desc{font-size:13px;color:#8a6a48;margin-top:4px}
+.panel{background:#fff;border:1px solid #e0c898;border-radius:4px;padding:18px;margin-bottom:16px}
+.panel h2{font-size:17px;color:#7a3d0e;border-bottom:1px dashed #d4a017;padding-bottom:8px;margin-bottom:12px}
+.panel h3{font-size:15px;color:#a4672e;margin:12px 0 6px}
+
+/* 表单 */
+.form-row{display:flex;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.form-row label{width:90px;text-align:right;color:#5a3a18;font-size:14px;flex-shrink:0}
+.form-row .ctrl{flex:1;min-width:160px}
+input[type=text],input[type=number],select,textarea{width:100%;max-width:280px;padding:7px 9px;border:1px solid #c9a96a;border-radius:3px;font-size:14px;background:#fffdf6;color:#3a2a18}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#a4672e;box-shadow:0 0 0 2px rgba(164,103,46,.15)}
+.btn{display:inline-block;padding:8px 22px;background:#a4672e;color:#fff;border:none;border-radius:3px;font-size:15px;cursor:pointer;font-weight:bold}
+.btn:hover{background:#8c4a14}
+.btn-gold{background:#d4a017;color:#3a1f0a}
+.btn-gold:hover{background:#c4910f}
+
+/* 结果区 */
+.result-box{margin-top:18px;padding:16px;background:#fffdf2;border:1px solid #e0c898;border-radius:4px;line-height:2}
+.result-box table{width:100%;border-collapse:collapse;margin:10px 0}
+.result-box th,.result-box td{border:1px solid #e0c898;padding:8px 10px;text-align:center;font-size:14px}
+.result-box th{background:#FEECBA;color:#7a3d0e}
+.result-box .gz{font-size:18px;font-weight:bold;color:#a4672e}
+.result-box .red{color:#d4450f}
+.result-box .green{color:#5a8a3a}
+.result-box .gold{color:#d4a017}
+.qian-title{font-size:18px;font-weight:bold;color:#7a3d0e;margin:10px 0}
+.qian-no{display:inline-block;background:#a4672e;color:#fff;padding:2px 12px;border-radius:12px;font-size:14px;margin-bottom:8px}
+
+/* 网格卡片 (首页/模块入口) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin:10px 0}
+.grid a{display:block;text-align:center;background:#fffdf6;border:1px solid #e0c898;border-radius:6px;padding:14px 8px;color:#5a3a18;transition:.15s}
+.grid a:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(122,61,14,.18);border-color:#a4672e;color:#a4672e}
+.grid .ic{font-size:30px;display:block;margin-bottom:6px}
+.grid .nm{font-size:13px}
+
+/* 标签 */
+.tag{display:inline-block;padding:2px 8px;background:#FEECBA;border:1px solid #d4a017;border-radius:10px;font-size:12px;color:#7a3d0e;margin:2px}
+.tag-red{background:#fdecea;border-color:#d4450f;color:#d4450f}
+.tag-green{background:#eef6e8;border-color:#5a8a3a;color:#5a8a3a}
+
+/* 页脚 */
+.foot-tools{background:#fff;border-top:3px solid #d4a017;padding:16px 0;margin-top:20px}
+.ft-title{font-size:15px;font-weight:bold;color:#7a3d0e;margin-bottom:8px}
+.ft-links{display:flex;flex-wrap:wrap;gap:6px 14px}
+.ft-links a{font-size:13px;color:#5a3a18}
+.copyright{background:#3a1f0a;color:#c9a96a;padding:14px 0;text-align:center;font-size:12px;line-height:1.9}
+.copyright a{color:#d4a017}
+
+/* 提示 */
+.notice{padding:10px 14px;background:#fff8e6;border:1px solid #d4a017;border-radius:3px;color:#7a5a18;font-size:13px;margin:10px 0}
+.error{padding:10px 14px;background:#fdecea;border:1px solid #d4450f;border-radius:3px;color:#a02818;font-size:13px;margin:10px 0}
+
+/* 加载中 */
+.loading{text-align:center;padding:30px;color:#8a6a48}
+.loading:before{content:"";display:inline-block;width:18px;height:18px;border:2px solid #d4a017;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 移动端 */
+@media(max-width:640px){
+  .nav-item>a{padding:0 11px;font-size:14px}
+  .container{padding:0 8px}
+  .form-row label{width:80px;font-size:13px}
+  .page-head h1{font-size:18px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+  .submenu{position:static;box-shadow:none;border:none;padding:0}
+  .nav-item:hover .submenu{display:none}
+}
+
+/* ===== 专业八字排盘表格 ===== */
+.bazi-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fffdf6;font-size:14px}
+.bazi-table th{background:#8a6a48;color:#fff;padding:8px 6px;font-weight:normal;border:1px solid #7a5a38;text-align:center}
+.bazi-table td{border:1px solid #e0d4b0;padding:8px 6px;text-align:center;vertical-align:middle}
+.bazi-table td:first-child{background:#f5ecd8;color:#7a5a18;font-weight:bold;width:60px}
+.bazi-table .gz{font-size:20px;font-weight:bold;color:#3a2a18;font-family:"STKaiti","KaiTi","楷体",serif}
+.bazi-table .gz.red{color:#d4450f}
+.bazi-table .ss{color:#0066cc;font-size:13px}
+.bazi-table .ss.ri{color:#d4450f;font-weight:bold}
+.bazi-table .cg{color:#5a8a3a;font-size:13px}
+.bazi-table .cg .muted{color:#a89878;font-size:11px}
+.bazi-table .ds{color:#9966cc;font-size:13px}
+.bazi-table .ds.red{color:#d4450f;font-weight:bold}
+.bazi-table .ss2{color:#a4672e;font-size:12px;line-height:1.6}
+.bazi-table .ss2.red{color:#d4450f;font-weight:bold}
+.bazi-table tr:hover td{background:#fff8e6}
+.bazi-table tr:hover td:first-child{background:#f0e4cc}
+
+/* 大运表 */
+.dy-table{margin-top:10px}
+.dy-table th{background:#6a5a48}
+.dy-table td{font-size:13px;padding:6px 4px}
+.dy-table .gz{font-size:16px}
+
+/* 五行统计 */
+.wx-stat{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:14px 0;padding:12px;background:#f8f4ec;border:1px solid #e0d4b0;border-radius:4px}
+.wx-item{display:inline-block;padding:4px 14px;border-radius:14px;font-size:14px;font-weight:bold;color:#fff}
+.wx-wood{background:#5a8a3a}
+.wx-fire{background:#d4450f}
+.wx-earth{background:#a07028}
+.wx-metal{background:#9a9a9a}
+.wx-water{background:#3a6a9a}
+.wx-day{background:#fff;color:#7a5a18;border:1px solid #d4a017;padding:4px 14px;border-radius:14px;font-size:13px;font-weight:bold}
+
+/* 结果信息区 */
+.result-box .muted{color:#8a7a58;font-size:13px}
+.result-box .center{text-align:center}
+
+/* ===== 分析区块 ===== */
+.analysis-box{margin:14px 0;padding:14px 16px;background:#faf6ec;border:1px solid #e0d4b0;border-radius:4px}
+.analysis-box h3{margin:0 0 10px 0;color:#7a3d0e;font-size:15px;border-left:3px solid #d4a017;padding-left:8px}
+.analysis-box p{margin:6px 0;line-height:1.8;font-size:13px;color:#5a4a28}
+.analysis-box p b{color:#7a3d0e}
+
+/* 刑冲合害列表 */
+.rel-list{list-style:none;padding:0;margin:0}
+.rel-list .rel-item{padding:5px 12px;margin:4px 0;border-radius:3px;font-size:13px;background:#f0ecd8}
+.rel-list .rel-good{background:#eaf6e0;color:#3a6a1a;border-left:3px solid #5a8a3a}
+.rel-list .rel-bad{background:#fdecea;color:#a02818;border-left:3px solid #d4450f}
+
+/* 十神详解表 */
+.ss-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+.ss-table th{background:#8a6a48;color:#fff;padding:6px 10px;font-weight:normal;border:1px solid #7a5a38;text-align:center}
+.ss-table td{border:1px solid #e0d4b0;padding:6px 10px;vertical-align:top}
+.ss-table .ss-name{width:80px;text-align:center;font-weight:bold;color:#0066cc;background:#f5ecd8}
+.ss-table .ss-exp{color:#5a4a28;line-height:1.6}
+.ss-table tr:hover td{background:#fff8e6}
+.ss-table tr:hover .ss-name{background:#f0e4cc}
+
+/* ===== Google AdSense 广告位 ===== */
+.ad-wrap{margin:14px auto;min-height:0}
+.ad-slot{width:100%;overflow:hidden}
+.ad-slot .adsbygoogle{display:block;width:100%;min-height:90px}
+/* 未接入 AdSense 时的占位框（填入真实广告ID后自动消失） */
+.ad-placeholder{border:1px dashed #d4a017;background:rgba(255,255,255,.55);color:#b08a4a;text-align:center;
+  padding:16px 10px;font-size:13px;border-radius:4px;min-height:90px;
+  display:flex;align-items:center;justify-content:center;line-height:1.5}
+@media(max-width:768px){
+  .ad-wrap{margin:10px auto}
+  .ad-placeholder{min-height:60px;padding:10px;font-size:12px}
+  .ad-slot .adsbygoogle{min-height:60px}
+}

@@ -1,0 +1,1 @@
+{"table":"admin","fields":["ID","Username","Password","oskey","LoginIP","LoginTime","LogoutTime","LoginTimes","lockuser","Moban"],"rows":[{"ID":"1","oskey":"super","lockuser":"False","Password":"senlon","Username":"senlon","LoginIP":"123.124.2.5","LogoutTime":"07/03/2010 17:10:31","LoginTimes":"94","Moban":"1","LoginTime":"07/03/2010 17:10:03"}],"count":1}

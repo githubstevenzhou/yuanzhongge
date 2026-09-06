@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁星座名人，查看与你同星座的名人明星，了解十二星座代表人物。">
+<meta name="keywords" content="星座名人,十二星座明星,星座代表人物">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/mingren.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="星座名人_十二星座名人明星大全 - 缘中阁">
+<meta property="og:description" content="缘中阁星座名人，查看与你同星座的名人明星，了解十二星座代表人物。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/mingren.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="星座名人_十二星座名人明星大全 - 缘中阁">
+<meta name="twitter:description" content="缘中阁星座名人，查看与你同星座的名人明星，了解十二星座代表人物。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>星座名人_十二星座名人明星大全 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "星座名人_十二星座名人明星大全",
+  "description": "缘中阁星座名人，查看与你同星座的名人明星，了解十二星座代表人物。",
+  "url": "https://www.yuanzhongge.com/sm/mingren.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>星座名人</h1><div class="desc">根据星座查看同星座的名人。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('星座名人');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function constellation(month,day){
+    var d=[[1,20,'摩羯','水瓶'],[2,19,'水瓶','双鱼'],[3,21,'双鱼','白羊'],[4,21,'白羊','金牛'],
+      [5,21,'金牛','双子'],[6,22,'双子','巨蟹'],[7,23,'巨蟹','狮子'],[8,23,'狮子','处女'],
+      [9,23,'处女','天秤'],[10,23,'天秤','天蝎'],[11,22,'天蝎','射手'],[12,22,'射手','摩羯']];
+    for(var i=0;i<12;i++){ if(month===d[i][0]) return day<d[i][1]?d[i][2]:d[i][3]; }
+    return '摩羯';
+  }
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+  var name=qs('n'), y=qs('y'), m=qs('m'), d=qs('d');
+  if(!y||!m||!d){
+    var now=new Date();
+    var ys='<select id="f_year">';for(var yr=1940;yr<=now.getFullYear();yr++){ys+='<option value="'+yr+'">'+yr+'</option>';}ys+='</select>';
+    var ms='<select id="f_month">';for(var mo=1;mo<=12;mo++){ms+='<option value="'+mo+'">'+mo+'</option>';}ms+='</select>';
+    var ds='<select id="f_day">';for(var dd=1;dd<=31;dd++){ds+='<option value="'+dd+'">'+dd+'</option>';}ds+='</select>';
+    var f='<div class="panel"><h2>查询星座</h2><form id="mrForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label>公历生日</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">'+ys+'<span>年</span>'+ms+'<span>月</span>'+ds+'<span>日</span></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">查询</button></div></div></form></div>';
+    document.getElementById('result').innerHTML=navButtons('星座名人')+f;
+    document.getElementById('f_year').value=1990;document.getElementById('f_month').value=now.getMonth()+1;
+    document.getElementById('f_day').value=now.getDate();
+    document.getElementById('goBtn').onclick=function(){
+      var p='?y='+document.getElementById('f_year').value+'&m='+document.getElementById('f_month').value+'&d='+document.getElementById('f_day').value;
+      var nm=document.getElementById('f_name').value.trim(); if(nm) p+='&n='+encodeURIComponent(nm);
+      location.href='mingren.html'+p;
+    };
+    return;
+  }
+  var r=document.getElementById('result');
+  r.innerHTML='<div class="loading">正在查询...</div>'+navButtons('星座名人');
+  var xz=constellation(parseInt(m),parseInt(d));
+  SHL.data.load('senlon_mingren').then(function(d){
+    var rows=d.rows, row=null;
+    for(var i=0;i<rows.length;i++){ if(rows[i].title===xz){ row=rows[i]; break; } }
+    var html='<div class="panel"><h2>'+esc(name||'')+'的星座名人</h2><div class="result-box">';
+    html+='<p><b>姓名：</b>'+esc(name||'未输入')+'　<b>出生：</b>'+y+'-'+m+'-'+d+'　<b>星座：</b><span class="red">'+xz+'座</span></p>';
+    html+='</div>';
+    html+='<div class="result-box"><h3>'+xz+'座之星座名人</h3>';
+    html+='<p>'+(row?row.content:'暂无资料')+'</p></div>';
+    html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p></div>';
+    r.innerHTML=navButtons('星座名人')+html;
+  }).catch(function(e){
+    r.innerHTML=navButtons('星座名人')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+  });
+})();
+</script>
+</body></html>

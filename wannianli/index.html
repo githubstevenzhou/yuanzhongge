@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁万年历在线查询，公历农历对照、节气、干支、宜忌一目了然，免费老黄历日历查询。">
+<meta name="keywords" content="万年历,老黄历,农历查询,公历农历对照,黄历">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/wannianli/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="万年历查询_公历农历对照老黄历 - 缘中阁">
+<meta property="og:description" content="缘中阁万年历在线查询，公历农历对照、节气、干支、宜忌一目了然，免费老黄历日历查询。">
+<meta property="og:url" content="https://www.yuanzhongge.com/wannianli/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="万年历查询_公历农历对照老黄历 - 缘中阁">
+<meta name="twitter:description" content="缘中阁万年历在线查询，公历农历对照、节气、干支、宜忌一目了然，免费老黄历日历查询。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>万年历查询_公历农历对照老黄历 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+.cal-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:center;margin:10px 0 16px}
+.cal-bar select{padding:4px 6px;border:1px solid #d9c8a4;border-radius:3px;background:#fff}
+.cal-grid{width:100%;border-collapse:collapse;table-layout:fixed;background:#fff;border:1px solid #e3d4b0}
+.cal-grid th{background:#8a6a48;color:#fff;padding:8px 4px;font-weight:normal;font-size:14px}
+.cal-grid th.weekend{color:#ffd9a0}
+.cal-grid td{border:1px solid #efe6d4;padding:0;vertical-align:top;height:78px}
+.cal-cell{height:100%;padding:4px 6px;cursor:default;position:relative}
+.cal-cell .solar{font-size:16px;font-weight:bold;color:#3a2a18}
+.cal-cell .lunar{font-size:11px;color:#8a6a48;margin-top:2px;line-height:1.4}
+.cal-cell .term{font-size:11px;color:#5a8a3a}
+.cal-cell .fest{font-size:11px;color:#d4450f}
+.cal-cell.today{background:#fff7e6}
+.cal-cell.today .solar{color:#cc6600}
+.cal-cell .red{color:#d4450f}
+.cal-cell.other .solar,.cal-cell.other .lunar{color:#cbb89a}
+.cal-legend{margin-top:12px;font-size:12px;color:#8a6a48;text-align:center}
+.cal-legend span{margin:0 8px}
+.cal-tip{position:absolute;z-index:50;background:#fffdf6;border:1px solid #d4a017;border-radius:4px;padding:8px 10px;font-size:12px;line-height:1.7;color:#5a3a18;box-shadow:0 2px 8px rgba(0,0,0,.12);pointer-events:none;max-width:240px;display:none}
+</style>
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "万年历查询_公历农历对照老黄历",
+  "description": "缘中阁万年历在线查询，公历农历对照、节气、干支、宜忌一目了然，免费老黄历日历查询。",
+  "url": "https://www.yuanzhongge.com/wannianli/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>万年历查询</h1><div class="desc">公历农历对照日历，含农历日期、二十四节气、传统节日与干支纪年。</div></div>
+
+  <div class="panel">
+    <div class="cal-bar">
+      <button class="btn" id="prevYear">上年</button>
+      <button class="btn" id="prevMonth">上月</button>
+      <select id="selYear"></select><span>年</span>
+      <select id="selMonth"></select><span>月</span>
+      <button class="btn" id="nextMonth">下月</button>
+      <button class="btn" id="nextYear">下年</button>
+      <button class="btn btn-gold" id="todayBtn">今日</button></div>
+    <div id="gzInfo" style="text-align:center;font-size:15px;color:#5a3a18;margin-bottom:10px"></div>
+    <table class="cal-grid" id="calTable"></table>
+    <div class="cal-legend">
+      <span><span class="red">红</span> 节日/假期</span>
+      <span><span style="color:#5a8a3a">绿</span> 节气</span>
+      <span>底色：今日</span></div></div>
+
+  <div id="calTip" class="cal-tip"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('万年历查询');
+  // ===== 农历核心算法 (移植自原 ASP wannianli，lunarInfo 表 1900-2049) =====
+  var lunarInfo=[
+0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,
+0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,
+0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,
+0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,
+0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6,0x0a4e0,0x0d260,0x0ea65,0x0d530,
+0x05aa0,0x076a3,0x096d0,0x04bd7,0x04ad0,0x0a4d0,0x1d0b6,0x0d250,0x0d520,0x0dd45,
+0x0b5a0,0x056d0,0x055b2,0x049b0,0x0a577,0x0a4b0,0x0aa50,0x1b255,0x06d20,0x0ada0];
+  var solarMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
+  var Gan=SHL.const.tg, Zhi=SHL.const.dz, Animals=SHL.const.shengxiao;
+  var solarTerm=["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"];
+  var sTermInfo=[0,21208,42467,63836,85337,107014,128867,150921,173149,195551,218072,240693,263343,285989,308563,331033,353350,375494,397447,419210,440795,462224,483532,504758];
+  var nStr1=['日','一','二','三','四','五','六','七','八','九','十'];
+  var nStr2=['初','十','廿','卅'];
+  var lunarMonthName=['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+
+  function lYearDays(y){var i,sum=348;for(i=0x8000;i>0x8;i>>=1)sum+=(lunarInfo[y-1900]&i)?1:0;return sum+leapDays(y);}
+  function leapDays(y){if(leapMonth(y))return((lunarInfo[y-1900]&0x10000)?30:29);else return 0;}
+  function leapMonth(y){return(lunarInfo[y-1900]&0xf);}
+  function monthDays(y,m){return((lunarInfo[y-1900]&(0x10000>>m))?30:29);}
+  function solarDays(y,m){if(m===1)return(((y%4===0)&&(y%100!==0)||(y%400===0))?29:28);else return solarMonth[m];}
+
+  // 公历日期 -> 农历
+  function solarToLunar(y,m,d){
+    var offset=Math.floor((Date.UTC(y,m,d)-Date.UTC(1900,0,31))/86400000);
+    var i,temp=0,year;
+    for(i=1900;i<2050&&offset>0;i++){temp=lYearDays(i);offset-=temp;}
+    if(offset<0){offset+=temp;i--;}
+    year=i;
+    var leap=leapMonth(i),isLeap=false,month,day;
+    for(i=1;i<13&&offset>0;i++){
+      if(leap>0&&i===(leap+1)&&isLeap===false){--i;isLeap=true;temp=leapDays(year);}
+      else{temp=monthDays(year,i);}
+      if(isLeap===true&&i===(leap+1))isLeap=false;
+      offset-=temp;
+    }
+    if(offset===0&&leap>0&&i===leap+1){if(isLeap){isLeap=false;}else{isLeap=true;--i;}}
+    if(offset<0){offset+=temp;--i;}
+    month=i;day=offset+1;
+    return {year:year,month:month,day:day,isLeap:isLeap};
+  }
+  function cyclical(num){return Gan[num%10]+Zhi[num%12];}
+  function cDay(d){
+    if(d===10)return '初十';if(d===20)return '二十';if(d===30)return '三十';
+    return nStr2[Math.floor(d/10)]+nStr1[d%10];
+  }
+  function lunarMonthDay(l){
+    if(l.day===1)return (l.isLeap?'闰':'')+lunarMonthName[l.month-1]+'月'+(monthDays(l.year,l.month)===29?'小':'大');
+    return cDay(l.day);
+  }
+  // 某年第n个节气为几日 (n: 0小寒起算)
+  function sTerm(y,n){
+    var offDate=new Date((31556925974.7*(y-1900)+sTermInfo[n]*60000)+Date.UTC(1900,0,6,2,5));
+    return offDate.getUTCDate();
+  }
+  // 节气所在月日
+  function termDate(y,mi){
+    var idx=mi*2; // 当月第1节气
+    var d1=sTerm(y,idx);
+    var d2=sTerm(y,idx+1);
+    return [{name:solarTerm[idx],day:d1},{name:solarTerm[idx+1],day:d2}];
+  }
+
+  // 节日数据
+  var sFtv=["0101*元旦","0214 情人节","0308 妇女节","0312 植树节","0401 愚人节","0501*劳动节","0504 青年节","0601 儿童节","0701 建党节","0801 建军节","0910 教师节","1001*国庆节","1002 国庆假","1003 国庆假","1224 平安夜","1225 圣诞节"];
+  var lFtv=["0101*春节","0102*初二","0103*初三","0115 元宵节","0505 端午节","0707 七夕节","0715 中元节","0815 中秋节","0909 重阳节","1208 腊八节","1223 小年","0100 除夕"];
+  function solarFestival(m,d){
+    var mm=String(m).padStart(2,'0'),dd=String(d).padStart(2,'0');
+    for(var i=0;i<sFtv.length;i++){
+      if(sFtv[i].substr(0,2)===mm&&sFtv[i].substr(2,2)===dd){
+        var star=sFtv[i].charAt(4)==='*';
+        return {name:sFtv[i].substr(5),holiday:star};
+      }
+    }
+    return null;
+  }
+  function lunarFestival(l){
+    if(l.isLeap)return null;
+    var mm=String(l.month).padStart(2,'0'),dd=String(l.day).padStart(2,'0');
+    for(var i=0;i<lFtv.length;i++){
+      if(lFtv[i].substr(0,2)===mm&&lFtv[i].substr(2,2)===dd){
+        var star=lFtv[i].charAt(4)==='*';
+        // 除夕特殊：取最后一条
+        if(lFtv[i].substr(0,4)==='0100')continue;
+        return {name:lFtv[i].substr(5),holiday:star};
+      }
+    }
+    // 除夕：腊月(12月)最后一天（非闰月）
+    if(!l.isLeap&&l.month===12&&l.day===monthDays(l.year,12))return {name:'除夕',holiday:true};
+    return null;
+  }
+
+  // ===== 渲染 =====
+  var ySel=document.getElementById('selYear'),mSel=document.getElementById('selMonth');
+  var table=document.getElementById('calTable'),gzInfo=document.getElementById('gzInfo');
+  var tip=document.getElementById('calTip');
+  var today=new Date();
+  var tY=today.getFullYear(),tM=today.getMonth(),tD=today.getDate();
+  var curY,curM;
+
+  for(var y=1950;y<=2049;y++)ySel.add(new Option(y,y));
+  for(var m=1;m<=12;m++)mSel.add(new Option(m+'月',m-1));
+  ySel.value=tY;mSel.value=tM;
+
+  function render(){
+    curY=parseInt(ySel.value);curM=parseInt(mSel.value);
+    // 干支纪年 (以立春为界, 此处用公历年近似, 立春前取上一年)
+    var gzYear=cyclical(curY-1900+36);
+    gzInfo.innerHTML='公历 <b>'+curY+'年'+(curM+1)+'月</b>　农历 '+gzYear+'年 【'+Animals[(curY-4)%12]+'年】';
+
+    var firstDay=new Date(curY,curM,1);
+    var firstWeek=firstDay.getDay();
+    var days=solarDays(curY,curM);
+    var terms=termDate(curY,curM);
+    var termMap={};termMap[terms[0].day]=terms[0].name;termMap[terms[1].day]=terms[1].name;
+
+    var h='<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th class="weekend">六</th></tr>';
+    var cell=0,day=1;
+    for(var row=0;row<6;row++){
+      h+='<tr>';
+      for(var col=0;col<7;col++){
+        if(cell<firstWeek||day>days){
+          h+='<td><div class="cal-cell other"></div></td>';
+          if(cell>=firstWeek)day++;
+        }else{
+          var l=solarToLunar(curY,curM,day);
+          var sf=solarFestival(curM+1,day);
+          var lf=lunarFestival(l);
+          var tm=termMap[day];
+          var isToday=(curY===tY&&curM===tM&&day===tD);
+          // 干支日柱 (1900/1/1 为甲戌, 60 进制 10)
+          var dayCyc=Math.floor(Date.UTC(curY,curM,day)/86400000)+25567+10;
+          var dayGz=cyclical(dayCyc);
+          var cls='cal-cell'+(isToday?' today':'');
+          h+='<td><div class="'+cls+'" data-tip="'+curY+'-'+(curM+1)+'-'+day+'|'+dayGz+'|'+(l.isLeap?'闰':'')+lunarMonthName[l.month-1]+'月'+cDay(l.day)+'">';
+          h+='<div class="solar">'+day+'</div>';
+          var sub=[];
+          if(lf)sub.push('<span class="fest">'+lf.name+'</span>');
+          else if(sf)sub.push('<span class="fest">'+sf.name+'</span>');
+          else if(tm)sub.push('<span class="term">'+tm+'</span>');
+          if(sub.length===0){
+            var ld=lunarMonthDay(l);
+            h+='<div class="lunar'+(l.day===1?' red':'')+'">'+ld+'</div>';
+          }else{
+            h+='<div class="lunar">'+sub.join(' ')+'</div>';
+          }
+          h+='</div></td>';
+          day++;
+        }
+        cell++;
+      }
+      h+='</tr>';
+      if(day>days&&row>=4)break;
+    }
+    table.innerHTML=h;
+  }
+
+  // 悬浮提示
+  table.onmouseover=function(e){
+    var el=e.target.closest?e.target.closest('.cal-cell'):null;
+    if(!el||!el.getAttribute('data-tip')){tip.style.display='none';return;}
+    var parts=el.getAttribute('data-tip').split('|');
+    tip.innerHTML='<b>'+parts[0]+'</b><br>干支日柱：<span style="color:#cc6600">'+parts[1]+'</span><br>农历：'+parts[2];
+    tip.style.display='block';
+    var r=el.getBoundingClientRect();
+    tip.style.left=(r.left+window.pageXOffset+12)+'px';
+    tip.style.top=(r.bottom+window.pageYOffset+4)+'px';
+  };
+  table.onmouseout=function(e){if(!e.relatedTarget||!table.contains(e.relatedTarget))tip.style.display='none';};
+
+  function shift(dy,dm){
+    var ny=curY+dy,nm=curM+dm;
+    if(nm<0){nm=11;ny--;}if(nm>11){nm=0;ny++;}
+    if(ny<1950)ny=1950;if(ny>2049)ny=2049;
+    ySel.value=ny;mSel.value=nm;render();
+  }
+  ySel.onchange=render;mSel.onchange=render;
+  document.getElementById('prevYear').onclick=function(){shift(-1,0);};
+  document.getElementById('nextYear').onclick=function(){shift(1,0);};
+  document.getElementById('prevMonth').onclick=function(){shift(0,-1);};
+  document.getElementById('nextMonth').onclick=function(){shift(0,1);};
+  document.getElementById('todayBtn').onclick=function(){ySel.value=tY;mSel.value=tM;render();};
+
+  render();
+})();
+</script>
+</body>
+</html>

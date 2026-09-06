@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁姓名配对测试，输入双方姓名按笔画数计算缘分指数与关系揭秘，趣味姓名爱情配对免费测试。">
+<meta name="keywords" content="姓名配对,姓名缘分,名字配对,姓名测试配对,缘分测试">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/xmpd/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="姓名配对测试_姓名笔画缘分配对 - 缘中阁">
+<meta property="og:description" content="缘中阁姓名配对测试，输入双方姓名按笔画数计算缘分指数与关系揭秘，趣味姓名爱情配对免费测试。">
+<meta property="og:url" content="https://www.yuanzhongge.com/xmpd/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="姓名配对测试_姓名笔画缘分配对 - 缘中阁">
+<meta name="twitter:description" content="缘中阁姓名配对测试，输入双方姓名按笔画数计算缘分指数与关系揭秘，趣味姓名爱情配对免费测试。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>姓名配对测试_姓名笔画缘分配对 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "姓名配对测试_姓名笔画缘分配对",
+  "description": "缘中阁姓名配对测试，输入双方姓名按笔画数计算缘分指数与关系揭秘，趣味姓名爱情配对免费测试。",
+  "url": "https://www.yuanzhongge.com/xmpd/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>姓名配对</h1><div class="desc">输入双方姓名，依笔画数测试你们的关系揭秘。</div></div>
+
+  <div class="panel">
+    <h2>姓名配对简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>姓名当中究竟隐藏了多少奥秘，可能至今也没有人能完全说破，这里有个趣味游戏，通过姓名笔划数看看你和爱人的关系究竟怎样。</p></div></div>
+
+  <div class="panel">
+    <h2>姓名配对测试</h2>
+    <form id="xmForm" onsubmit="return false">
+      <div class="form-row">
+        <label>您的姓名</label>
+        <div class="ctrl">
+          <input type="text" id="name1" maxlength="4" placeholder="请输入您的姓名" style="max-width:200px;font-size:18px;letter-spacing:4px" autocomplete="off">
+          <span style="font-size:12px;color:#8a6a48;margin-left:8px">最多4个简体汉字</span></div></div>
+      <div class="form-row">
+        <label>爱人姓名</label>
+        <div class="ctrl">
+          <input type="text" id="name2" maxlength="4" placeholder="请输入您爱人的名字" style="max-width:200px;font-size:18px;letter-spacing:4px" autocomplete="off">
+          <span style="font-size:12px;color:#8a6a48;margin-left:8px">最多4个简体汉字</span></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="xmBtn" type="button">开始测试</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('姓名配对');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  function br(s){ return esc(s).replace(/\r\n|\n|\r/g,'<br>'); }
+
+  var input1=document.getElementById('name1');
+  var input2=document.getElementById('name2');
+  // 仅允许中文汉字
+  function bindFilter(el){
+    el.oninput=function(){ this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,''); };
+  }
+  bindFilter(input1); bindFilter(input2);
+
+  // 构建笔画索引: char -> 笔画数 (参考 zgss 的 bihuaMap 模式)
+  var bihuaMap=null, qlRows=null;
+  function ensureData(){
+    var p1 = bihuaMap ? Promise.resolve() :
+      SHL.data.rows('senlon_bihua').then(function(rows){
+        bihuaMap={};
+        for(var i=0;i<rows.length;i++){
+          var n=parseInt(rows[i].num); var s=rows[i].hanzi||'';
+          for(var k=0;k<s.length;k++){ bihuaMap[s.charAt(k)]=n; }
+        }
+      });
+    var p2 = qlRows ? Promise.resolve() :
+      SHL.data.rows('senlon_qlpdbh').then(function(rows){ qlRows=rows; });
+    return Promise.all([p1,p2]);
+  }
+
+  // 计算姓名前 4 字笔画和（不足 4 字时缺字笔画为 0）
+  function nameBihua(name){
+    var sum=0;
+    for(var i=0;i<4;i++){
+      var ch=name.charAt(i);
+      if(ch && bihuaMap[ch]!=null){ sum+=bihuaMap[ch]; }
+    }
+    return sum;
+  }
+
+  // 在 qlpdbh 中查找 bihua 字段（逗号分隔的数字串）包含 num 的行
+  function findQl(num){
+    if(!qlRows) return null;
+    var ns=String(num);
+    for(var i=0;i<qlRows.length;i++){
+      var parts=(qlRows[i].bihua||'').split(',');
+      for(var j=0;j<parts.length;j++){
+        if(parts[j]===ns) return qlRows[i];
+      }
+    }
+    return null;
+  }
+
+  function calc(){
+    var n1=input1.value.trim();
+    var n2=input2.value.trim();
+    if(!n1){ alert('请输入您的姓名！'); input1.focus(); return; }
+    if(!n2){ alert('请输入您爱人的名字！'); input2.focus(); return; }
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var sum1=nameBihua(n1);
+      var sum2=nameBihua(n2);
+      var total=sum1+sum2;
+      var bihuac=total;
+      if(bihuac>100) bihuac=bihuac%100;
+      var row=findQl(bihuac);
+      var html='<div class="result-box">';
+      html+='<p>双方姓名：<b style="color:#0066cc">'+esc(n1)+' '+esc(n2)+'</b></p>';
+      html+='<p>笔画之和：'+sum1+' + '+sum2+' = '+total+(bihuac!==total?'　→　取模后 <b style="color:#cc6600">'+bihuac+'</b>':'')+'</p>';
+      html+='<p><b style="color:#cc6600">关系揭密：</b>'+(row?br(row.intro):'<span class="error">未找到对应的配对结果。</span>')+'</p>';
+      html+='';
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('xmBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

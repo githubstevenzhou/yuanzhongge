@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁真太阳时查询工具，根据出生地经度与出生时间计算真太阳时与平太阳时偏差，八字排盘前校正出生时辰更准确。">
+<meta name="keywords" content="真太阳时,真太阳时查询,太阳时校正,经度时差,八字时辰校正">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/taiyang/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="真太阳时查询_真太阳时在线校正 - 缘中阁">
+<meta property="og:description" content="缘中阁真太阳时查询工具，根据出生地经度与出生时间计算真太阳时与平太阳时偏差，八字排盘前校正出生时辰更准确。">
+<meta property="og:url" content="https://www.yuanzhongge.com/taiyang/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="真太阳时查询_真太阳时在线校正 - 缘中阁">
+<meta name="twitter:description" content="缘中阁真太阳时查询工具，根据出生地经度与出生时间计算真太阳时与平太阳时偏差，八字排盘前校正出生时辰更准确。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>真太阳时查询_真太阳时在线校正 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "真太阳时查询_真太阳时在线校正",
+  "description": "缘中阁真太阳时查询工具，根据出生地经度与出生时间计算真太阳时与平太阳时偏差，八字排盘前校正出生时辰更准确。",
+  "url": "https://www.yuanzhongge.com/taiyang/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>真太阳时查询</h1><div class="desc">按出生地经度与当日均时差修正北京时间，得到平太阳时与真太阳时，用于准确判定八字时辰。</div></div>
+
+  <div class="panel">
+    <h2>真太阳时修正</h2>
+    <form id="tyForm" onsubmit="return false">
+      <div class="form-row"><label>出生日期</label><div class="ctrl">
+        <select id="f_year"></select><span>年</span>
+        <select id="f_month"></select><span>月</span>
+        <select id="f_day"></select><span>日</span>
+        <span style="font-size:12px;color:#8a6a48;margin-left:6px">北京标准时间</span></div></div>
+      <div class="form-row"><label>出生时间</label><div class="ctrl">
+        <select id="f_hour"></select><span>时</span>
+        <select id="f_min"></select><span>分</span>
+        <span style="font-size:12px;color:#8a6a48;margin-left:6px">24小时制 00:00~23:59</span></div></div>
+      <div class="form-row"><label>出生地经度</label><div class="ctrl">
+        <input type="number" id="f_lon" value="120" step="0.01" style="max-width:100px"> 度（东经）
+        <select id="f_preset" style="max-width:160px;margin-left:8px">
+          <option value="">常用城市...</option>
+        </select>
+        <a href="../jingdu/" style="color:#0066cc;margin-left:8px;font-size:12px">查询地区经度</a></div></div>
+      <div class="form-row"><label>夏令时</label><div class="ctrl"><label><input type="checkbox" id="f_xialing" value="yes"> 出生时间为夏令时（自动减 1 小时）</label></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="tyBtn">立刻修正</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>什么是真太阳时？</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>周易中的时辰应按太阳相对于地球的视角来确定，即天文学上的真太阳时：<b>真太阳时＝平太阳时＋真平太阳时差（均时差）</b>。凡定生时，必须按出生地推算出当地平太阳时，再据平太阳时推算真太阳时，不能简单沿用北京时间。</p>
+      <p>真太阳时简单说就是按太阳真正的位置来定时辰。比如太阳在头顶古时称为午时（12 点左右）。北京时间 12 点太阳在北京上方，但对新疆来说这个 12 点太阳还在清晨位置，必须换算成真太阳时（可能是 8 点左右，按辰时而非午时）。</p>
+      <p>本页算法：平太阳时＝北京时间＋（经度−120）×4 分钟；真太阳时＝平太阳时＋当日均时差。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('真太阳时查询');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function fmt(d){ return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 '+pad(d.getHours())+'时'+pad(d.getMinutes())+'分'+pad(d.getSeconds())+'秒'; }
+
+  var now=new Date();
+  var yS=document.getElementById('f_year'), mS=document.getElementById('f_month'), dS=document.getElementById('f_day'), hS=document.getElementById('f_hour'), minS=document.getElementById('f_min');
+  for(var y=1950;y<=now.getFullYear()+1;y++){ yS.add(new Option(y,y)); }
+  for(var m=1;m<=12;m++){ mS.add(new Option(m,m)); }
+  for(var d=1;d<=31;d++){ dS.add(new Option(d,d)); }
+  for(var h=0;h<=23;h++){ hS.add(new Option(pad(h)+'时',h)); }
+  for(var mi=0;mi<=59;mi++){ minS.add(new Option(pad(mi),mi)); }
+  yS.value=now.getFullYear(); mS.value=now.getMonth()+1; dS.value=now.getDate(); hS.value=12; minS.value=0;
+
+  // 常用城市经度预设
+  var PRESETS=[
+    {t:'北京',lon:116.46},{t:'上海',lon:121.48},{t:'天津',lon:117.20},{t:'重庆',lon:106.54},
+    {t:'广州',lon:113.23},{t:'深圳',lon:114.07},{t:'杭州',lon:120.19},{t:'南京',lon:118.78},
+    {t:'合肥',lon:117.27},{t:'福州',lon:119.30},{t:'南昌',lon:115.89},{t:'济南',lon:117.00},
+    {t:'郑州',lon:113.65},{t:'武汉',lon:114.31},{t:'长沙',lon:112.97},{t:'海口',lon:110.35},
+    {t:'成都',lon:104.06},{t:'贵阳',lon:106.71},{t:'昆明',lon:102.73},{t:'拉萨',lon:91.13},
+    {t:'西安',lon:108.95},{t:'兰州',lon:103.82},{t:'西宁',lon:101.78},{t:'银川',lon:106.27},
+    {t:'乌鲁木齐',lon:87.68},{t:'太原',lon:112.53},{t:'石家庄',lon:114.50},{t:'呼和浩特',lon:111.65},
+    {t:'沈阳',lon:123.43},{t:'长春',lon:125.35},{t:'哈尔滨',lon:126.63},{t:'南宁',lon:108.33},
+    {t:'香港',lon:114.17},{t:'澳门',lon:113.55},{t:'台北',lon:121.50}
+  ];
+  var pre=document.getElementById('f_preset');
+  for(var i=0;i<PRESETS.length;i++){ pre.add(new Option(PRESETS[i].t, PRESETS[i].lon)); }
+  pre.onchange=function(){ if(this.value){ document.getElementById('f_lon').value=this.value; } };
+
+  var stimeItems=null;
+  function ensureData(){
+    if(stimeItems) return Promise.resolve(stimeItems);
+    return SHL.data.rows('calendar_stime').then(function(r){ stimeItems=r; return r; });
+  }
+
+  function calc(){
+    var y=parseInt(yS.value), mo=parseInt(mS.value), d=parseInt(dS.value), h=parseInt(hS.value), mi=parseInt(minS.value);
+    var lon=parseFloat(document.getElementById('f_lon').value);
+    if(isNaN(lon)) lon=120;
+    var xialing=document.getElementById('f_xialing').checked;
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在计算...</div>';
+    ensureData().then(function(){
+      // 原始时间
+      var raw=new Date(y,mo-1,d,h,mi,0);
+      // 夏令时修正：减 1 小时得到北京时间
+      var bj=new Date(raw.getTime());
+      if(xialing) bj=new Date(bj.getTime()-3600000);
+      // 平太阳时 = 北京时间 + (经度-120)*4 分钟
+      var lonMin=(lon-120)*4;
+      var ping=new Date(bj.getTime()+lonMin*60000);
+      // 真太阳时 = 复用 SHL.bazi.trueSolarTime（其内部对 bj 加经度修正与均时差）
+      var zhen=SHL.bazi.trueSolarTime(bj.getFullYear(), bj.getMonth()+1, bj.getDate(), bj.getHours(), bj.getMinutes(), lon, stimeItems);
+      // 时辰
+      var sc=shichen(zhen.getHours());
+      var h='<div class="result-box">';
+      h+='<p>出生地经度：<b style="color:#0066cc">'+lon+'</b> 度　均时差修正：<b>'+(xialing?'已按夏令时减 1 小时':'无')+'</b></p>';
+      h+='<p>原始时间：'+fmt(raw)+'</p>';
+      h+='<p>北京时间：'+fmt(bj)+'</p>';
+      h+='<p>平太阳时：'+fmt(ping)+'</p>';
+      h+='<p>真太阳时：<b style="color:#cc3300;font-size:16px">'+fmt(zhen)+'</b>　<span class="tag tag-green">'+esc(sc)+'</span></p>';
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  // 23-1 子, 1-3 丑, 3-5 寅, 5-7 卯, 7-9 辰, 9-11 巳, 11-13 午, 13-15 未, 15-17 申, 17-19 酉, 19-21 戌, 21-23 亥
+  function shichen(h){
+    var DZ=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+    var idx = h===23||h<1 ? 0 : Math.floor((h+1)/2);
+    return DZ[idx]+'时';
+  }
+
+  document.getElementById('tyBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

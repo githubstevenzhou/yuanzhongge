@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁生男生女预测，依据清宫珍藏生男生女预测表，按母亲虚岁与怀孕农历月份推算，趣味预测。">
+<meta name="keywords" content="生男生女,生男生女预测表,清宫表,生男生女清宫图,生男生女早知道">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/snsn/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="生男生女预测_清宫生男生女预测表 - 缘中阁">
+<meta property="og:description" content="缘中阁生男生女预测，依据清宫珍藏生男生女预测表，按母亲虚岁与怀孕农历月份推算，趣味预测。">
+<meta property="og:url" content="https://www.yuanzhongge.com/snsn/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生男生女预测_清宫生男生女预测表 - 缘中阁">
+<meta name="twitter:description" content="缘中阁生男生女预测，依据清宫珍藏生男生女预测表，按母亲虚岁与怀孕农历月份推算，趣味预测。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>生男生女预测_清宫生男生女预测表 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "生男生女预测_清宫生男生女预测表",
+  "description": "缘中阁生男生女预测，依据清宫珍藏生男生女预测表，按母亲虚岁与怀孕农历月份推算，趣味预测。",
+  "url": "https://www.yuanzhongge.com/snsn/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>生男生女预测</h1><div class="desc">数据来自《清宫珍藏的生男生女预测表》，按母亲虚岁与怀孕农历月份推算。</div></div>
+
+  <div class="panel">
+    <h2>生男生女测算</h2>
+    <form id="snsnForm" onsubmit="return false">
+      <div class="form-row">
+        <label>测算方式</label>
+        <div class="ctrl">
+          <label><input type="radio" name="mode" value="1" checked> 预测宝宝性别</label>
+          <label style="margin-left:14px"><input type="radio" name="mode" value="2"> 查询适合怀孕月份</label></div></div>
+      <div class="form-row"><label>称呼</label><div class="ctrl"><input type="text" id="mqname" placeholder="可选" style="max-width:140px"></div></div>
+      <div class="form-row"><label>母亲虚岁</label><div class="ctrl"><select id="nn" style="max-width:100px"></select> <span style="font-size:12px;color:#8a6a48">18-45 虚岁</span></div></div>
+      <div class="form-row" id="yueRow"><label>怀孕农历月份</label><div class="ctrl"><select id="yue" style="max-width:100px"></select></div></div>
+      <div class="form-row" id="babyRow" style="display:none"><label>计划生个</label><div class="ctrl"><select id="baby" style="max-width:120px"><option value="男">小王子</option><option value="女">小公主</option></select></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="snsnBtn">开始推算</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>说明</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>年龄为母亲虚岁年龄，月份指怀孕月份，以农历为准。遇闰月，上半月以上个月份计算，下半月以下个月份计算。</p>
+      <p>本测算数据为转载的网络资料，仅供参考，不保证其真实性，请勿迷信。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('生男生女预测');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  var nnSel=document.getElementById('nn'), yueSel=document.getElementById('yue');
+  for(var n=18;n<=45;n++){ nnSel.add(new Option(n+' 岁',n)); }
+  for(var m=1;m<=12;m++){ yueSel.add(new Option(m+' 月',m)); }
+  nnSel.value=22;
+
+  var rows=null;
+  function ensureData(){
+    if(rows) return Promise.resolve(rows);
+    return SHL.data.rows('senlon_snsn').then(function(r){ rows=r; return r; });
+  }
+  function findByNn(nn){
+    for(var i=0;i<rows.length;i++){ if(String(rows[i].nn)===String(nn)) return rows[i]; }
+    return null;
+  }
+
+  function mode(){
+    var rs=document.getElementsByName('mode');
+    for(var i=0;i<rs.length;i++){ if(rs[i].checked) return rs[i].value; }
+    return '1';
+  }
+  var modeRadios=document.getElementsByName('mode');
+  for(var k=0;k<modeRadios.length;k++){
+    modeRadios[k].onchange=function(){
+      var m=mode();
+      document.getElementById('yueRow').style.display = m==='1'?'':'none';
+      document.getElementById('babyRow').style.display = m==='2'?'':'none';
+    };
+  }
+
+  function babyLabel(v){ return v==='男'?'小王子':(v==='女'?'小公主':v); }
+
+  function calc(){
+    var m=mode();
+    var name=document.getElementById('mqname').value.trim()||'网友';
+    var nn=nnSel.value;
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在推算...</div>';
+    ensureData().then(function(){
+      var h='<div class="result-box">';
+      h+='<p>'+esc(name)+'，您好</p>';
+      if(m==='1'){
+        var yue=yueSel.value;
+        var row=findByNn(nn);
+        var v = row ? row[String(yue)] : '';
+        h+='<p>母亲虚岁 <b style="color:#0066cc">'+esc(nn)+'</b>，怀孕农历 <b style="color:#0066cc">'+esc(yue)+'</b> 月，推算结果：</p>';
+        if(v){
+          h+='<p style="font-size:18px;color:#cc3300">恭喜您，根据推算，你很可能会有一个 <b>'+esc(babyLabel(v))+'</b></p>';
+        } else {
+          h+='<div class="error">未找到对应数据。</div>';
+        }
+      } else {
+        var baby=document.getElementById('baby').value;
+        var cur=findByNn(nn);
+        var nxt=findByNn(parseInt(nn,10)+1);
+        function monthsOf(row){
+          if(!row) return [];
+          var arr=[];
+          for(var mo=1;mo<=12;mo++){
+            if(row[String(mo)]===baby) arr.push(mo);
+          }
+          return arr;
+        }
+        var cm=monthsOf(cur), nm=monthsOf(nxt);
+        h+='<p>您如果想生个 <b style="color:#cc3300">'+esc(babyLabel(baby))+'</b>，建议在以下农历月份怀孕机会较大：</p>';
+        h+='<p>今年（虚岁 '+esc(nn)+'）：<b style="color:#0066cc">'+(cm.length?cm.join('、')+' 月':'无')+'</b></p>';
+        h+='<p>明年（虚岁 '+(parseInt(nn,10)+1)+'）：<b style="color:#0066cc">'+(nm.length?nm.join('、')+' 月':'无')+'</b></p>';
+      }
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('snsnBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

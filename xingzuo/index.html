@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁星座运势查询，提供白羊座、金牛座、双子座等十二星座今日运势、本周运势、本月运势与本年运势详解。">
+<meta name="keywords" content="星座运势,今日运势,十二星座运势,本周运势,本月运势">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/xingzuo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="星座运势_十二星座今日本周本月本年运势 - 缘中阁">
+<meta property="og:description" content="缘中阁星座运势查询，提供白羊座、金牛座、双子座等十二星座今日运势、本周运势、本月运势与本年运势详解。">
+<meta property="og:url" content="https://www.yuanzhongge.com/xingzuo/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="星座运势_十二星座今日本周本月本年运势 - 缘中阁">
+<meta name="twitter:description" content="缘中阁星座运势查询，提供白羊座、金牛座、双子座等十二星座今日运势、本周运势、本月运势与本年运势详解。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>星座运势_十二星座今日本周本月本年运势 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "星座运势_十二星座今日本周本月本年运势",
+  "description": "缘中阁星座运势查询，提供白羊座、金牛座、双子座等十二星座今日运势、本周运势、本月运势与本年运势详解。",
+  "url": "https://www.yuanzhongge.com/xingzuo/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>星座运势</h1><div class="desc">选择星座与时段，查看综合、爱情、工作、财运、健康等运势分析。</div></div>
+
+  <div class="panel">
+    <h2>运势查询</h2>
+    <form id="xzForm" onsubmit="return false">
+      <div class="form-row">
+        <label>选择星座</label>
+        <div class="ctrl"><select id="xzSel" style="max-width:140px"></select></div></div>
+      <div class="form-row">
+        <label>选择时段</label>
+        <div class="ctrl">
+          <select id="periodSel" style="max-width:140px">
+            <option value="day">今日运势</option>
+            <option value="nextday">明日运势</option>
+            <option value="week">本周运势</option>
+            <option value="month">本月运势</option>
+            <option value="year">本年运势</option>
+            <option value="aqyear">爱情年运</option>
+            <option value="luck">今日综合</option>
+          </select></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="xzBtn">查看运势</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>说明</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>星座按公历出生日期划分：白羊(3.21-4.20)、金牛(4.21-5.20)、双子(5.21-6.21)、巨蟹(6.22-7.22)、狮子(7.23-8.22)、处女(8.23-9.22)、天秤(9.23-10.22)、天蝎(10.23-11.21)、射手(11.22-12.21)、魔羯(12.22-1.19)、水瓶(1.20-2.19)、双鱼(2.20-3.20)。</p>
+      <p>本页运势数据为静态版样本存档（原 ASP 版实时抓取自第三方星座站并按日缓存）。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('星座运势');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  function fmt(s){
+    if(s==null) return '';
+    s = String(s).replace(/^\s+|\s+$/g,'');
+    s = s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    s = s.replace(/&lt;BR\s*\/?&gt;/gi,'<br>').replace(/&lt;br\s*\/?&gt;/gi,'<br>');
+    s = s.replace(/&lt;p&gt;/gi,'<p>').replace(/&lt;\/p&gt;/gi,'</p>');
+    s = s.replace(/&nbsp;/g,' ');
+    return s;
+  }
+  // 星级渲染: n 为 1-5
+  function stars(n){
+    n = parseInt(n,10)||0; if(n>5) n=5; if(n<0) n=0;
+    var s=''; for(var i=0;i<5;i++){ s += i<n ? '<span style="color:#ff8c00">★</span>' : '<span style="color:#ddd">★</span>'; }
+    return s;
+  }
+  function bar(label, val, unit){
+    return '<p>'+esc(label)+'：<b style="color:#0066cc">'+esc(val)+(unit||'')+'</b></p>';
+  }
+  function starBar(label, val){
+    return '<p>'+esc(label)+'：'+stars(val)+'</p>';
+  }
+  function textBlock(label, val){
+    if(!val) return '';
+    return '<h3 style="color:#cc6600">'+esc(label)+'</h3><p style="line-height:2;text-indent:2em">'+fmt(val)+'</p>';
+  }
+
+  // 12 星座 (id 1-12)
+  var XZ=[
+    {id:1,t:'白羊座'},{id:2,t:'金牛座'},{id:3,t:'双子座'},{id:4,t:'巨蟹座'},
+    {id:5,t:'狮子座'},{id:6,t:'处女座'},{id:7,t:'天秤座'},{id:8,t:'天蝎座'},
+    {id:9,t:'射手座'},{id:10,t:'魔羯座'},{id:11,t:'水瓶座'},{id:12,t:'双鱼座'}
+  ];
+  var sel=document.getElementById('xzSel');
+  for(var i=0;i<XZ.length;i++){ sel.add(new Option(XZ[i].t, XZ[i].id)); }
+
+  var cache={};
+  function loadPeriod(p){
+    if(cache[p]) return Promise.resolve(cache[p]);
+    var name = p==='luck' ? 'xingzuo_luck' : ('senlon_xzys'+p);
+    return SHL.data.rows(name).then(function(r){ cache[p]=r; return r; });
+  }
+  function findById(rows, id){
+    for(var i=0;i<rows.length;i++){ if(String(rows[i].id)===String(id)) return rows[i]; }
+    return null;
+  }
+  function xzTitle(id){ for(var i=0;i<XZ.length;i++){ if(String(XZ[i].id)===String(id)) return XZ[i].t; } return ''; }
+
+  function renderDay(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b>　<span class="muted">('+esc(r.xzrq||'')+')　有效期：'+esc(r.yxqx||'')+'</span></p>';
+    h+='<p>速配星座：<b style="color:#cc6600">'+esc(r.spxz||'')+'</b>　幸运颜色：'+esc(r.xyys||'')+'　幸运数字：'+esc(r.xysz||'')+'</p>';
+    h+=starBar('综合运势', r.zhys);
+    h+=starBar('爱情运势', r.aqys);
+    h+=starBar('工作状况', r.gzzk);
+    h+=starBar('财运指数', r.nctz);
+    h+=bar('健康指数', r.jkzs);
+    h+=bar('商谈指数', r.stzs);
+    h+=textBlock('综合点评', r.zhpg);
+    h+='</div>';
+    return h;
+  }
+
+  function renderWeek(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b>　<span class="muted">('+esc(r.xzrq||'')+')　有效期：'+esc(r.yxqx||'')+'</span></p>';
+    if(r.title) h+='<p style="font-size:16px;color:#cc3300">本周主题：'+esc(r.title)+'</p>';
+    h+=starBar('整体运势', r.ztzs);
+    h+=textBlock('整体运势详析', r.ztys);
+    h+=starBar('爱情运势', r.aqzs1);
+    h+=textBlock('爱情提示', r.aqys1);
+    h+=starBar('情感补充', r.aqzs2);
+    h+=textBlock('情感补充', r.aqys2);
+    h+=starBar('工作运势', r.gzzs);
+    h+=textBlock('工作提示', r.gzys);
+    h+=starBar('健康运势', r.jkzs);
+    h+=textBlock('健康提示', r.jkys);
+    h+=starBar('幸运指数', r.xyzs);
+    h+=textBlock('幸运提示', r.xyys);
+    if(r.hxri) h+='<p>幸运日：'+esc(r.hxri)+'</p>';
+    if(r.hxsm) h+=textBlock('幸运日说明', r.hxsm);
+    if(r.hmri) h+='<p>注意日：'+esc(r.hmri)+'</p>';
+    if(r.hmsm) h+=textBlock('注意日说明', r.hmsm);
+    h+='</div>';
+    return h;
+  }
+
+  function renderMonth(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b>　<span class="muted">('+esc(r.xzrq||'')+')　有效期：'+esc(r.yxqx||'')+'</span></p>';
+    h+=starBar('整体运势', r.ztzs);
+    h+=textBlock('整体运势详析', r.ztys);
+    h+=starBar('爱情运势', r.aqzs);
+    h+=textBlock('爱情运势详析', r.aqys);
+    h+=starBar('财运指数', r.tzzs);
+    h+=textBlock('财运详析', r.tzys);
+    if(r.jyfs) h+='<p>减压方式：'+esc(r.jyfs)+'</p>';
+    if(r.xyw) h+='<p>幸运物：'+esc(r.xyw)+'</p>';
+    h+='</div>';
+    return h;
+  }
+
+  function renderYear(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b>　<span class="muted">('+esc(r.xzrq||'')+')　有效期：'+esc(r.yxqx||'')+'</span></p>';
+    if(r.title) h+='<p style="font-size:16px;color:#cc3300">年度主题：'+esc(r.title)+'</p>';
+    h+=starBar('综合指数', r.ztzs);
+    h+=textBlock('综合运势', r.ztzk);
+    h+=starBar('学业考运', r.gkzs);
+    h+=textBlock('学业考运提示', r.gkxy);
+    h+=starBar('工作运势', r.gzzs);
+    h+=textBlock('工作状况', r.gzzc);
+    h+=starBar('金钱运势', r.jqzs);
+    h+=textBlock('理财投资', r.zqlc);
+    h+=starBar('爱情运势', r.lazs);
+    h+=textBlock('爱情缘分', r.lzfy);
+    h+='</div>';
+    return h;
+  }
+
+  function renderAqYear(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b> 爱情年运　<span class="muted">有效期：'+esc(r.yxqx||'')+'</span></p>';
+    h+=textBlock('整体状况', r.ztzk);
+    h+=textBlock('男生爱情运', r.nan);
+    h+=textBlock('女生爱情运', r.nv);
+    h+='</div>';
+    return h;
+  }
+
+  function renderLuck(r, title){
+    var h='<div class="result-box">';
+    h+='<p><b style="color:#0066cc;font-size:18px">'+esc(title)+'</b> 今日综合运势</p>';
+    if(r.date) h+='<p class="muted">数据日期：'+esc(r.date)+'</p>';
+    h+=starBar('综合运势', r.all);
+    h+=starBar('爱情运势', r.love);
+    h+=starBar('工作状况', r.work);
+    h+=starBar('理财投资', r.business);
+    h+=bar('健康指数', r.health);
+    h+=bar('商谈指数', r.talk);
+    if(r.color) h+='<p>幸运颜色：'+esc(r.color)+'</p>';
+    if(r.number) h+='<p>幸运数字：'+esc(r.number)+'</p>';
+    if(r.soon) h+='<p>速配星座：'+esc(r.soon)+'</p>';
+    h+=textBlock('今日忠告', r.main);
+    h+='</div>';
+    return h;
+  }
+
+  function calc(){
+    var id=sel.value, p=document.getElementById('periodSel').value;
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在加载运势...</div>';
+    loadPeriod(p).then(function(rows){
+      var row=findById(rows, id);
+      var title=xzTitle(id);
+      if(!row){ r.innerHTML='<div class="error">未找到「'+esc(title)+'」的运势数据。</div>'; return; }
+      var h;
+      if(p==='day') h=renderDay(row,title);
+      else if(p==='nextday') h=renderDay(row,title);
+      else if(p==='week') h=renderWeek(row,title);
+      else if(p==='month') h=renderMonth(row,title);
+      else if(p==='year') h=renderYear(row,title);
+      else if(p==='aqyear') h=renderAqYear(row,title);
+      else if(p==='luck') h=renderLuck(row,title);
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('xzBtn').onclick=calc;
+  document.getElementById('periodSel').onchange=calc;
+  sel.onchange=calc;
+  calc();
+})();
+</script>
+</body>
+</html>

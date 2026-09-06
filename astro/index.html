@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁十二星座剖析，详解各星座性格特点、爱情观、事业财运与健康，全面了解你的星座特质。">
+<meta name="keywords" content="星座剖析,十二星座性格,星座解读,星座爱情,星座大全">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/astro/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="星座剖析_十二星座性格爱情事业解读 - 缘中阁">
+<meta property="og:description" content="缘中阁十二星座剖析，详解各星座性格特点、爱情观、事业财运与健康，全面了解你的星座特质。">
+<meta property="og:url" content="https://www.yuanzhongge.com/astro/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="星座剖析_十二星座性格爱情事业解读 - 缘中阁">
+<meta name="twitter:description" content="缘中阁十二星座剖析，详解各星座性格特点、爱情观、事业财运与健康，全面了解你的星座特质。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>星座剖析_十二星座性格爱情事业解读 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "星座剖析_十二星座性格爱情事业解读",
+  "description": "缘中阁十二星座剖析，详解各星座性格特点、爱情观、事业财运与健康，全面了解你的星座特质。",
+  "url": "https://www.yuanzhongge.com/astro/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>星座剖析</h1><div class="desc">选择您的星座，查看性格、情感和爱情生活等全面剖析；可叠加血型组合深入解读。</div></div>
+
+  <div class="panel">
+    <h2>星座解读</h2>
+    <form id="astroForm" onsubmit="return false">
+      <div class="form-row">
+        <label>选择星座</label>
+        <div class="ctrl"><select id="xzSel" style="max-width:160px"></select></div></div>
+      <div class="form-row">
+        <label>血型（可选）</label>
+        <div class="ctrl">
+          <select id="bloodSel" style="max-width:120px">
+            <option value="">不选</option>
+            <option value="A">A 型</option>
+            <option value="B">B 型</option>
+            <option value="AB">AB 型</option>
+            <option value="O">O 型</option>
+          </select>
+          <span style="font-size:12px;color:#8a6a48;margin-left:8px">叠加血型可查看「血型+星座」组合解析</span></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="astroBtn">开始剖析</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>十二星座日期对照</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>白羊座(3.21-4.20) · 金牛座(4.21-5.20) · 双子座(5.21-6.21) · 巨蟹座(6.22-7.22) · 狮子座(7.23-8.22) · 处女座(8.23-9.22)</p>
+      <p>天秤座(9.23-10.22) · 天蝎座(10.23-11.21) · 射手座(11.22-12.21) · 魔羯座(12.22-1.19) · 水瓶座(1.20-2.19) · 双鱼座(2.20-3.20)</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('星座剖析');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  // content 含 <p> 等标签，转义后选择性还原
+  function fmt(s){
+    if(s==null) return '';
+    s = String(s);
+    s = s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    s = s.replace(/&lt;p&gt;/gi,'<p>').replace(/&lt;\/p&gt;/gi,'</p>');
+    s = s.replace(/&lt;br\s*\/?&gt;/gi,'<br>');
+    s = s.replace(/&nbsp;/g,' ');
+    return s;
+  }
+
+  var XZ=['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','魔羯座','水瓶座','双鱼座'];
+  var sel=document.getElementById('xzSel');
+  for(var i=0;i<XZ.length;i++){ sel.add(new Option(XZ[i],XZ[i])); }
+
+  var rows=null;
+  function ensureData(){
+    if(rows) return Promise.resolve(rows);
+    return SHL.data.rows('senlon_astro').then(function(r){ rows=r; return r; });
+  }
+  function findByTitle(t){
+    if(!rows) return null;
+    for(var i=0;i<rows.length;i++){ if(rows[i].title===t) return rows[i]; }
+    return null;
+  }
+
+  function calc(){
+    var xz=sel.value, blood=document.getElementById('bloodSel').value;
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在剖析...</div>';
+    ensureData().then(function(){
+      var title = blood ? (blood+'型'+xz) : xz;
+      var row=findByTitle(title);
+      var h='<div class="result-box">';
+      h+='<p>剖析对象：<b style="color:#0066cc;font-size:18px">'+esc(title)+'</b></p>';
+      if(row && row.content){
+        h+='<div style="line-height:2;margin-top:8px">'+fmt(row.content)+'</div>';
+      } else {
+        h+='<div class="error">未找到「'+esc(title)+'」的剖析数据。</div>';
+      }
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('astroBtn').onclick=calc;
+  // 默认展示第一个
+  calc();
+})();
+</script>
+</body>
+</html>

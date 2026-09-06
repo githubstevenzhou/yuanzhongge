@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁指纹算命，输入十指指纹斗（螺）与簸箕组合，解析性格特质与命运倾向，趣味指纹测算。">
+<meta name="keywords" content="指纹算命,指纹看命运,斗和簸箕,十指指纹,指纹性格">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/zwsm/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="指纹算命_手指斗簸箕性格解析 - 缘中阁">
+<meta property="og:description" content="缘中阁指纹算命，输入十指指纹斗（螺）与簸箕组合，解析性格特质与命运倾向，趣味指纹测算。">
+<meta property="og:url" content="https://www.yuanzhongge.com/zwsm/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="指纹算命_手指斗簸箕性格解析 - 缘中阁">
+<meta name="twitter:description" content="缘中阁指纹算命，输入十指指纹斗（螺）与簸箕组合，解析性格特质与命运倾向，趣味指纹测算。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>指纹算命_手指斗簸箕性格解析 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+.zw-thumbs{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0}
+.zw-thumb{width:78px;text-align:center;cursor:pointer;border:1px solid #e0d6c0;border-radius:8px;padding:8px 4px;background:#fbf6ed;user-select:none}
+.zw-thumb:hover{border-color:#cc8800}
+.zw-thumb .lbl{font-size:13px;color:#8a6a48;margin-bottom:4px}
+.zw-thumb .code{font-size:26px;font-weight:bold;color:#0066cc;line-height:1.2}
+.zw-thumb .sub{font-size:12px;color:#888;margin-top:4px;min-height:16px}
+.zw-code{font-size:22px;letter-spacing:8px;color:#cc3300;font-weight:bold}
+</style>
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "指纹算命_手指斗簸箕性格解析",
+  "description": "缘中阁指纹算命，输入十指指纹斗（螺）与簸箕组合，解析性格特质与命运倾向，趣味指纹测算。",
+  "url": "https://www.yuanzhongge.com/zwsm/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>手指指纹算命</h1><div class="desc">依据五指指纹组合（斗 O / 簸箕 X）解析性格与命运，男左手、女右手，从拇指起依次输入。</div></div>
+
+  <div class="panel">
+    <h2>指纹算命</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>指纹大致可分为<strong>“涡纹”（又叫斗或箩）</strong>和<strong>“流纹”（又叫簸箕）</strong>两种。方法：<span style="color:#cc3300">男左手，女右手</span>，从拇指开始，斗（箩）用 <b>O</b>，簸箕用 <b>X</b>，组成 5 位指纹代码即可测算。</p></div>
+    <form id="zwForm" onsubmit="return false">
+      <div class="form-row"><label>选择指纹</label><div class="ctrl"><div class="zw-thumbs" id="thumbs"></div></div></div>
+      <div class="form-row"><label>当前代码</label><div class="ctrl"><span class="zw-code" id="codeView">XXXXX</span> <span style="font-size:12px;color:#8a6a48;margin-left:8px">点击上方手指可在 O / X 间切换</span></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="zwBtn">立刻测算</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>说明</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>据研究报告，人的性格是与生俱来的，而指纹终生不变。本测算通过指纹组合研究性格，辅助您对自己或他人的性格有所了解。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('手指指纹算命');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  var NAMES=['拇指','食指','中指','无名指','小指'];
+  var code=['X','X','X','X','X'];
+
+  var thumbs=document.getElementById('thumbs');
+  for(var i=0;i<5;i++){
+    (function(idx){
+      var d=document.createElement('div');
+      d.className='zw-thumb';
+      d.innerHTML='<div class="lbl">'+NAMES[idx]+'</div><div class="code" id="tc'+idx+'">X</div><div class="sub" id="ts'+idx+'">簸箕</div>';
+      d.onclick=function(){ toggle(idx); };
+      thumbs.appendChild(d);
+    })(i);
+  }
+  function subLabel(c){ return c==='O'?'斗（箩）':'簸箕'; }
+  function refresh(){
+    for(var i=0;i<5;i++){
+      document.getElementById('tc'+i).textContent=code[i];
+      document.getElementById('ts'+i).textContent=subLabel(code[i]);
+    }
+    document.getElementById('codeView').textContent=code.join('');
+  }
+  function toggle(idx){ code[idx] = code[idx]==='O'?'X':'O'; refresh(); }
+  refresh();
+
+  var rows=null;
+  function ensureData(){
+    if(rows) return Promise.resolve(rows);
+    return SHL.data.rows('senlon_zhiwen').then(function(r){ rows=r; return r; });
+  }
+  function findCode(c){
+    if(!rows) return null;
+    var lc=c.toLowerCase();
+    for(var i=0;i<rows.length;i++){ if(String(rows[i].zhiwen)===lc) return rows[i]; }
+    return null;
+  }
+
+  function calc(){
+    var c=code.join('');
+    if(!/^[OX]{5}$/.test(c)){ alert('指纹代码应为 5 个 O 或 X！'); return; }
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var row=findCode(c);
+      var h='<div class="result-box">';
+      h+='<p>您的指纹代码为：<b style="color:#0066cc;font-size:18px;letter-spacing:4px">'+esc(c)+'</b></p>';
+      if(row && row.jiexi){
+        h+='<h3 style="color:#cc6600">性格解析</h3>';
+        h+='<p style="line-height:2;text-indent:2em;color:#cc1100">'+esc(row.jiexi)+'</p>';
+      } else {
+        h+='<div class="error">未找到该指纹代码的解析数据。</div>';
+      }
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('zwBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

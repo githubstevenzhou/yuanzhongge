@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁QQ号码配对，输入你和对方的QQ号进行趣味关系缘分测试，立即查看配对结果。">
+<meta name="keywords" content="QQ号码配对,QQ配对,QQ号测试,缘分测试">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/qqtest/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="QQ号码配对测试_QQ号缘分测试 - 缘中阁">
+<meta property="og:description" content="缘中阁QQ号码配对，输入你和对方的QQ号进行趣味关系缘分测试，立即查看配对结果。">
+<meta property="og:url" content="https://www.yuanzhongge.com/qqtest/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QQ号码配对测试_QQ号缘分测试 - 缘中阁">
+<meta name="twitter:description" content="缘中阁QQ号码配对，输入你和对方的QQ号进行趣味关系缘分测试，立即查看配对结果。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>QQ号码配对测试_QQ号缘分测试 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "QQ号码配对测试_QQ号缘分测试",
+  "description": "缘中阁QQ号码配对，输入你和对方的QQ号进行趣味关系缘分测试，立即查看配对结果。",
+  "url": "https://www.yuanzhongge.com/qqtest/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>QQ号码配对</h1><div class="desc">输入你和对方的QQ号，进行趣味关系测试。</div></div>
+
+  <div class="panel">
+    <h2>QQ号码配对简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>现在上网，大家肯定都有个QQ号吧，那么你想知道QQ好友跟自己的关系吗？在下面输入你想测试的双方QQ号，马上进行这个趣味小测试吧！</p></div></div>
+
+  <div class="panel">
+    <h2>开始测试</h2>
+    <form id="qqForm" onsubmit="return false">
+      <div class="form-row"><label>我的QQ</label><div class="ctrl"><input type="text" id="qq1" maxlength="12" placeholder="请输入你的QQ号" autocomplete="off" style="max-width:220px"></div></div>
+      <div class="form-row"><label>对方QQ</label><div class="ctrl"><input type="text" id="qq2" maxlength="12" placeholder="请输入对方QQ号" autocomplete="off" style="max-width:220px"></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="qqBtn" type="button">开始测试</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('QQ号码配对');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+
+  var inp1=document.getElementById('qq1');
+  var inp2=document.getElementById('qq2');
+  // 仅允许数字
+  inp1.oninput=function(){ this.value=this.value.replace(/[^\d]/g,''); };
+  inp2.oninput=function(){ this.value=this.value.replace(/[^\d]/g,''); };
+  inp1.onkeydown=inp2.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); calc(); } };
+
+  var data=null;
+  function ensureData(){
+    if(data) return Promise.resolve(data);
+    return SHL.data.rows('senlon_qlpdbh').then(function(rows){ data=rows; return rows; });
+  }
+
+  // 把QQ号每位数字相加
+  function sumDigits(s){
+    var sum=0;
+    for(var i=0;i<s.length;i++){ sum += parseInt(s.charAt(i),10)||0; }
+    return sum;
+  }
+
+  // 在 qlpdbh 表中查找 bihua 字段（逗号分隔列表）包含指定数字的行
+  function findRow(num){
+    if(!data) return null;
+    var key=String(num);
+    for(var i=0;i<data.length;i++){
+      var parts=String(data[i].bihua||'').split(',');
+      for(var j=0;j<parts.length;j++){
+        if(parts[j]===key) return data[i];
+      }
+    }
+    return null;
+  }
+
+  function calc(){
+    var q1=inp1.value.trim();
+    var q2=inp2.value.trim();
+    if(!q1){ alert('请输入QQ！'); inp1.focus(); return; }
+    if(!q2){ alert('请输入对方QQ！'); inp2.focus(); return; }
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var sum1=sumDigits(q1);
+      var sum2=sumDigits(q2);
+      var total=sum1+sum2;
+      var num=total;
+      if(num>100) num=num%100;
+      var row=findRow(num);
+      var html='<div class="result-box">';
+      html+='<p>双方QQ：<b style="color:#0066cc">'+esc(q1)+'</b> &nbsp; <b style="color:#0066cc">'+esc(q2)+'</b></p>';
+      html+='<p>各位数字之和：'+sum1+' + '+sum2+' = '+total+(total>100?(' → '+total+' mod 100 = '+num):'')+'</p>';
+      html+='<p style="color:#cc6600;font-weight:bold">关系揭密：</p>';
+      if(row){
+        html+='<div style="line-height:2;text-indent:2em">'+esc(row.intro||'').replace(/\r\n|\n|\r/g,'<br>')+'</div>';
+      } else {
+        html+='<div class="error">未找到数字 '+num+' 对应的配对结果。</div>';
+      }
+      html+='';
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('qqBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

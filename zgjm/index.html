@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁周公解梦大全，输入梦见的事物关键词即可查询解梦释义，涵盖人物、动物、生活、情感等各类梦境。">
+<meta name="keywords" content="周公解梦,解梦,梦见,周公解梦大全,在线解梦">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/zgjm/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="周公解梦大全_在线解梦查询 - 缘中阁">
+<meta property="og:description" content="缘中阁周公解梦大全，输入梦见的事物关键词即可查询解梦释义，涵盖人物、动物、生活、情感等各类梦境。">
+<meta property="og:url" content="https://www.yuanzhongge.com/zgjm/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="周公解梦大全_在线解梦查询 - 缘中阁">
+<meta name="twitter:description" content="缘中阁周公解梦大全，输入梦见的事物关键词即可查询解梦释义，涵盖人物、动物、生活、情感等各类梦境。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>周公解梦大全_在线解梦查询 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "周公解梦大全_在线解梦查询",
+  "description": "缘中阁周公解梦大全，输入梦见的事物关键词即可查询解梦释义，涵盖人物、动物、生活、情感等各类梦境。",
+  "url": "https://www.yuanzhongge.com/zgjm/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>周公解梦</h1><div class="desc">输入梦中内容的关键字，搜索原版周公解梦，解读梦境吉凶。</div></div>
+
+  <div class="panel">
+    <h2>周公解梦简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>周公，即周公旦，他是周成王的叔父，对于建立和完善周代的封建制度他有很大贡献。周公在儒家文化中享有崇高的地位，孔子以“吾不复梦见周公矣”之言，隐喻周代礼仪文化的失落。</p>
+      <p>周公是一个在孔子梦中频频出现的人物，在儒教长期主导文化的中国，周公也就不可避免的直接与梦联系起来。梦，经常被称为“周公之梦”或“梦见周公”。因此，周公解梦中的周公，即是周公旦。</p>
+      <p>梦文化是中国古代文化中不可缺少的重要组成部分，虽难登大雅之堂，但在民间却流传甚广，《周公解梦》即流传在民间的解梦之书，为后人借周公姬旦之名而著。书中列举种种梦境，并对梦预测吉凶。</p></div></div>
+
+  <div class="panel">
+    <h2>关键字解梦</h2>
+    <form id="zgForm" onsubmit="return false">
+      <div class="form-row">
+        <label>梦的关键字</label>
+        <div class="ctrl">
+          <input type="text" id="zgInput" maxlength="20" placeholder="如：父母、蛇、水、飞行" style="max-width:240px" autocomplete="off">
+          <span style="font-size:12px;color:#8a6a48;margin-left:8px">控制在20字以内，建议用单个词搜索</span></div></div>
+      <div class="form-row">
+        <label>搜索范围</label>
+        <div class="ctrl">
+          <label><input type="radio" name="zgField" value="all" checked> 全部</label>
+          <label style="margin-left:14px"><input type="radio" name="zgField" value="title"> 仅标题</label>
+          <label style="margin-left:14px"><input type="radio" name="zgField" value="content"> 仅内容</label></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="zgBtn">开始解梦</button></div></div>
+    </form>
+    <div id="result"></div></div>
+
+  <div class="panel">
+    <h2>按分类浏览</h2>
+    <div id="cateBar" style="margin-bottom:10px"></div>
+    <div id="cateList"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('周公解梦');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  // 解梦内容含 <BR> 与 &nbsp;，转义后还原换行与空格
+  function fmt(s){
+    if(s==null) return '';
+    s = String(s);
+    s = s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    s = s.replace(/&lt;BR&gt;/gi,'<br>').replace(/&lt;br\s*\/?&gt;/gi,'<br>');
+    s = s.replace(/&lt;p&gt;/gi,'<p>').replace(/&lt;\/p&gt;/gi,'</p>');
+    s = s.replace(/&nbsp;/g,' ');
+    return s;
+  }
+  // 高亮关键字
+  function highlight(s, kw){
+    if(!kw) return s;
+    var k = kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    return s.replace(new RegExp('('+k+')','gi'),'<b style="color:#cc3300">$1</b>');
+  }
+
+  var jmRows=null, cateRows=null;
+
+  function ensureData(){
+    var p1 = jmRows ? Promise.resolve() :
+      SHL.data.rows('senlon_zgjm').then(function(r){ jmRows=r; });
+    var p2 = cateRows ? Promise.resolve() :
+      SHL.data.rows('senlon_jmlb').then(function(r){ cateRows=r; });
+    return Promise.all([p1,p2]);
+  }
+
+  function cateName(id){
+    if(!cateRows) return '';
+    for(var i=0;i<cateRows.length;i++){
+      if(String(cateRows[i].id)===String(id)) return cateRows[i].jmlb;
+    }
+    return '';
+  }
+
+  var input=document.getElementById('zgInput');
+  input.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); search(); } };
+
+  function getField(){
+    var rs=document.getElementsByName('zgField');
+    for(var i=0;i<rs.length;i++){ if(rs[i].checked) return rs[i].value; }
+    return 'all';
+  }
+
+  function search(){
+    var kw=input.value.trim();
+    if(!kw){ alert('请输入梦的关键字！'); input.focus(); return; }
+    if(kw.length>20){ alert('请将描述控制在20个字以内！'); input.focus(); return; }
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在搜索...</div>';
+    ensureData().then(function(){
+      var f=getField();
+      var matches=[];
+      var kl=kw.toLowerCase();
+      for(var i=0;i<jmRows.length;i++){
+        var row=jmRows[i];
+        var t=String(row.title||''), c=String(row.content||'');
+        var inT=t.toLowerCase().indexOf(kl)>=0;
+        var inC=c.toLowerCase().indexOf(kl)>=0;
+        if(f==='title' && inT) matches.push(row);
+        else if(f==='content' && inC) matches.push(row);
+        else if(f==='all' && (inT||inC)) matches.push(row);
+      }
+      var h='<div class="result-box">';
+      h+='<p>关键字「<b style="color:#cc6600">'+esc(kw)+'</b>」共搜索到 <b style="color:#0066cc">'+matches.length+'</b> 条相关解梦：</p>';
+      if(matches.length===0){
+        h+='<div class="error">未搜索到相关解梦，建议用单个汉字或单个词进行搜索。</div>';
+      } else {
+        for(var j=0;j<matches.length;j++){
+          var m=matches[j];
+          h+='<div style="border-bottom:1px dashed #e0d6c0;padding:10px 0">';
+          h+='<p><span class="tag" style="background:#f0e6d0;color:#8a6a48">'+esc(cateName(m.jmlb))+'</span> <b style="color:#cc3300">（'+highlight(esc(m.title),kw)+'）</b></p>';
+          h+='<div style="line-height:2;margin-top:4px">'+highlight(fmt(m.content),kw)+'</div>';
+          h+='</div>';
+        }
+      }
+      h+='</div>';
+      r.innerHTML=h;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('zgBtn').onclick=search;
+
+  // 分类浏览
+  function renderCateBar(active){
+    var h='';
+    for(var i=0;i<cateRows.length;i++){
+      var c=cateRows[i];
+      var cls = (String(active)===String(c.id)) ? 'tag tag-green' : 'tag';
+      h+='<a href="javascript:;" class="'+cls+'" data-cid="'+esc(c.id)+'" style="margin:0 6px 6px 0;display:inline-block">'+esc(c.jmlb)+'</a>';
+    }
+    var bar=document.getElementById('cateBar');
+    bar.innerHTML=h;
+    var links=bar.getElementsByTagName('a');
+    for(var k=0;k<links.length;k++){
+      links[k].onclick=function(){ showCate(this.getAttribute('data-cid')); };
+    }
+  }
+
+  function showCate(cid){
+    renderCateBar(cid);
+    var list=document.getElementById('cateList');
+    list.innerHTML='<div class="loading">加载中...</div>';
+    ensureData().then(function(){
+      var items=[];
+      for(var i=0;i<jmRows.length;i++){
+        if(String(jmRows[i].jmlb)===String(cid)) items.push(jmRows[i]);
+      }
+      var h='<div class="result-box"><p>分类「<b style="color:#0066cc">'+esc(cateName(cid))+'</b>」共 <b>'+items.length+'</b> 条：</p>';
+      h+='<div style="line-height:2.2">';
+      for(var j=0;j<items.length;j++){
+        h+='<a href="javascript:;" class="jm-item" data-id="'+esc(items[j].id)+'" style="margin-right:14px;display:inline-block;color:#0066cc">'+esc(items[j].title)+'</a>';
+      }
+      h+='</div></div>';
+      list.innerHTML=h;
+      var as=list.getElementsByTagName('a');
+      for(var k=0;k<as.length;k++){
+        as[k].onclick=function(){ showDetail(this.getAttribute('data-id')); };
+      }
+    }).catch(function(e){
+      list.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  function showDetail(id){
+    var row=null;
+    for(var i=0;i<jmRows.length;i++){ if(String(jmRows[i].id)===String(id)){ row=jmRows[i]; break; } }
+    if(!row) return;
+    var list=document.getElementById('cateList');
+    var h='<div class="result-box">';
+    h+='<p><a href="javascript:;" id="backCate" style="color:#0066cc">返回分类列表</a></p>';
+    h+='<p><span class="tag" style="background:#f0e6d0;color:#8a6a48">'+esc(cateName(row.jmlb))+'</span> <b style="color:#cc3300;font-size:18px">（'+esc(row.title)+'）</b></p>';
+    h+='<div style="line-height:2;margin-top:6px">'+fmt(row.content)+'</div>';
+    h+='</div>';
+    list.innerHTML=h;
+    document.getElementById('backCate').onclick=function(){ showCate(row.jmlb); };
+  }
+
+  // 初始化分类
+  ensureData().then(function(){
+    if(cateRows && cateRows.length){ showCate(cateRows[0].id); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁三世书在线测算，按出生年月日时查三世书财运、六亲与前世今生，传统命理趣味测算。">
+<meta name="keywords" content="三世书,三世书算命,前世今生,财运预测,三世书测算">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sanshishu/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="三世书算命_前世今生财运测算 - 缘中阁">
+<meta property="og:description" content="缘中阁三世书在线测算，按出生年月日时查三世书财运、六亲与前世今生，传统命理趣味测算。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sanshishu/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三世书算命_前世今生财运测算 - 缘中阁">
+<meta name="twitter:description" content="缘中阁三世书在线测算，按出生年月日时查三世书财运、六亲与前世今生，传统命理趣味测算。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>三世书算命_前世今生财运测算 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "三世书算命_前世今生财运测算",
+  "description": "缘中阁三世书在线测算，按出生年月日时查三世书财运、六亲与前世今生，传统命理趣味测算。",
+  "url": "https://www.yuanzhongge.com/sanshishu/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>三世书 · 财运预测</h1><div class="desc">输入姓名与农历生辰，依三世书推算你的财运类型。</div></div>
+
+  <div class="panel">
+    <h2>三世书简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>三世书是传说中一本可以看到你前世、今生和后世的书，里面所有人的一切都包括。这个财运篇是专门从里面精选而来，可以算到你的财运属于哪种类型的，据说很准的哦，下面就开始测试试试自己的财运吧！</p></div></div>
+
+  <div class="panel">
+    <h2>开始测算</h2>
+    <form id="ssForm" onsubmit="return false">
+      <div class="form-row"><label>姓</label><div class="ctrl"><input type="text" id="youname1" maxlength="2" placeholder="姓氏（汉字）" autocomplete="off" style="max-width:120px"></div></div>
+      <div class="form-row"><label>名</label><div class="ctrl"><input type="text" id="youname2" maxlength="2" placeholder="名字（汉字）" autocomplete="off" style="max-width:120px"></div></div>
+      <div class="form-row"><label>性别</label><div class="ctrl"><select id="sex"><option value="男">男</option><option value="女">女</option></select></div></div>
+      <div class="form-row"><label>农历生辰</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">
+        <select id="nn"></select><span>年</span>
+        <select id="yue"></select><span>月</span>
+        <select id="ri"></select><span>日</span>
+        <select id="hh"></select><span>时</span></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="ssBtn" type="button">测算</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('三世书');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+
+  // 年/月/日/时 下拉
+  var ySel=document.getElementById('nn'), mSel=document.getElementById('yue'),
+      dSel=document.getElementById('ri'), hSel=document.getElementById('hh');
+  for(var y=1901;y<=2050;y++){ ySel.add(new Option(y,y)); }
+  for(var m=1;m<=12;m++){ mSel.add(new Option(m,m)); }
+  for(var d=1;d<=31;d++){ dSel.add(new Option(d,d)); }
+  // 时辰: 子 0/23, 丑 1/2, ... 亥 21/22
+  var SHICHEN=[
+    {v:'0', t:'子时 0'}, {v:'1', t:'丑时 1'}, {v:'2', t:'丑时 2'},
+    {v:'3', t:'寅时 3'}, {v:'4', t:'寅时 4'}, {v:'5', t:'卯时 5'},
+    {v:'6', t:'卯时 6'}, {v:'7', t:'辰时 7'}, {v:'8', t:'辰时 8'},
+    {v:'9', t:'巳时 9'}, {v:'10', t:'巳时 10'}, {v:'11', t:'午时 11'},
+    {v:'12', t:'午时 12'}, {v:'13', t:'未时 13'}, {v:'14', t:'未时 14'},
+    {v:'15', t:'申时 15'}, {v:'16', t:'申时 16'}, {v:'17', t:'酉时 17'},
+    {v:'18', t:'酉时 18'}, {v:'19', t:'戌时 19'}, {v:'20', t:'戌时 20'},
+    {v:'21', t:'亥时 21'}, {v:'22', t:'亥时 22'}, {v:'23', t:'子时 23'}
+  ];
+  for(var i=0;i<SHICHEN.length;i++){ hSel.add(new Option(SHICHEN[i].t, SHICHEN[i].v)); }
+  ySel.value=1990; mSel.value=1; dSel.value=1; hSel.value='0';
+
+  // 仅允许汉字
+  function cnOnly(id){
+    var el=document.getElementById(id);
+    el.oninput=function(){ this.value=this.value.replace(/[^\u4E00-\u9FA5]/g,''); };
+  }
+  cnOnly('youname1'); cnOnly('youname2');
+
+  // 十二财禄释义（来自 ASP Select Case）
+  var LUCKY={
+    '正': {name:'正禄－勤俭成富', desc:'祖业福禄十分弱，所得一分一毫需靠劳力赚取，可是财运极佳，皆因个性克勤克俭，不放过发财良机，积少成多，发达都无人知。唯独姻缘欠顺，可能不止一次嫁娶。'},
+    '逐': {name:'逐禄－孤寒敛财', desc:'金钱不缺，虽不是超级富豪，但也算一生财产充裕。缺点是喜欢追名逐利，永远贪不知足，但又非常吝啬，储藏多多钱却不舍得花费，"孤寒财主"正是他们的写照。'},
+    '背': {name:'背禄－离乡别井', desc:'注定奔波劳碌到外地谋生，以前中国人重视乡土亲情，迫不得已才会离乡别井。但时势转变，周围走才得四方财，有边个商家不是搭飞机多过行路？总之赚到钱便属贵格。'},
+    '耗': {name:'耗禄－快来快去', desc:'一生中有多次大笔金钱过手的机会，即使如此，也不能算是富贵命。因为钱财来得快去得快，如不能妥善理财，最后千金散尽，晚景孤苦凄凉。'},
+    '困': {name:'困禄－知足常乐', desc:'所谓"知足者贫亦乐"，无论出生和财禄也平平无奇，但知足的个性令他们不以为苦。这种人福气不薄，多数拥有无忧的晚年，年纪愈大愈富贵。'},
+    '天': {name:'天禄－祖荫丰厚', desc:'前世做得好事多，今世可在富裕环境长大，祖荫丰厚，名副其实含住金锁匙出生。他们只要守住祖业，一生衣食无忧，不宜太刻意钻营求财，否则招至失败。'},
+    '向': {name:'向禄－超级巨富', desc:'十二财禄中，以向禄最好。正财、横财两可兼得，一生与金钱结下不解缘，创业做老板固然有机会成巨富，即使帮人打工亦属令人称羡的"打工皇帝"。离开出生地往外地发展，成就更大。'},
+    '煞': {name:'煞禄－奔波劳碌', desc:'半生奔波，只因优柔寡断的性格所累，想做又不够勇气，到立下决心时又为时已晚，因此在年轻时错过不少发达契机。补救方法是学一门技能傍身，努力工作自然衣食无忧。'},
+    '才': {name:'才禄－亲力亲为', desc:'财运不过不失，所得的金钱与付出的努力成正比，想赚钱必须亲力亲为。而才禄的人，一般比人聪明、有学识，适宜从事专业行头，例如医生、律师、艺术家等，下半生生活过得充裕。'},
+    '旺': {name:'旺禄－大富大贵', desc:'财格拍得住"向禄"，同属大富大贵命。致富之道是稳守突击，不宜投资高风险项目，稳稳阵阵反而可望财源广进。财运主要由贵人带挈，适宜拓阔人际网络和社交圈子。'},
+    '暗': {name:'暗禄－先苦后甜', desc:'受前世影响，今生与家人难和睦相处，别奢望可以靠屋企发达。财运先苦后甜，需依赖朋友致富，不妨找个有信用的拍档做生意。晚景甚佳，积落不少金钱，长寿而健康。'},
+    '病': {name:'病禄－好食懒做', desc:'你并非能力逊于人，只系自己好食懒做，机会送上门都白白流失，想发达的话切忌贪图安逸，所谓"力不到不为财"。此外，他们天生体质较差，没有良好体魄，竞争力难免被削弱。'}
+  };
+
+  var data=null;
+  function ensureData(){
+    if(data) return Promise.resolve(data);
+    return SHL.data.rows('senlon_sanshishu').then(function(rows){ data=rows; return rows; });
+  }
+
+  // 在 sanshishu 表中查找 nn 等于指定字符的行
+  function findRow(nn){
+    if(!data) return null;
+    var key=String(nn);
+    for(var i=0;i<data.length;i++){
+      if(String(data[i].nn)===key) return data[i];
+    }
+    return null;
+  }
+
+  function calc(){
+    var n1=document.getElementById('youname1').value.trim();
+    var n2=document.getElementById('youname2').value.trim();
+    if(!n1){ alert('请输入姓氏。'); document.getElementById('youname1').focus(); return; }
+    if(!/^[\u4E00-\u9FA5]+$/.test(n1)){ alert('输入出错,应该都为汉字。'); document.getElementById('youname1').focus(); return; }
+    if(n1.length>2){ alert('姓氏输入出错,不能多于2字。'); document.getElementById('youname1').focus(); return; }
+    if(!n2){ alert('请输入名。'); document.getElementById('youname2').focus(); return; }
+    if(!/^[\u4E00-\u9FA5]+$/.test(n2)){ alert('输入出错,应该都为汉字。'); document.getElementById('youname2').focus(); return; }
+    if(n2.length>2){ alert('名字输入出错,不能多于2字。'); document.getElementById('youname2').focus(); return; }
+    var y=ySel.value, m=mSel.value;
+    if(!y || y<1901 || y>2050){ alert('年应在1901和2050之间。'); ySel.focus(); return; }
+    if(m<1 || m>12){ alert('月应在1与12之间。'); mSel.focus(); return; }
+
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var nn=String(y).slice(-1); // 年份最后一位
+      var row=findRow(nn);
+      if(!row){
+        r.innerHTML='<div class="error">未找到年尾数为 '+esc(nn)+' 的三世书记录。</div>';
+        return;
+      }
+      var cai=row[m]; // 该月列对应的字
+      var info=LUCKY[cai];
+      var html='<div class="result-box">';
+      html+='<p>姓名：<b style="color:#0066cc">'+esc(n1+n2)+'</b>　性别：<b>'+esc(document.getElementById('sex').value)+'</b></p>';
+      html+='<p>农历生辰：<b>'+esc(y)+'年'+esc(m)+'月'+esc(dSel.value)+'日 '+esc(hSel.options[hSel.selectedIndex].text)+'</b></p>';
+      html+='<hr style="border:0;border-top:1px dashed #d4a017;margin:14px 0">';
+      if(info){
+        html+='<p>你的财运属 <b style="font-size:24px;color:#d4450f">『'+esc(info.name)+'』</b></p>';
+        html+='<div style="line-height:2;text-indent:2em;margin-top:8px">'+esc(info.desc)+'</div>';
+      } else {
+        html+='<div class="error">未找到财运字 "'+esc(cai)+'" 对应的解释。</div>';
+      }
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('ssBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

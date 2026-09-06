@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁身份证号码测算，输入身份证号解析出生地、出生日期、性别等信息并测号码吉凶，数据仅本地计算不上传。">
+<meta name="keywords" content="身份证号码,身份证测算,身份证吉凶,号码吉凶,身份证查询">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sfz/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="身份证号码吉凶查询_身份证号测算 - 缘中阁">
+<meta property="og:description" content="缘中阁身份证号码测算，输入身份证号解析出生地、出生日期、性别等信息并测号码吉凶，数据仅本地计算不上传。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sfz/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="身份证号码吉凶查询_身份证号测算 - 缘中阁">
+<meta name="twitter:description" content="缘中阁身份证号码测算，输入身份证号解析出生地、出生日期、性别等信息并测号码吉凶，数据仅本地计算不上传。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>身份证号码吉凶查询_身份证号测算 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "身份证号码吉凶查询_身份证号测算",
+  "description": "缘中阁身份证号码测算，输入身份证号解析出生地、出生日期、性别等信息并测号码吉凶，数据仅本地计算不上传。",
+  "url": "https://www.yuanzhongge.com/sfz/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>身份号码吉凶查询</h1><div class="desc">输入15位或18位身份证号，推算户籍、出生日期、性别、校验及性格命运。</div></div>
+
+  <div class="panel">
+    <h2>查询说明</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>自古有云：谋事在人，成事在天。究竟我们可否争取主动，反过来操控自己的命运呢？答案是肯定的。现在我们就可以用身份证号来测试你的性格、爱情、事业与未来，让你更能掌握未来，迈出成功的第一步。</p>
+      <p>只要凭身份证上的号码，便可推算出你一生的命运，十分奇妙！</p>
+      <p style="color:#8a6a48">重要声明：本查询不会记录查询者的任何信息，只提供所输入数字的吉凶测试，查询结果仅供参考！</p></div></div>
+
+  <div class="panel">
+    <h2>开始查询</h2>
+    <form id="sfzForm" onsubmit="return false">
+      <div class="form-row"><label>身份证号码</label><div class="ctrl"><input type="text" id="xian" maxlength="18" placeholder="请输入15位或18位号码" autocomplete="off" style="max-width:280px"></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="sfzBtn" type="button">查询</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('身份号码吉凶查询');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+
+  var inp=document.getElementById('xian');
+  // 仅允许数字与末位 X
+  inp.oninput=function(){
+    var v=this.value.toUpperCase();
+    // 只保留前17位为数字，第18位可为X
+    var out='';
+    for(var i=0;i<v.length && i<18;i++){
+      var ch=v.charAt(i);
+      if(i<17){ if(ch>='0'&&ch<='9') out+=ch; }
+      else { if((ch>='0'&&ch<='9')||ch==='X') out+=ch; }
+    }
+    this.value=out;
+  };
+  inp.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); calc(); } };
+
+  var sfzData=null, testData=null;
+  function ensureData(){
+    var p1 = sfzData ? Promise.resolve() : SHL.data.rows('sfz_sfz').then(function(rows){ sfzData=rows; });
+    var p2 = testData ? Promise.resolve() : SHL.data.rows('sfz_test').then(function(rows){ testData=rows; });
+    return Promise.all([p1,p2]);
+  }
+
+  // 身份证校验码计算 (与 ASP sfzjy 一致)
+  // 输入 15/17/18 位，返回校验位字符
+  function sfzjy(num){
+    var cID;
+    if(num.length===15){
+      cID = num.substring(0,6) + '19' + num.substring(6,15); // 升级为17位
+    } else if(num.length===17 || num.length===18){
+      cID = num.substring(0,17);
+    } else {
+      return '';
+    }
+    var w=[7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2];
+    var nSum=0;
+    for(var i=0;i<17;i++){
+      nSum += parseInt(cID.charAt(i),10) * w[i];
+    }
+    var check = 12 - (nSum % 11);
+    if(check===10) return 'X';
+    if(check===12) return '1';
+    if(check===11) return '0';
+    return String(check);
+  }
+
+  // 查询地区: bm == 前6位
+  function findArea(bm){
+    if(!sfzData) return null;
+    for(var i=0;i<sfzData.length;i++){
+      if(String(sfzData[i].BM)===String(bm)) return sfzData[i];
+    }
+    return null;
+  }
+  // 查询测试结果: testnum 匹配
+  function findTest(testnum){
+    if(!testData) return null;
+    for(var i=0;i<testData.length;i++){
+      if(String(testData[i].testnum)===String(testnum)) return testData[i];
+    }
+    return null;
+  }
+
+  // 单双推算: 取两位数字之和，若为2位则两位再相加，再 mod 2 -> 单/双
+  function oddEven(d1, d2){
+    var n = d1 + d2;
+    if(n>=10){ n = Math.floor(n/10) + (n%10); }
+    return (n % 2 === 0) ? '双' : '单';
+  }
+
+  function calc(){
+    var xian=inp.value.trim();
+    if(!xian){ alert('请输入身份证号码！'); inp.focus(); return; }
+    var lenx=xian.length;
+    if(lenx!==15 && lenx!==18){ alert('请输入正确的身份证号码！'); inp.focus(); return; }
+    // 前15位必须为数字
+    if(!/^\d{15}/.test(xian)){ alert('请输入正确身份证号码!'); inp.focus(); return; }
+
+    var yy, mm, dd, aa;
+    if(lenx===15){
+      yy = '19' + xian.substring(6,8);
+      mm = xian.substring(8,10);
+      dd = xian.substring(10,12);
+      aa = xian.substring(14,15);
+    } else {
+      yy = xian.substring(6,10);
+      mm = xian.substring(10,12);
+      dd = xian.substring(12,14);
+      aa = xian.substring(16,17);
+    }
+    if(parseInt(mm,10)>12 || parseInt(dd,10)>31){
+      alert('请输入正确的身份证号码!'); inp.focus(); return;
+    }
+
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在查询...</div>';
+    ensureData().then(function(){
+      var area=findArea(xian.substring(0,6));
+      if(!area){
+        r.innerHTML='<div class="error">未找到前6位编码 '+xian.substring(0,6)+' 对应的地区，请检查号码是否正确。</div>';
+        return;
+      }
+      var xb = (parseInt(aa,10) % 2 === 0) ? '女' : '男';
+
+      // 校验码处理
+      var checkNote='';
+      var xian18 = xian;
+      if(lenx===18){
+        var calc=sfzjy(xian);
+        if(xian.charAt(17).toUpperCase() !== calc){
+          checkNote = '<span style="color:#FF0000">提示：身份证校验错误!可能为假！</span>';
+          // 校验失败时仍继续推算（ASP 中虽置 xian="" 但页面已渲染前面信息，这里保留推算）
+        } else {
+          checkNote = '结果：身份证号码校验为合法号码!';
+        }
+      } else {
+        // 15位升级为18位
+        xian18 = xian.substring(0,6) + '19' + xian.substring(6,15) + sfzjy(xian);
+        checkNote = '新身份证：'+xian18;
+      }
+
+      // 单双测试 (基于18位)
+      var n1=parseInt(xian18.charAt(6),10), n2=parseInt(xian18.charAt(7),10);
+      var y1=parseInt(xian18.charAt(8),10), y2=parseInt(xian18.charAt(9),10);
+      var r1=parseInt(xian18.charAt(10),10), r2=parseInt(xian18.charAt(11),10);
+      var ny = oddEven(n1,n2), yue = oddEven(y1,y2), ri = oddEven(r1,r2);
+      var testnum = ny + yue + ri;
+      var testRow = findTest(testnum);
+
+      var html='<div class="result-box">';
+      html+='<p>查询号码：<b style="color:#0066cc">'+esc(xian)+'</b></p>';
+      html+='<p>原户籍地：<b>'+esc(area.DQ||'')+'</b></p>';
+      html+='<p>出生年月：<b>'+esc(yy)+'年'+esc(mm)+'月'+esc(dd)+'日</b></p>';
+      html+='<p>性&nbsp;&nbsp;&nbsp;&nbsp;别：<b>'+esc(xb)+'</b></p>';
+      html+='<p>'+checkNote+'</p>';
+      html+='<hr style="border:0;border-top:1px dashed #d4a017;margin:14px 0">';
+      html+='<p style="color:#cc6600;font-weight:bold">测试结果（'+esc(testnum)+'）：</p>';
+      if(testRow){
+        // content 内含 HTML（strong/br），数据为可信自有数据，直接渲染
+        html+='<div style="line-height:2">'+(testRow.content||'')+'</div>';
+      } else {
+        html+='<div class="error">芸芸众生，竟无此人，无从进行命运推理！请施主输入正确的身份证再行测运。</div>';
+      }
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('sfzBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

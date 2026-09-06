@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁生辰八字算命，输入出生年月日时排出四柱八字，详批五行分布、十神关系与日主旺衰。">
+<meta name="keywords" content="生辰八字,四柱八字,八字算命,生辰八字算命,八字详批">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-1.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="生辰八字算命_四柱八字详批 - 缘中阁">
+<meta property="og:description" content="缘中阁生辰八字算命，输入出生年月日时排出四柱八字，详批五行分布、十神关系与日主旺衰。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-1.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生辰八字算命_四柱八字详批 - 缘中阁">
+<meta name="twitter:description" content="缘中阁生辰八字算命，输入出生年月日时排出四柱八字，详批五行分布、十神关系与日主旺衰。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>生辰八字算命_四柱八字详批 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "生辰八字算命_四柱八字详批",
+  "description": "缘中阁生辰八字算命，输入出生年月日时排出四柱八字，详批五行分布、十神关系与日主旺衰。",
+  "url": "https://www.yuanzhongge.com/sm/sm-1.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>生辰八字</h1><div class="desc">四柱八字排盘与五行分析。</div></div>
+  <div id="formBox"></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('生辰八字');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function constellation(month,day){
+    var d=[[1,20,'摩羯','水瓶'],[2,19,'水瓶','双鱼'],[3,21,'双鱼','白羊'],[4,21,'白羊','金牛'],
+      [5,21,'金牛','双子'],[6,22,'双子','巨蟹'],[7,23,'巨蟹','狮子'],[8,23,'狮子','处女'],
+      [9,23,'处女','天秤'],[10,23,'天秤','天蝎'],[11,22,'天蝎','射手'],[12,22,'射手','摩羯']];
+    for(var i=0;i<12;i++){ if(month===d[i][0]) return day<d[i][1]?d[i][2]:d[i][3]; }
+    return '摩羯';
+  }
+
+  // 子模块导航按钮
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>';
+    return h;
+  }
+
+  function buildForm(msg){
+    var now=new Date();
+    var ys='<select id="f_year">';for(var y=1940;y<=now.getFullYear();y++){ys+='<option value="'+y+'">'+y+'</option>';}ys+='</select>';
+    var ms='<select id="f_month">';for(var m=1;m<=12;m++){ms+='<option value="'+m+'">'+m+'</option>';}ms+='</select>';
+    var ds='<select id="f_day">';for(var d=1;d<=31;d++){ds+='<option value="'+d+'">'+d+'</option>';}ds+='</select>';
+    var hs='<select id="f_hour">';for(var h=0;h<=23;h++){hs+='<option value="'+h+'">'+C.dizhiHour(h)+' '+h+'时</option>';}hs+='</select>';
+    var mis='<select id="f_min"><option value="0">未知</option>';for(var mi=0;mi<=59;mi++){mis+='<option value="'+mi+'">'+mi+'</option>';}mis+='</select>';
+    var f='<div class="panel"><h2>输入资料</h2>'+(msg?'<p class="red">'+msg+'</p>':'')+
+      '<form id="bzForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓</label><div class="ctrl"><input type="text" id="f_xing" maxlength="2" style="max-width:80px"></div></div>'+
+      '<div class="form-row"><label>名</label><div class="ctrl"><input type="text" id="f_ming" maxlength="2" style="max-width:80px"></div></div>'+
+      '<div class="form-row"><label>性别</label><div class="ctrl"><select id="f_sex"><option value="男">男</option><option value="女">女</option></select></div></div>'+
+      '<div class="form-row"><label>血型</label><div class="ctrl"><select id="f_blood"><option value="">未知</option><option value="A">A型</option><option value="B">B型</option><option value="O">O型</option><option value="AB">AB型</option></select></div></div>'+
+      '<div class="form-row"><label>出生时间</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">'+ys+'<span>年</span>'+ms+'<span>月</span>'+ds+'<span>日</span>'+hs+'<span>时</span>'+mis+'<span>分</span></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始算命</button></div></div>'+
+      '</form></div>';
+    document.getElementById('formBox').innerHTML=f;
+    document.getElementById('f_year').value=1990;
+    document.getElementById('f_month').value=now.getMonth()+1;
+    document.getElementById('f_day').value=now.getDate();
+    document.getElementById('f_hour').value=12;
+    document.getElementById('goBtn').onclick=function(){
+      var xing=document.getElementById('f_xing').value.trim(),ming=document.getElementById('f_ming').value.trim();
+      if(!xing||!ming){alert('请输入姓名');return;}
+      var p='?y='+document.getElementById('f_year').value+'&m='+document.getElementById('f_month').value+'&d='+document.getElementById('f_day').value;
+      p+='&h='+document.getElementById('f_hour').value+'&mi='+document.getElementById('f_min').value;
+      p+='&n='+encodeURIComponent(xing+ming)+'&s='+encodeURIComponent(document.getElementById('f_sex').value);
+      var b=document.getElementById('f_blood').value; if(b) p+='&b='+encodeURIComponent(b);
+      location.href='sm-1.html'+p;
+    };
+  }
+
+  var y=parseInt(qs('y')),m=parseInt(qs('m')),d=parseInt(qs('d')),h=parseInt(qs('h')),mi=parseInt(qs('mi'))||0;
+  var name=qs('n'),sex=qs('s'),blood=qs('b');
+  if(!y||!m||!d||isNaN(h)||!name||!sex){ buildForm(); return; }
+
+  var r=document.getElementById('result');
+  r.innerHTML='<div class="loading">正在排盘分析...</div>'+navButtons('生辰八字');
+
+  Promise.all([
+    SHL.data.load('calendar_jq'), SHL.data.load('calendar_stime'), SHL.data.load('calendar_xunkong'),
+    SHL.data.load('senlon_wh'), SHL.data.load('senlon_sjrs'), SHL.data.load('senlon_sxgx'),
+    SHL.data.load('senlon_rgnm'), SHL.data.load('senlon_rysmn'), SHL.data.load('senlon_smtf'),
+    SHL.data.load('senlon_qtbj')
+  ]).then(function(arr){
+    var jq=arr[0].terms, st=arr[1].items, xk=arr[2].items;
+    var whData=arr[3].rows, sjrsData=arr[4].rows, sxgxData=arr[5].rows;
+    var rgnmData=arr[6].rows, rysmnData=arr[7].rows, smtfData=arr[8].rows, qtbjData=arr[9].rows;
+
+    var b=SHL.bazi.calc({year:y,month:m,day:d,hour:h,minute:mi,longitude:120}, jq, st);
+    var dg1=b.dgz.charAt(0), dz1=b.dgz.charAt(1);
+    var dWh=SHL.common.ganWh(dg1);
+    var season=SHL.common.siji(m);
+    var xingzuo=constellation(m,d);
+
+    // 五行个数
+    var bzwh=b.ygzWh+b.mgzWh+b.dgzWh+b.tgzWh;
+    var wn={金:0,木:0,水:0,火:0,土:0};
+    for(var i=0;i<bzwh.length;i++){ if(wn[bzwh[i]]!==undefined) wn[bzwh[i]]++; }
+    var mainw='', mainq='';
+    for(var k in wn){
+      if(wn[k]>=3) mainw+='<strong>'+k+'</strong>旺';
+      if(wn[k]===0) mainq+='缺<strong>'+k+'</strong>';
+    }
+
+    // 数据查找
+    var whRow=null; for(var i=0;i<whData.length;i++){ if(whData[i].wh===dWh){whRow=whData[i];break;} }
+    var sjrsRow=null; for(var i=0;i<sjrsData.length;i++){ if(sjrsData[i].wh===dWh && sjrsData[i].sj===season){sjrsRow=sjrsData[i];break;} }
+    var sxgxRow=null; for(var i=0;i<sxgxData.length;i++){ if(sxgxData[i].sx===b.shengxiao){sxgxRow=sxgxData[i];break;} }
+    var rgnmRow=null; for(var i=0;i<rgnmData.length;i++){ if(rgnmData[i].rgz===b.dgz){rgnmRow=rgnmData[i];break;} }
+    // 时命理 (按地支时辰)
+    var hourShi=C.dz[b.tdz]+'时';
+    var rysmnHour=null; for(var i=0;i<rysmnData.length;i++){ if(rysmnData[i].siceng===hourShi){rysmnHour=rysmnData[i];break;} }
+    var smtfRow=null; for(var i=0;i<smtfData.length;i++){ if(smtfData[i].ri===b.dgz && smtfData[i].shi===b.tgz){smtfRow=smtfData[i];break;} }
+    var qtbjRow=null; for(var i=0;i<qtbjData.length;i++){ if(qtbjData[i].tg===dg1 && qtbjData[i].dz===b.mgz.charAt(1)){qtbjRow=qtbjData[i];break;} }
+
+    var ty=SHL.bazi.taiyuan(b.mgz);
+    var mg=SHL.bazi.minggong(b.mgz.charAt(1), b.dgz.charAt(1), b.minggongx);
+    var dxk=SHL.bazi.xunkong(b.dgz, xk);
+
+    var html='<div class="panel"><h2>当前算命者信息</h2><div class="result-box">';
+    html+='<p><b>姓名：</b><span class="red">'+esc(name)+'</span>　<b>性别：</b>'+esc(sex)+(blood?'　<b>血型：</b>'+esc(blood)+'型':'')+'</p>';
+    html+='<p><b>出生(公历)：</b><span class="gold">'+y+'年'+m+'月'+d+'日 '+pad(h)+'时'+pad(mi)+'分</span>　<b>生肖：</b>'+b.shengxiao+'　<b>星座：</b>'+xingzuo+'</p>';
+    html+='</div>';
+
+    // 四柱表
+    html+='<table class="bazi-table">';
+    html+='<tr><th>四柱</th><th>年柱</th><th>月柱</th><th>日柱</th><th>时柱</th></tr>';
+    html+='<tr><td>十神</td><td>'+esc(SHL.bazi.shishen(dg1,b.ygz.charAt(0)))+'</td><td>'+esc(SHL.bazi.shishen(dg1,b.mgz.charAt(0)))+'</td><td>日元</td><td>'+esc(SHL.bazi.shishen(dg1,b.tgz.charAt(0)))+'</td></tr>';
+    html+='<tr><td>天干地支</td><td class="gz">'+b.ygz+'</td><td class="gz">'+b.mgz+'</td><td class="gz red">'+b.dgz+'</td><td class="gz">'+b.tgz+'</td></tr>';
+    var cY=SHL.bazi.canggan(b.ygz.charAt(1)).split(''), cM=SHL.bazi.canggan(b.mgz.charAt(1)).split(''), cD=SHL.bazi.canggan(b.dgz.charAt(1)).split(''), cT=SHL.bazi.canggan(b.tgz.charAt(1)).split('');
+    for(var k=0;k<3;k++){
+      html+='<tr><td>藏干</td>';
+      var arrc=[cY,cM,cD,cT];
+      for(var j=0;j<4;j++){
+        html+='<td>'+(arrc[j][k]||'')+(arrc[j][k]?' <span class="muted">('+esc(SHL.bazi.shishen(dg1,arrc[j][k]))+')</span>':'')+'</td>';
+      }
+      html+='</tr>';
+    }
+    html+='<tr><td>纳音</td><td>'+b.yNayin+'</td><td>'+b.mNayin+'</td><td>'+b.dNayin+'</td><td>'+b.tNayin+'</td></tr>';
+    html+='<tr><td>五行</td><td>'+b.ygzWh+'</td><td>'+b.mgzWh+'</td><td>'+b.dgzWh+'</td><td>'+b.tgzWh+'</td></tr>';
+    html+='</table>';
+
+    html+='<div class="result-box">';
+    html+='<p>本命属'+b.shengxiao+'，'+SHL.common.layin(b.ygz)+'命。五行'+mainw+mainq+'；日主天干为<b>'+dWh+'</b>，生于'+season+'季。';
+    if(whRow) html+='（同类'+whRow.tnwh+'；异类'+whRow.ynwh+'。）';
+    html+='</p>';
+    html+='<p><b>胎元：</b>'+ty+'（'+SHL.common.layin(ty)+'）　<b>命宫：</b>'+mg+'（'+SHL.common.layin(mg)+'）</p>';
+    html+='<p><b>旬空：</b><span style="color:#0066cc">'+(dxk.filter(function(s){return s;}).join('、')||'无')+'</span></p>';
+    html+='<p>八字五行个数：'+wn.金+'个金，'+wn.木+'个木，'+wn.水+'个水，'+wn.火+'个火，'+wn.土+'个土</p>';
+    html+='</div>';
+
+    if(sjrsRow){
+      html+='<div class="result-box"><p><b>四季用神参考：</b>日主天干'+dWh+'生于'+season+'季，'+sjrsRow.sjrs+'。</p></div>';
+    }
+    if(qtbjRow){
+      html+='<div class="result-box"><p><b>穷通宝鉴调候用神参考：</b>'+dg1+dWh+'生于'+b.mgz.charAt(1)+'月，'+qtbjRow.content+'</p></div>';
+    }
+    if(sxgxRow){
+      html+='<div class="result-box"><p><b>生肖个性：</b>根据分析，您的生肖为"'+b.shengxiao+'"<br>'+sxgxRow.sxgx+'</p></div>';
+    }
+    if(rgnmRow){
+      if(rgnmRow.rgxx) html+='<div class="result-box"><p><b>日干心性：</b>'+rgnmRow.rgxx+'</p></div>';
+      if(rgnmRow.rgcz) html+='<div class="result-box"><p><b>日干支层次：</b>'+rgnmRow.rgcz+'</p></div>';
+      if(rgnmRow.rgzfx) html+='<div class="result-box"><p><b>日干支分析：</b>'+rgnmRow.rgzfx+'<br><span class="muted">*根据四柱预测学资料归纳整理，仅供参考。</span></p></div>';
+    }
+    if(whRow){
+      html+='<div class="result-box">';
+      if(whRow.skzhyj) html+='<p><b>五行生克制化宜忌：</b>'+whRow.skzhyj+'</p>';
+      if(whRow.whzx) html+='<p><b>五行之性：</b>'+whRow.whzx+'</p>';
+      if(whRow.szwh) html+='<p><b>四柱五行生克中对应需补的脏腑和部位：</b>'+whRow.szwh+'</p>';
+      if(whRow.hyhw) html+='<p><b>宜从事行业与方位：</b>'+whRow.hyhw+'</p>';
+      html+='</div>';
+    }
+    if(smtfRow){
+      html+='<div class="result-box"><p><b>三命通会：</b>'+smtfRow.tf1+'<br><span style="color:#006699">'+smtfRow.tf2+'</span></p></div>';
+    }
+    if(rysmnHour){
+      html+='<div class="result-box"><p><b>时命理（'+hourShi+'生）：</b>'+rysmnHour.mingmi+'</p></div>';
+    }
+
+    html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p>';
+    html+='</div>';
+    r.innerHTML=navButtons('生辰八字')+html;
+  }).catch(function(e){
+    r.innerHTML=navButtons('生辰八字')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+  });
+})();
+</script>
+</body></html>

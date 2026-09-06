@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁诸葛神数（诸葛神算、诸葛测字）在线测算，心中默念所问之事随机抽得签数，查阅诸葛神数签诗吉凶。">
+<meta name="keywords" content="诸葛神数,诸葛神算,诸葛测字,在线测字,神数签诗">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/zgss/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="诸葛神数_诸葛测字_诸葛神算在线抽签 - 缘中阁">
+<meta property="og:description" content="缘中阁诸葛神数（诸葛神算、诸葛测字）在线测算，心中默念所问之事随机抽得签数，查阅诸葛神数签诗吉凶。">
+<meta property="og:url" content="https://www.yuanzhongge.com/zgss/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="诸葛神数_诸葛测字_诸葛神算在线抽签 - 缘中阁">
+<meta name="twitter:description" content="缘中阁诸葛神数（诸葛神算、诸葛测字）在线测算，心中默念所问之事随机抽得签数，查阅诸葛神数签诗吉凶。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>诸葛神数_诸葛测字_诸葛神算在线抽签 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "诸葛神数_诸葛测字_诸葛神算在线抽签",
+  "description": "缘中阁诸葛神数（诸葛神算、诸葛测字）在线测算，心中默念所问之事随机抽得签数，查阅诸葛神数签诗吉凶。",
+  "url": "https://www.yuanzhongge.com/zgss/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>诸葛神数 · 诸葛测字</h1><div class="desc">输入三个简体汉字，依笔画数起卦，得三百八十四爻之一。</div></div>
+
+  <div class="panel">
+    <h2>诸葛神数简介</h2>
+    <div class="desc" style="line-height:1.9">
+      <p>诸葛神数相传是三国时代刘备的军师诸葛亮所作。诸葛亮上懂天文，下晓地理，料事如神，用兵用人皆恰到好处。每遇难题，必暗自用一种独到的占卜法：心要诚，手要净，焚香向天祷告，然后在纸上写三个字。这三个字即是天灵与人心灵交流，也就是说，你的心事已得上天了解，而上天会对你作出指示。</p>
+      <p>诸葛神数共三百八十四爻，谶语句法长短不一，寓意深远，对占卜者的思路有很大的启发作用，特别是那些正陷于彷徨迷惘中的人，更有一种拨开云雾、重见天日的豁然开朗感觉。可作为判断吉凶、决定进退、选择趋吉避凶的指南针。</p></div></div>
+
+  <div class="panel">
+    <h2>测字起卦</h2>
+    <form id="zgForm" onsubmit="return false">
+      <div class="form-row">
+        <label>输入汉字</label>
+        <div class="ctrl">
+          <input type="text" id="zgInput" maxlength="3" placeholder="请输入三个简体汉字" style="max-width:240px;font-size:18px;letter-spacing:4px;text-align:center" autocomplete="off">
+          <span style="font-size:12px;color:#8a6a48;margin-left:8px">多输入只取前三个</span></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="zgBtn">开始测算</button></div></div>
+    </form>
+    <div id="result"></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('诸葛神数');
+  var L=SHL.layout;
+  function esc(s){ return L.esc(s); }
+  function br(s){ return esc(s).replace(/\r\n|\n|\r/g,'<br>'); }
+
+  var input=document.getElementById('zgInput');
+  // 仅允许中文汉字
+  input.oninput=function(){
+    this.value = this.value.replace(/[^\u4E00-\u9FA5]/g,'');
+  };
+  // 回车提交
+  input.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); calc(); } };
+
+  // 构建笔画索引: char -> 笔画数 (1-33)
+  var bihuaMap=null, zhugeRows=null;
+  function ensureData(){
+    var p1 = bihuaMap ? Promise.resolve() :
+      SHL.data.rows('senlon_bihua').then(function(rows){
+        bihuaMap={};
+        for(var i=0;i<rows.length;i++){
+          var n=parseInt(rows[i].num); var s=rows[i].hanzi||'';
+          for(var k=0;k<s.length;k++){ bihuaMap[s.charAt(k)]=n; }
+        }
+      });
+    var p2 = zhugeRows ? Promise.resolve() :
+      SHL.data.rows('senlon_zhuge').then(function(rows){ zhugeRows=rows; });
+    return Promise.all([p1,p2]);
+  }
+
+  // 根据 id 查找 zhuge 行
+  function findZhuge(id){
+    if(!zhugeRows) return null;
+    for(var i=0;i<zhugeRows.length;i++){
+      if(String(zhugeRows[i].id)===id) return zhugeRows[i];
+    }
+    return null;
+  }
+
+  function calc(){
+    var raw=input.value.trim();
+    if(raw.length<3){ alert('请输入三个简体汉字进行测算！'); input.focus(); return; }
+    // 只取前三个
+    var s1=raw.charAt(0), s2=raw.charAt(1), s3=raw.charAt(2);
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在测算...</div>';
+    ensureData().then(function(){
+      var b1=bihuaMap[s1], b2=bihuaMap[s2], b3=bihuaMap[s3];
+      if(b1==null||b2==null||b3==null){
+        var missing=[];
+        if(b1==null) missing.push(s1);
+        if(b2==null) missing.push(s2);
+        if(b3==null) missing.push(s3);
+        r.innerHTML='<div class="error">笔画库中未找到汉字：'+esc(missing.join(' '))+'，请尝试更换其他常用汉字。</div>';
+        return;
+      }
+      // 每字笔画 mod 10, 若为 0 取 1
+      var d1=b1%10; if(d1===0) d1=1;
+      var d2=b2%10; if(d2===0) d2=1;
+      var d3=b3%10; if(d3===0) d3=1;
+      // 拼接为三位数
+      var num=parseInt(''+d1+d2+d3);
+      // 反复减 384 直到 < 384
+      while(num>=384) num-=384;
+      // 补零成 3 位 id
+      var id = num<10 ? '00'+num : (num<100 ? '0'+num : ''+num);
+      var row=findZhuge(id);
+      var html='<div class="result-box">';
+      html+='<p>您输入的三个汉字为：<b style="color:#0066cc;font-size:18px;letter-spacing:6px">'+esc(s1+' '+s2+' '+s3)+'</b></p>';
+      html+='<p>各字笔画数：<b>'+b1+'</b> · <b>'+b2+'</b> · <b>'+b3+'</b>　→　取模后：<b>'+d1+d2+d3+'</b>　→　爻序：<b style="color:#cc6600">'+id+'</b></p>';
+      if(row){
+        html+='<h3 style="color:#cc6600">〖诗曰〗</h3>';
+        html+='<div style="font-size:17px;line-height:2;color:#5a3a18;text-align:center;max-width:540px;margin:10px auto;padding:10px;background:#fbf6ed;border:1px dashed #d9c8a4">'+br(row.title)+'</div>';
+        html+='<h3 style="color:#cc6600">〖签释〗</h3>';
+        html+='<div style="line-height:2;text-indent:2em">'+br(row.content)+'</div>';
+      } else {
+        html+='<div class="error">未找到第 '+id+' 爻的签文。</div>';
+      }
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  document.getElementById('zgBtn').onclick=calc;
+})();
+</script>
+</body>
+</html>

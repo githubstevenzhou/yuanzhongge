@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁四柱八字在线排盘系统，输入出生年月日时即可免费排盘，含天干地支、十神、藏干、纳音、地势、神煞、五行统计与日主旺衰分析，支持农历阳历输入。">
+<meta name="keywords" content="四柱八字,八字排盘,在线排盘,生辰八字,十神,五行统计,免费八字算命">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/ppbazi/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="四柱八字在线排盘_生辰八字免费测算 - 缘中阁">
+<meta property="og:description" content="缘中阁四柱八字在线排盘系统，输入出生年月日时即可免费排盘，含天干地支、十神、藏干、纳音、地势、神煞、五行统计与日主旺衰分析，支持农历阳历输入。">
+<meta property="og:url" content="https://www.yuanzhongge.com/ppbazi/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="四柱八字在线排盘_生辰八字免费测算 - 缘中阁">
+<meta name="twitter:description" content="缘中阁四柱八字在线排盘系统，输入出生年月日时即可免费排盘，含天干地支、十神、藏干、纳音、地势、神煞、五行统计与日主旺衰分析，支持农历阳历输入。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>四柱八字在线排盘_生辰八字免费测算 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "四柱八字在线排盘_生辰八字免费测算",
+  "description": "缘中阁四柱八字在线排盘系统，输入出生年月日时即可免费排盘，含天干地支、十神、藏干、纳音、地势、神煞、五行统计与日主旺衰分析，支持农历阳历输入。",
+  "url": "https://www.yuanzhongge.com/ppbazi/",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>四柱八字在线排盘</h1><div class="desc">输入出生时间进行八字排盘，支持真太阳时校正。</div></div>
+
+  <div class="panel" id="formPanel">
+    <h2>排盘信息</h2>
+    <form id="bzForm" onsubmit="return false">
+      <div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" placeholder="可选" style="max-width:140px"></div></div>
+      <div class="form-row"><label>性别</label><div class="ctrl"><select id="f_sex"><option value="1">男</option><option value="0">女</option></select></div></div>
+      <div class="form-row"><label>出生地</label><div class="ctrl"><input type="text" id="f_area" placeholder="可选" style="max-width:200px"></div></div>
+      <div class="form-row"><label>历法</label><div class="ctrl">
+        <label><input type="radio" name="caltype" value="solar" checked> 阳历（公历）</label>
+        <label><input type="radio" name="caltype" value="lunar"> 阴历（农历）</label></div></div>
+      <div class="form-row"><label>出生时间</label><div class="ctrl" style="display:flex;gap:6px;flex-wrap:wrap">
+        <select id="f_year"></select><span>年</span>
+        <select id="f_month"></select><span>月</span>
+        <select id="f_day"></select><span>日</span>
+        <select id="f_hour"></select><span>时</span>
+        <select id="f_min"><option value="0">未知</option></select><span>分</span></div></div>
+      <div class="form-row" id="leapRow" style="display:none"><label>闰月</label><div class="ctrl">
+        <label><input type="checkbox" id="f_leap"> 此月为闰月</label>
+        <span style="font-size:12px;color:#8a6a48">仅当所选农历年该月有闰月时勾选</span></div></div>
+      <div class="form-row"><label>排盘方式</label><div class="ctrl">
+        <label><input type="radio" name="taiyang" value="0" checked> 普通方式</label>
+        <label><input type="radio" name="taiyang" value="1"> 真太阳时</label></div></div>
+      <div class="form-row" id="lonRow" style="display:none"><label>出生地经度</label><div class="ctrl"><input type="number" id="f_lon" value="120" step="0.01" style="max-width:100px"> <span style="font-size:12px;color:#8a6a48">东经度数（默认120=北京时间）</span></div></div>
+      <div class="form-row"><label>排盘详简</label><div class="ctrl">
+        <label><input type="radio" name="quanpai" value="0"> 简排</label>
+        <label><input type="radio" name="quanpai" value="1" checked> 全排</label></div></div>
+      <div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="bzBtn">开始排盘</button></div></div>
+    </form></div>
+
+  <div id="result"></div>
+
+  <div class="panel">
+    <h2>四柱八字常用术语简释</h2>
+    <div class="desc" style="line-height:1.9">
+      <p><b>四柱八字</b>：以人出生的年、月、日、时为四柱，合四柱之干支为八字。年干支为年柱，月干支为月柱，日干支为日柱，时干支为时柱，共四柱八个字。</p>
+      <p><b style="color:#0066cc">比劫帮身</b>：比肩劫财与日干属同类，可助日干之力。日干弱时喜比劫帮身，日干本强又见比劫则为祸。</p>
+      <p><b style="color:#0066cc">财多身弱</b>：日干弱而财星之力强，日主不能胜任，财反不能享。</p>
+      <p><b style="color:#0066cc">贪财坏印</b>：日干弱喜印生扶，若柱中财星克印则为不吉之兆。</p>
+      <p><b style="color:#0066cc">官印相生</b>：官杀克日，须印星泄官杀之力而生身，富贵双全。</p>
+      <p><b style="color:#0066cc">食神制杀</b>：日干衰有食神又有七杀克身，妙在有食神制去七杀化为权星。</p>
+      <p><b style="color:#0066cc">伤官见官</b>：柱以伤官为用，则不喜官星，缘伤官与官星相战，其祸不可胜言。</p></div></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js?v=20260815a"></script>
+<script src="../assets/js/lib/common.js?v=20260815a"></script>
+<script src="../assets/js/lib/data.js?v=20260815a"></script>
+<script src="../assets/js/lib/bazi.js?v=20260815a"></script>
+<script src="../assets/js/layout.js?v=20260815a"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('四柱八字在线排盘');
+  var now=new Date();
+  var ySel=document.getElementById('f_year'),
+      mSel=document.getElementById('f_month'),
+      dSel=document.getElementById('f_day'),
+      hSel=document.getElementById('f_hour'),
+      minSel=document.getElementById('f_min');
+  for(var y=1940;y<=now.getFullYear()+1;y++){ ySel.add(new Option(y,y)); }
+  for(var m=1;m<=12;m++){ mSel.add(new Option(m,m)); }
+  for(var d=1;d<=31;d++){ dSel.add(new Option(d,d)); }
+  for(var h=0;h<=23;h++){ hSel.add(new Option(SHL.const.dizhiHour(h)+' '+h+'时',h)); }
+  for(var mi=0;mi<=59;mi++){ minSel.add(new Option(mi,mi)); }
+  ySel.value=1990; mSel.value=1; dSel.value=1; hSel.value=12;
+
+  // 真太阳时切换
+  document.querySelectorAll('input[name=taiyang]').forEach(function(r){
+    r.onchange=function(){
+      document.getElementById('lonRow').style.display = this.value==='1'?'':'none';
+    };
+  });
+
+  // 历法切换: 阴历时显示闰月选项
+  function updateLeapRow(){
+    var isLunar=document.querySelector('input[name=caltype]:checked').value==='lunar';
+    var leapRow=document.getElementById('leapRow');
+    var leapChk=document.getElementById('f_leap');
+    if(!isLunar){
+      leapRow.style.display='none';
+      leapChk.checked=false;
+      return;
+    }
+    var y=parseInt(ySel.value), mo=parseInt(mSel.value);
+    var monthNames=['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+    leapRow.style.display='';
+    if(y && mo){
+      var leap=SHL.common.lunar.leapMonth(y);
+      if(leap>0 && leap===mo){
+        leapRow.querySelector('span').textContent='农历'+y+'年有闰'+monthNames[leap-1]+'月，可勾选表示排闰月';
+      } else {
+        leapChk.checked=false;
+        if(leap>0){
+          leapRow.querySelector('span').textContent='提示：农历'+y+'年的闰月为'+monthNames[leap-1]+'月，请切换到该月方可勾选闰月';
+        } else {
+          leapRow.querySelector('span').textContent='提示：农历'+y+'年无闰月，无需勾选';
+        }
+      }
+    } else {
+      leapRow.querySelector('span').textContent='仅当所选农历年该月有闰月时勾选';
+    }
+  }
+  document.querySelectorAll('input[name=caltype]').forEach(function(r){ r.onchange=updateLeapRow; });
+  ySel.onchange=updateLeapRow;
+  mSel.onchange=updateLeapRow;
+
+  function esc(s){ return SHL.layout.esc(s); }
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function parseQuery(){
+    var q={}; location.search.replace(/[?&]([^=&]+)=([^&]*)/g, function(_,k,v){ q[k]=decodeURIComponent(v); }); return q;
+  }
+
+  function doPaipan(){
+    var y=parseInt(ySel.value),mo=parseInt(mSel.value),d=parseInt(dSel.value),h=parseInt(hSel.value),mi=parseInt(minSel.value)||0;
+    if(!y||!mo||!d||isNaN(h)){ alert('请填写完整的出生时间'); return; }
+    var calType=document.querySelector('input[name=caltype]:checked').value;
+    // 输入转公历 (排盘内部按公历计算)
+    var solarY=y, solarM=mo, solarD=d;
+    var inputLunarStr='';
+    if(calType==='lunar'){
+      var isLeap=document.getElementById('f_leap').checked;
+      var s=SHL.common.lunar.lunarToSolar(y,mo,d,isLeap);
+      if(!s){ alert('农历日期无效，请检查是否选错闰月或日期超出范围'); return; }
+      solarY=s.year; solarM=s.month; solarD=s.day;
+      inputLunarStr=SHL.common.lunar.lunarStr({year:y,month:mo,day:d,isLeap:isLeap});
+    }
+    var sex=parseInt(document.getElementById('f_sex').value);
+    var name=document.getElementById('f_name').value||'';
+    var area=document.getElementById('f_area').value||'未输入';
+    var isTrueSolar=document.querySelector('input[name=taiyang]:checked').value==='1';
+    var lon=isTrueSolar ? (parseFloat(document.getElementById('f_lon').value)||120) : 120;
+    var quanpai=document.querySelector('input[name=quanpai]:checked').value==='1';
+    var r=document.getElementById('result');
+    r.innerHTML='<div class="loading">正在排盘...</div>';
+    Promise.all([
+      SHL.data.load('calendar_jq'),
+      SHL.data.load('calendar_stime'),
+      SHL.data.load('calendar_xunkong')
+    ]).then(function(arr){
+      var jq=arr[0].terms, st=arr[1].items, xk=arr[2].items;
+      var b=SHL.bazi.calc({year:solarY,month:solarM,day:solarD,hour:h,minute:mi,longitude:lon}, jq, st);
+      var qy=SHL.bazi.qiyun(b, sex, jq);
+      var dy=SHL.bazi.dayun(b, qy.sx);
+      var ln=SHL.bazi.liunian(b.solar.year, qy.qyAge);
+      var ty=SHL.bazi.taiyuan(b.mgz);
+      var mg=SHL.bazi.minggong(b.mgz.charAt(1), b.dgz.charAt(1), b.minggongx);
+      var dxk=SHL.bazi.xunkong(b.dgz, xk);
+      var cangY=SHL.bazi.canggan(b.ygz.charAt(1));
+      var cangM=SHL.bazi.canggan(b.mgz.charAt(1));
+      var cangD=SHL.bazi.canggan(b.dgz.charAt(1));
+      var cangT=SHL.bazi.canggan(b.tgz.charAt(1));
+
+      var html='<div class="panel"><h2>八字排盘结果</h2>';
+      html+='<div class="result-box">';
+      html+='<p><b>姓名：</b>'+esc(name)+'　<b>出生地：</b>'+esc(area)+'　<b>排盘方式：</b>'+(isTrueSolar?'真太阳时':'普通方式')+'</p>';
+      if(calType==='lunar'){
+        html+='<p class="muted">输入：'+esc(inputLunarStr)+'</p>';
+      }
+      // 公历/农历对照
+      var lunar=SHL.common.lunar.solarToLunar(b.solar.year, b.solar.month, b.solar.day);
+      html+='<p><b>公历：</b>'+b.solar.year+'年'+b.solar.month+'月'+b.solar.day+'日 '+pad(b.solar.hour)+'时'+pad(b.solar.minute)+'分　<b>生肖：</b>'+b.shengxiao+'</p>';
+      if(lunar){
+        html+='<p class="muted">'+esc(SHL.common.lunar.lunarStr(lunar))+'</p>';
+      }
+      if(isTrueSolar){
+        html+='<p><b>真太阳时：</b>'+b.trueSolarDate.getFullYear()+'-'+pad(b.trueSolarDate.getMonth()+1)+'-'+pad(b.trueSolarDate.getDate())+' '+pad(b.trueSolarDate.getHours())+':'+pad(b.trueSolarDate.getMinutes())+'</p>';
+      }
+      html+='<p><b>胎元：</b>'+ty+'（'+SHL.common.layin(ty)+'）　<b>命宫：</b>'+mg+'（'+SHL.common.layin(mg)+'）</p>';
+      var dxkStr = dxk.filter(function(s){return s;}).join('、') || '无';
+      html+='<p><b>旬空：</b><span style="color:#0066cc">'+dxkStr+'</span></p>';
+      html+='<p><b>起运：</b>命主于出生后'+qy.qyText+'开始起运</p>';
+      if(qy.jiaoyunDate){
+        html+='<p><b>交运：</b>命主于公历 <b>'+qy.jiaoyunDate.getFullYear()+'</b> 年 <b>'+(qy.jiaoyunDate.getMonth()+1)+'</b> 月 <b>'+qy.jiaoyunDate.getDate()+'</b> 日 <b>'+qy.jiaoyunDate.getHours()+'</b> 时交运</p>';
+      }
+      html+='</div>';
+
+      // 四柱表
+      var riGan=b.dgz.charAt(0), riZhi=b.dgz.charAt(1);
+      var dsY=SHL.bazi.dishi(riGan, b.ygz.charAt(1));
+      var dsM=SHL.bazi.dishi(riGan, b.mgz.charAt(1));
+      var dsD=SHL.bazi.dishi(riGan, riZhi);
+      var dsT=SHL.bazi.dishi(riGan, b.tgz.charAt(1));
+      var ssYArr=SHL.bazi.shensha(riGan, riZhi, b.ygz.charAt(1));
+      var ssMArr=SHL.bazi.shensha(riGan, riZhi, b.mgz.charAt(1));
+      var ssDArr=SHL.bazi.shensha(riGan, riZhi, riZhi);
+      var ssTArr=SHL.bazi.shensha(riGan, riZhi, b.tgz.charAt(1));
+
+      html+='<table class="bazi-table">';
+      html+='<tr><th>四柱</th><th>年柱</th><th>月柱</th><th>日柱</th><th>时柱</th></tr>';
+      html+='<tr><td>十神</td><td class="ss">'+esc(SHL.bazi.shishen(riGan, b.ygz.charAt(0)))+'</td><td class="ss">'+esc(SHL.bazi.shishen(riGan, b.mgz.charAt(0)))+'</td><td class="ss ri">日主</td><td class="ss">'+esc(SHL.bazi.shishen(riGan, b.tgz.charAt(0)))+'</td></tr>';
+      html+='<tr><td>天干</td><td class="gz">'+b.ygz.charAt(0)+'</td><td class="gz">'+b.mgz.charAt(0)+'</td><td class="gz red">'+riGan+'</td><td class="gz">'+b.tgz.charAt(0)+'</td></tr>';
+      html+='<tr><td>地支</td><td class="gz">'+b.ygz.charAt(1)+'</td><td class="gz">'+b.mgz.charAt(1)+'</td><td class="gz red">'+riZhi+'</td><td class="gz">'+b.tgz.charAt(1)+'</td></tr>';
+      // 藏干 (3 行, 带十神)
+      var cY=cangY.split(''), cM=cangM.split(''), cD=cangD.split(''), cT=cangT.split('');
+      for(var k=0;k<3;k++){
+        html+='<tr><td>藏干</td>';
+        html+='<td>'+(cY[k]||'')+(cY[k]?' <span class="muted">('+esc(SHL.bazi.shishen(riGan, cY[k]))+')</span>':'')+'</td>';
+        html+='<td>'+(cM[k]||'')+(cM[k]?' <span class="muted">('+esc(SHL.bazi.shishen(riGan, cM[k]))+')</span>':'')+'</td>';
+        html+='<td>'+(cD[k]||'')+(cD[k]?' <span class="muted">('+esc(SHL.bazi.shishen(riGan, cD[k]))+')</span>':'')+'</td>';
+        html+='<td>'+(cT[k]||'')+(cT[k]?' <span class="muted">('+esc(SHL.bazi.shishen(riGan, cT[k]))+')</span>':'')+'</td>';
+        html+='</tr>';
+      }
+      html+='<tr><td>纳音</td><td>'+b.yNayin+'</td><td>'+b.mNayin+'</td><td>'+b.dNayin+'</td><td>'+b.tNayin+'</td></tr>';
+      html+='<tr><td>地势</td><td class="ds">'+esc(dsY)+'</td><td class="ds">'+esc(dsM)+'</td><td class="ds red">'+esc(dsD)+'</td><td class="ds">'+esc(dsT)+'</td></tr>';
+      html+='<tr><td>神煞</td><td class="ss2">'+esc(ssYArr.join(' '))+'</td><td class="ss2">'+esc(ssMArr.join(' '))+'</td><td class="ss2 red">'+esc(ssDArr.join(' '))+'</td><td class="ss2">'+esc(ssTArr.join(' '))+'</td></tr>';
+      html+='</table>';
+
+      // 五行统计
+      var wx=SHL.bazi.wuxingTongji(b);
+      var wxTotal=wx.木+wx.火+wx.土+wx.金+wx.水;
+      var dayWh=SHL.common.ganWh(riGan);
+      var shengWh=SHL.const.sheng[dayWh];
+      var bornCount=wx[shengWh]+wx[dayWh];
+      var weakStr = bornCount>=wxTotal/2 ? '偏强' : '偏弱';
+      html+='<div class="wx-stat">';
+      html+='<span class="wx-item wx-wood">木 '+wx.木+'</span>';
+      html+='<span class="wx-item wx-fire">火 '+wx.火+'</span>';
+      html+='<span class="wx-item wx-earth">土 '+wx.土+'</span>';
+      html+='<span class="wx-item wx-metal">金 '+wx.金+'</span>';
+      html+='<span class="wx-item wx-water">水 '+wx.水+'</span>';
+      html+='<span class="wx-day">日主'+dayWh+' · '+weakStr+'</span>';
+      html+='</div>';
+
+      // ===== 日主分析 =====
+      var dma=SHL.bazi.dayMasterAnalysis(b);
+      html+='<div class="analysis-box">';
+      html+='<h3>日主分析</h3>';
+      html+='<p><b>日主'+esc(dma.dayWh)+'：</b>'+esc(dma.ganChar)+'</p>';
+      html+='<p><b>生月地势：</b>'+esc(dma.relation)+'，日主在月支处'+esc(dma.dsDesc)+'</p>';
+      html+='<p><b>命局'+esc(dma.strong)+'：</b>日主'+esc(dma.dayWh)+'五行'+esc(dma.strong)+'，'+esc(dma.yongshen)+'</p>';
+      html+='</div>';
+
+      // ===== 天干地支刑冲合害 =====
+      var rel=SHL.bazi.ganZhiRelation(b);
+      html+='<div class="analysis-box">';
+      html+='<h3>干支关系（刑冲合害）</h3>';
+      if(rel.length===0){
+        html+='<p class="muted">四柱干支无明显刑冲合害关系</p>';
+      } else {
+        html+='<ul class="rel-list">';
+        for(var ri=0;ri<rel.length;ri++){
+          var cls='rel-item';
+          if(rel[ri].indexOf('冲')>=0||rel[ri].indexOf('刑')>=0||rel[ri].indexOf('害')>=0) cls+=' rel-bad';
+          else if(rel[ri].indexOf('合')>=0) cls+=' rel-good';
+          html+='<li class="'+cls+'">'+esc(rel[ri])+'</li>';
+        }
+        html+='</ul>';
+      }
+      html+='</div>';
+
+      if(quanpai){
+        // ===== 十神详解 =====
+        var ssSet={};
+        var ssList=[];
+        var ssY=SHL.bazi.shishen(riGan, b.ygz.charAt(0));
+        var ssM2=SHL.bazi.shishen(riGan, b.mgz.charAt(0));
+        var ssT2=SHL.bazi.shishen(riGan, b.tgz.charAt(0));
+        [ssY,ssM2,ssT2].forEach(function(s){ if(s && !ssSet[s]){ ssSet[s]=1; ssList.push(s); } });
+        // 藏干十神
+        [cangY,cangM,cangD,cangT].forEach(function(cg){
+          for(var ci=0;ci<cg.length;ci++){
+            var s=SHL.bazi.shishen(riGan, cg.charAt(ci));
+            if(s && !ssSet[s]){ ssSet[s]=1; ssList.push(s); }
+          }
+        });
+        if(ssList.length>0){
+          html+='<div class="analysis-box">';
+          html+='<h3>十神详解</h3>';
+          html+='<table class="ss-table">';
+          html+='<tr><th>十神</th><th>含义</th></tr>';
+          for(var si=0;si<ssList.length;si++){
+            var sName=ssList[si];
+            var sExp=SHL.bazi.shishenExplain(sName);
+            html+='<tr><td class="ss-name">'+esc(sName)+'</td><td class="ss-exp">'+esc(sExp)+'</td></tr>';
+          }
+          html+='</table>';
+          html+='</div>';
+        }
+
+        // 大运表
+        html+='<h3 style="margin-top:18px">大运（10步）</h3>';
+        html+='<table class="bazi-table dy-table">';
+        html+='<tr><th>项</th>';
+        for(var i=0;i<10;i++){ html+='<th>第'+(i+1)+'步</th>'; }
+        html+='</tr>';
+        html+='<tr><td>纳音</td>';
+        for(var i=0;i<10;i++){ html+='<td style="color:#408000">'+dy[i].nayin+'</td>'; }
+        html+='</tr>';
+        html+='<tr><td>十神</td>';
+        for(var i=0;i<10;i++){ html+='<td style="color:#0066cc">'+esc(dy[i].shishen)+'</td>'; }
+        html+='</tr>';
+        html+='<tr><td>大运</td>';
+        for(var i=0;i<10;i++){ html+='<td class="gz red">'+dy[i].gz+'</td>'; }
+        html+='</tr>';
+        html+='<tr><td>岁数</td>';
+        for(var i=0;i<10;i++){
+          var rg=SHL.bazi.dayunAgeRange(qy.qyAge, i);
+          html+='<td style="color:#0066cc">'+rg.from+'-'+rg.to+'岁</td>';
+        }
+        html+='</tr>';
+        html+='<tr><td>始于</td>';
+        for(var i=0;i<10;i++){
+          var sy=SHL.bazi.dayunStartYear(b.solar.year, qy.qyAge, i);
+          html+='<td class="red">'+sy+'</td>';
+        }
+        html+='</tr>';
+        // 流年
+        html+='<tr><td>流年</td>';
+        for(var i=0;i<10;i++){
+          var lst=ln[i].list.map(function(it){return it.gz;}).join(' ');
+          html+='<td class="muted small">'+lst+'</td>';
+        }
+        html+='</tr>';
+        html+='</table>';
+      }
+
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="'+SHL.layout.link('')+'">返回首页</a></p>';
+      html+='</div>';
+      r.innerHTML=html;
+    }).catch(function(e){
+      r.innerHTML='<div class="error">排盘数据加载失败：'+esc(e&&e.message?e.message:e)+'<br>请通过本地服务器预览（直接双击打开HTML文件无法加载数据，需用 <code>python -m http.server</code> 等启动本地服务；GitHub Pages 部署后可正常使用）。</div>';
+    });
+  }
+  document.getElementById('bzBtn').onclick=doPaipan;
+
+  // ===== 如果URL带了排盘参数(首页跳转过来)，自动填表并排盘 =====
+  var q=parseQuery();
+  if(q.year && q.month && q.day){
+    try{
+      var origY=parseInt(q.origY||q.year), origM=parseInt(q.origM||q.month), origD=parseInt(q.origD||q.day);
+      var cal=(q.cal==='lunar')?'lunar':'solar';
+      document.querySelector('input[name=caltype][value='+cal+']').checked=true;
+      updateLeapRow();
+      document.getElementById('f_sex').value=q.sex==='0'?'0':'1';
+      ySel.value=origY; mSel.value=origM; dSel.value=origD;
+      hSel.value=(parseInt(q.hour)||0).toString();
+      if(minSel){ minSel.value=(parseInt(q.minute)||0).toString(); }
+      if(cal==='lunar' && q.leap==='1'){ document.getElementById('f_leap').checked=true; }
+      // 自动排盘 (稍微延迟让select联动完成)
+      setTimeout(doPaipan, 100);
+    }catch(e){ console.error('URL排盘参数解析失败', e); }
+  }
+})();
+</script>
+</body>
+</html>

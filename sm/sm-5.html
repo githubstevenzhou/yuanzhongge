@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁姓名测试，依据天格、人格、地格、外格、总格五格数理、三才配置与81数理吉凶为姓名打分解析。">
+<meta name="keywords" content="姓名测试,姓名打分,五格数理,三才配置,81数理">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-5.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="姓名测试打分_五格数理三才分析 - 缘中阁">
+<meta property="og:description" content="缘中阁姓名测试，依据天格、人格、地格、外格、总格五格数理、三才配置与81数理吉凶为姓名打分解析。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-5.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="姓名测试打分_五格数理三才分析 - 缘中阁">
+<meta name="twitter:description" content="缘中阁姓名测试，依据天格、人格、地格、外格、总格五格数理、三才配置与81数理吉凶为姓名打分解析。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>姓名测试打分_五格数理三才分析 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "姓名测试打分_五格数理三才分析",
+  "description": "缘中阁姓名测试，依据天格、人格、地格、外格、总格五格数理、三才配置与81数理吉凶为姓名打分解析。",
+  "url": "https://www.yuanzhongge.com/sm/sm-5.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>姓名测试</h1><div class="desc">姓名五格数理与三才分析。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('姓名测试');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+  // 从 bihua 数据反查汉字笔画
+  function getBihua(ch, bihuaData){
+    for(var i=0;i<bihuaData.length;i++){
+      var chars=(bihuaData[i].hanzi||'').replace(/\r/g,'');
+      if(chars.indexOf(ch)>=0) return parseInt(bihuaData[i].num);
+    }
+    return 0;
+  }
+
+  var name=qs('n');
+  // 拆分姓/名 (假设姓1字名2字或姓1名1)
+  function buildForm(){
+    var f='<div class="panel"><h2>姓名资料</h2>'+
+      '<p class="desc" style="margin-bottom:12px">输入中文姓名（2-4字），将根据康熙笔画计算五格数理。</p>'+
+      '<form id="xmForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓</label><div class="ctrl"><input type="text" id="f_xing" maxlength="2" style="max-width:80px"></div></div>'+
+      '<div class="form-row"><label>名</label><div class="ctrl"><input type="text" id="f_ming" maxlength="2" style="max-width:80px"></div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始测试</button></div></div></form></div>';
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓名测试')+f;
+    if(name){
+      // 尝试拆分：姓1字，名其余
+      document.getElementById('f_xing').value=name.charAt(0);
+      document.getElementById('f_ming').value=name.substring(1);
+    }
+    document.getElementById('goBtn').onclick=calc;
+  }
+
+  function calc(){
+    var xing=document.getElementById('f_xing').value.trim();
+    var ming=document.getElementById('f_ming').value.trim();
+    if(!xing||!ming){alert('请输入姓和名');return;}
+    if(/[^\u4e00-\u9fa5]/.test(xing+ming)){alert('请输入中文汉字');return;}
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('姓名测试')+'<div class="loading">正在分析...</div>';
+
+    Promise.all([
+      SHL.data.load('senlon_bihua'), SHL.data.load('senlon_81'),
+      SHL.data.load('senlon_sancai'), SHL.data.load('senlon_hzwh')
+    ]).then(function(arr){
+      var bihua=arr[0].rows, d81=arr[1].rows, sancai=arr[2].rows, hzwh=arr[3].rows;
+      var xChars=xing.split(''), mChars=ming.split('');
+      var xBihua=xChars.map(function(c){return getBihua(c,bihua);});
+      var mBihua=mChars.map(function(c){return getBihua(c,bihua);});
+      var wuge=SHL.common.wuge(xBihua, mBihua);
+
+      // 三才
+      var tianSc=SHL.common.getsancai(wuge.tian);
+      var renSc=SHL.common.getsancai(wuge.ren);
+      var diSc=SHL.common.getsancai(wuge.di);
+      var sancaiTitle=tianSc+renSc+diSc;
+      var sancaiRow=null;
+      for(var i=0;i<sancai.length;i++){ if(sancai[i].title===sancaiTitle){sancaiRow=sancai[i];break;} }
+
+      // 数理查找
+      function shuliLookup(n){
+        var m=((n-1)%80)+1; if(m===0)m=81;
+        for(var i=0;i<d81.length;i++){ if(parseInt(d81[i].num)===m) return d81[i]; }
+        return null;
+      }
+      var grids=[
+        {name:'天格',val:wuge.tian,sc:tianSc},
+        {name:'人格',val:wuge.ren,sc:renSc},
+        {name:'地格',val:wuge.di,sc:diSc},
+        {name:'外格',val:wuge.wai,sc:SHL.common.getsancai(wuge.wai)},
+        {name:'总格',val:wuge.zong,sc:SHL.common.getsancai(wuge.zong)}
+      ];
+
+      var html='<div class="panel"><h2>姓名测试结果</h2><div class="result-box">';
+      html+='<p><b>姓名：</b><span class="red">'+esc(xing+ming)+'</span></p>';
+      html+='</div>';
+
+      // 笔画表
+      html+='<table class="bazi-table">';
+      html+='<tr><th>字</th><th>康熙笔画</th><th>字意五行</th></tr>';
+      var allChars=xChars.concat(mChars);
+      for(var i=0;i<allChars.length;i++){
+        var wh=SHL.common.charWh(allChars[i], hzwh);
+        var bh=(i<xBihua.length)?xBihua[i]:mBihua[i-xBihua.length];
+        html+='<tr><td class="gz">'+esc(allChars[i])+'</td><td>'+bh+'</td><td>'+wh+'</td></tr>';
+      }
+      html+='</table>';
+
+      // 五格
+      html+='<div class="result-box"><p><b>五格数理：</b></p>';
+      for(var i=0;i<grids.length;i++){
+        var g=grids[i];
+        var sl=shuliLookup(g.val);
+        html+='<p>'+g.name+'→ <span class="red">'+g.val+'</span> ('+g.sc+') '+(sl?'<span class="muted">'+esc(sl.jx)+'</span>':'')+'</p>';
+      }
+      html+='</div>';
+
+      // 各格详解
+      for(var i=0;i<grids.length;i++){
+        var g=grids[i];
+        var sl=shuliLookup(g.val);
+        if(sl){
+          html+='<div class="result-box"><h3>'+g.name+g.val+'的解析</h3>';
+          html+='<p><span class="gold">'+esc(sl.yy)+'</span>　<span class="red">['+esc(sl.jx+'/'+sl.as)+']</span></p>';
+          html+='<p>'+esc(sl.content)+'</p></div>';
+        }
+      }
+
+      // 三才
+      if(sancaiRow){
+        html+='<div class="result-box"><h3>三才配置（'+sancaiTitle+'）</h3>';
+        html+='<p><b>吉凶：</b><span class="red">'+esc(sancaiRow.jx)+'</span></p>';
+        html+='<p>'+esc(sancaiRow.yy)+'</p>';
+        html+='</div>';
+      }
+
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p>';
+      html+='</div>';
+      el.innerHTML=navButtons('姓名测试')+html;
+    }).catch(function(e){
+      el.innerHTML=navButtons('姓名测试')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  buildForm();
+})();
+</script>
+</body></html>

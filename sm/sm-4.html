@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--SEO-BEGIN-->
+<meta name="description" content="缘中阁袁天罡称骨算命，根据出生年月日时计算骨重几两几钱，查询称骨论命命书详解。">
+<meta name="keywords" content="称骨论命,称骨算命,袁天罡称骨,骨重查询,称骨歌">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.yuanzhongge.com/sm/sm-4.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="缘中阁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="称骨论命_袁天罡称骨算命查询 - 缘中阁">
+<meta property="og:description" content="缘中阁袁天罡称骨算命，根据出生年月日时计算骨重几两几钱，查询称骨论命命书详解。">
+<meta property="og:url" content="https://www.yuanzhongge.com/sm/sm-4.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="称骨论命_袁天罡称骨算命查询 - 缘中阁">
+<meta name="twitter:description" content="缘中阁袁天罡称骨算命，根据出生年月日时计算骨重几两几钱，查询称骨论命命书详解。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%238b1a1a'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='%23e8c87a' font-family='serif'>缘</text></svg>">
+<!--SEO-END-->
+<title>称骨论命_袁天罡称骨算命查询 - 缘中阁</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<!--SEO-LD-BEGIN-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "称骨论命_袁天罡称骨算命查询",
+  "description": "缘中阁袁天罡称骨算命，根据出生年月日时计算骨重几两几钱，查询称骨论命命书详解。",
+  "url": "https://www.yuanzhongge.com/sm/sm-4.html",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "缘中阁",
+    "url": "https://www.yuanzhongge.com/"
+  }
+}
+</script>
+<!--SEO-LD-END-->
+</head>
+<body>
+<div id="site-header"></div>
+<main><div class="container">
+  <div class="page-head"><h1>袁天罡称骨算命</h1><div class="desc">根据出生年月日时计算骨重，命书仅供参考。</div></div>
+  <div id="result"></div></div></main>
+<div id="site-footer"></div>
+<script src="../assets/js/lib/constants.js"></script>
+<script src="../assets/js/lib/common.js"></script>
+<script src="../assets/js/lib/data.js"></script>
+<script src="../assets/js/lib/bazi.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+(function(){
+  SHL.layout.setTitle('称骨论命');
+  var qs=SHL.common.qs, esc=SHL.layout.esc, C=SHL.const;
+  function navButtons(cur){
+    var items=[['生辰八字','sm-1.html'],['八字测算','sm-2.html'],['日干论命','sm-3.html'],['称骨论命','sm-4.html'],
+      ['姓名测试','sm-5.html'],['姓名配对','sm-6.html'],['上辈为人','sm-7.html'],['姓氏起源','sm-8.html'],
+      ['身体保健','baojian.html'],['EQ曲线','eq.html'],['五大建议','wu.html'],['IQ揭密','iq.html'],['失败剖析','shibai.html'],['星座名人','mingren.html']];
+    var h='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    for(var i=0;i<items.length;i++){
+      h+='<a class="btn" style="font-size:13px;padding:6px 12px'+(items[i][0]===cur?';background:#d4a017;color:#3a1f0a':'')+'" href="'+items[i][1]+location.search+'">'+esc(items[i][0])+'</a>';
+    }
+    h+='</div></div>'; return h;
+  }
+  // 农历月名
+  var monNames=['','正','二','三','四','五','六','七','八','九','十','十一','腊'];
+  // 农历日名
+  function dayName(d){
+    var prefix=['初','初','初','初','初','初','初','初','初','初','十','十','十','十','十','十','十','十','十','十','廿','廿','廿','廿','廿','廿','廿','廿','廿','廿','三十'];
+    var digit=['','一','二','三','四','五','六','七','八','九','','一','二','三','四','五','六','七','八','九','','一','二','三','四','五','六','七','八','九',''];
+    if(d===30) return '三十';
+    if(d===10) return '初十';
+    if(d===20) return '二十';
+    return prefix[d]+digit[d];
+  }
+
+  var name=qs('n'), sex=qs('s'), y=qs('y'), h=qs('h');
+  var now=new Date();
+
+  function buildForm(){
+    var ys='<select id="f_year">';for(var yr=1940;yr<=now.getFullYear();yr++){ys+='<option value="'+yr+'">'+yr+'</option>';}ys+='</select>';
+    var ms='<select id="f_month">';for(var mo=1;mo<=12;mo++){ms+='<option value="'+mo+'">'+monNames[mo]+'月</option>';}ms+='</select>';
+    var ds='<select id="f_day">';for(var dd=1;dd<=30;dd++){ds+='<option value="'+dd+'">'+dayName(dd)+'</option>';}ds+='</select>';
+    var hs='<select id="f_hour">';for(var hh=0;hh<=23;hh++){hs+='<option value="'+hh+'">'+C.dizhiHour(hh)+' '+hh+'时</option>';}hs+='</select>';
+    var f='<div class="panel"><h2>称骨资料</h2>'+
+      '<p class="desc" style="margin-bottom:12px">称骨算命以<b>农历</b>出生月日计算骨重。若只知公历，请先<a href="../wannianli/" target="_blank">查农历</a>。</p>'+
+      '<form id="cgForm" onsubmit="return false">'+
+      '<div class="form-row"><label>姓名</label><div class="ctrl"><input type="text" id="f_name" style="max-width:140px"></div></div>'+
+      '<div class="form-row"><label>出生年(公历)</label><div class="ctrl">'+ys+'</div></div>'+
+      '<div class="form-row"><label>农历月</label><div class="ctrl">'+ms+'</div></div>'+
+      '<div class="form-row"><label>农历日</label><div class="ctrl">'+ds+'</div></div>'+
+      '<div class="form-row"><label>出生时辰</label><div class="ctrl">'+hs+'</div></div>'+
+      '<div class="form-row"><label></label><div class="ctrl"><button class="btn btn-gold" id="goBtn">开始算命</button></div></div></form></div>';
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('称骨论命')+f;
+    if(y) document.getElementById('f_year').value=y;
+    if(h) document.getElementById('f_hour').value=h;
+    document.getElementById('f_name').value=name||'';
+    document.getElementById('goBtn').onclick=calc;
+  }
+
+  function calc(){
+    var nm=document.getElementById('f_name').value.trim();
+    var yr=parseInt(document.getElementById('f_year').value);
+    var mo=parseInt(document.getElementById('f_month').value);
+    var dd=parseInt(document.getElementById('f_day').value);
+    var hh=parseInt(document.getElementById('f_hour').value);
+    if(!nm){alert('请输入姓名');return;}
+    var el=document.getElementById('result');
+    el.innerHTML=navButtons('称骨论命')+'<div class="loading">正在计算骨重...</div>';
+
+    Promise.all([
+      SHL.data.load('senlon_chenggu1'), SHL.data.load('senlon_chenggu2'),
+      SHL.data.load('senlon_chenggu3'), SHL.data.load('senlon_chenggu4'),
+      SHL.data.load('senlon_chenggu')
+    ]).then(function(arr){
+      var d1=arr[0].rows, d2=arr[1].rows, d3=arr[2].rows, d4=arr[3].rows, dc=arr[4].rows;
+      var w1=0,w2=0,w3=0,w4=0;
+      for(var i=0;i<d1.length;i++){ if(parseInt(d1[i].year)===yr){ w1=parseFloat(d1[i].weight); break; } }
+      for(var i=0;i<d2.length;i++){ if(d2[i].month===monNames[mo]){ w2=parseFloat(d2[i].weight); break; } }
+      var dn=dayName(dd);
+      for(var i=0;i<d3.length;i++){ if(d3[i].day===dn){ w3=parseFloat(d3[i].weight); break; } }
+      for(var i=0;i<d4.length;i++){ if(parseInt(d4[i].time)===hh){ w4=parseFloat(d4[i].weight); break; } }
+      var weight=w1+w2+w3+w4;
+      var weightKey=String(parseInt(weight*10));
+      var cgRow=null;
+      for(var i=0;i<dc.length;i++){ if(dc[i].weight===weightKey){ cgRow=dc[i]; break; } }
+
+      var cf=nm;
+      var html='<div class="panel"><h2>称骨算命结果</h2><div class="result-box">';
+      html+='<p>亲爱的<span class="red">'+esc(nm)+'</span>，根据您的生辰，经过测算：</p>';
+      html+='<p>出生年骨重：<b>'+w1+'</b> 两 ＋ 农历'+monNames[mo]+'月骨重：<b>'+w2+'</b> 两 ＋ '+dn+'骨重：<b>'+w3+'</b> 两 ＋ '+C.dizhiHour(hh)+'时骨重：<b>'+w4+'</b> 两</p>';
+      html+='<p>您的骨重为：<span class="red" style="font-size:18px">'+weight+'</span> 两</p>';
+      html+='</div>';
+      if(cgRow){
+        html+='<div class="result-box" style="text-align:center">';
+        html+='<div style="font-size:16px;font-weight:bold;color:#d4450f;line-height:2">'+esc(cgRow.content)+'</div>';
+        if(cgRow.intro) html+='<hr><p style="color:#0066cc;text-align:left">命书解释：<br>'+esc(cgRow.intro)+'</p>';
+        html+='</div>';
+      } else {
+        html+='<div class="result-box"><p>未找到骨重 '+weightKey+' 对应的命书。</p></div>';
+      }
+      html+='<p class="center" style="margin-top:14px"><a class="btn" href="index.html">返回算命首页</a></p>';
+      html+='</div>';
+      el.innerHTML=navButtons('称骨论命')+html;
+    }).catch(function(e){
+      el.innerHTML=navButtons('称骨论命')+'<div class="error">数据加载失败：'+esc(e.message)+'</div>';
+    });
+  }
+
+  buildForm();
+})();
+</script>
+</body></html>
