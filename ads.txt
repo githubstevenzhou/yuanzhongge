@@ -1,2 +1,2 @@
 # Google AdSense - 接入时把下方 pub-XXXXXXXXXXXXXXXX 替换为你的发布商 ID（与 ads.js 中 ADSENSE_CLIENT 一致）
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-2430544512774360, DIRECT, f08c47fec0942fa0
