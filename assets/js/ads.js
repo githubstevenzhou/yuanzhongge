@@ -20,8 +20,8 @@
  */
 (function(){
   // ===== 配置区（接入时修改这里） =====
-  var ADS_ENABLED = false;  // 广告总开关：未接入 AdSense 前保持 false（不显示任何广告/占位框）
-  var ADSENSE_CLIENT = 'ca-pub-XXXXXXXXXXXXXXXX'; // TODO: 替换为你的 AdSense 发布商 ID
+  var ADS_ENABLED = true;  // 广告总开关：未接入 AdSense 前保持 false（不显示任何广告/占位框）
+  var ADSENSE_CLIENT = 'ca-pub-2430544512774360'; // TODO: 替换为你的 AdSense 发布商 ID
   var ADSENSE_SLOTS = {
     top:       '0000000001',  // 全站顶部横幅（导航下方，所有页面自动加载）
     bottom:    '0000000002',  // 全站底部横幅（版权信息上方，所有页面自动加载）
