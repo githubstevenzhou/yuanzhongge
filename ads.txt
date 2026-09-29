@@ -1,2 +1,1 @@
-# Google AdSense - 发布商 ID: pub-2430544512774360
 google.com, pub-2430544512774360, DIRECT, f08c47fec0942fa0
