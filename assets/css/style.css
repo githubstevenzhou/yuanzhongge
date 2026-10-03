@@ -171,3 +171,29 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#a4672e;box-sh
   .ad-placeholder{min-height:60px;padding:10px;font-size:12px}
   .ad-slot .adsbygoogle{min-height:60px}
 }
+
+/* ===== 百科正文 / 步骤 / FAQ / CTA（诸葛神算、诸葛测字专题复用） ===== */
+.article p{margin:8px 0;line-height:1.9;color:#4a3520}
+.article p:first-of-type{margin-top:0}
+.article ul,.article ol{margin:8px 0 8px 4px;padding-left:22px;color:#4a3520;line-height:2}
+.article ul li,.article ol li{margin:4px 0}
+.article b{color:#7a3d0e}
+.steps{counter-reset:step;list-style:none;padding:0;margin:10px 0}
+.steps li{position:relative;padding:8px 10px 8px 44px;margin:8px 0;background:#fbf6ed;border:1px solid #e0c898;border-radius:4px;line-height:1.8;color:#4a3520}
+.steps li:before{counter-increment:step;content:counter(step);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;line-height:24px;text-align:center;background:#a4672e;color:#fff;border-radius:50%;font-size:13px;font-weight:bold}
+.cta-row{text-align:center;margin:16px 0 4px}
+.cta-row .btn{margin:4px 6px}
+.related-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.related-links a{flex:1;min-width:200px;display:block;padding:12px 14px;background:#fffdf6;border:1px solid #e0c898;border-radius:6px;color:#5a3a18;font-size:14px}
+.related-links a:hover{border-color:#a4672e;color:#a4672e;box-shadow:0 4px 10px rgba(122,61,14,.12)}
+.related-links b{display:block;color:#7a3d0e;font-size:15px;margin-bottom:2px}
+/* FAQ（原生 details，无脚本依赖） */
+.faq-list{margin:6px 0}
+.faq-list details{background:#fffdf6;border:1px solid #e0c898;border-radius:4px;margin:8px 0;padding:0 14px}
+.faq-list summary{cursor:pointer;padding:12px 0;font-weight:bold;color:#7a3d0e;font-size:15px;list-style:none;outline:none}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:before{content:"问 ";color:#d4a017;font-weight:bold;margin-right:4px}
+.faq-list summary:after{content:"▾";float:right;color:#b08a4a;font-size:12px;margin-top:5px}
+.faq-list details[open] summary:after{content:"▴"}
+.faq-list details>p{padding:0 0 12px;margin:0;line-height:1.9;color:#4a3520;font-size:14px}
+.disclaimer{margin-top:10px;padding:10px 14px;background:#fff8e6;border:1px solid #d4a017;border-radius:3px;color:#7a5a18;font-size:13px;line-height:1.8}
