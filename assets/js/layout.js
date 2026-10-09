@@ -96,11 +96,15 @@
     for(var i=0;i<NAV.length;i++){ if(NAV[i].sub){ for(var j=0;j<NAV[i].sub.length;j++){ flat.push(NAV[i].sub[j]); } } }
     for(var k=0;k<flat.length;k++){ h += '<a href="'+link(flat[k].u)+'">'+esc(flat[k].n)+'</a>'; }
     h += '</div></div></div>';
+    // 站点信息链接（关于/联系/隐私/免责）
+    var ft = [{n:'关于缘中阁',u:'about/'},{n:'联系我们',u:'contact/'},{n:'隐私政策',u:'privacy/'},{n:'免责声明',u:'disclaimer/'},{n:'排盘说明',u:'guide/how-to/'}];
+    var h2 = '<div class="ft-links">';
+    for(var m=0;m<ft.length;m++){ h2 += '<a href="'+link(ft[m].u)+'">'+esc(ft[m].n)+'</a>'; }
+    h += '<div class="foot-tools"><div class="container"><div class="ft-title">站点信息</div>'+h2+'</div></div>';
     // 全站底部广告位（Google AdSense 横幅，版权信息上方）
     h += '<div class="container ad-wrap"><div class="ad-slot" data-ad-slot="bottom" data-ad-label="底部横幅广告"></div></div>';
     h += '<div class="copyright"><div class="container">'+
-      '<p>© '+y+' 缘中阁</p>'+
-      '<p>静态版基于 ASP 源码改写 · 部署于 GitHub Pages + Cloudflare</p>'+
+      '<p>© '+y+' 缘中阁 · 排盘结果由传统命理规则程序演算，仅供文化参考与娱乐，不构成任何专业建议。</p>'+
       '</div></div>';
     el.innerHTML = h;
   }
